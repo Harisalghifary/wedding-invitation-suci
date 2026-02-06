@@ -1,63 +1,51 @@
-import { SectionWrapper } from '../shared/SectionWrapper';
-
 export default function StorySection() {
   return (
-    <SectionWrapper id="story" background="cream">
-      <div className="text-center max-w-3xl mx-auto">
-        <h3 className="font-josefin text-3xl sm:text-4xl text-primary mb-2">Our Story</h3>
-        <div className="text-3xl mb-8">🥂</div>
-
-        {/* First photo */}
-        <div className="relative mb-8">
-          {/* Floral outlines in corners */}
-          <span className="absolute -top-4 -left-4 text-3xl text-primary/30">❀</span>
-          <span className="absolute -top-4 -right-4 text-3xl text-primary/30">❀</span>
-
-          <div className="w-full h-64 sm:h-80 rounded-lg overflow-hidden shadow-lg bg-gray-200">
-            <img
-              src="/assets/story-photo1.jpg"
-              alt="Our story"
-              className="w-full h-full object-cover"
-              onError={(e) => e.target.style.display = 'none'}
-            />
-          </div>
-        </div>
-
-        {/* Story text */}
-        <div className="bg-cream p-6 rounded-lg mb-8">
-          <p className="text-darkBrown text-base leading-relaxed text-justify mb-4">
-            [Placeholder: Kami pertama kali bertemu di kampus pada tahun 2020.
-            Awalnya hanya teman biasa, namun seiring waktu kami semakin dekat
-            dan menyadari bahwa kami adalah pasangan yang sempurna satu sama lain.]
-          </p>
-          <p className="text-darkBrown text-base leading-relaxed text-justify">
-            [Placeholder: Setelah 4 tahun bersama melewati suka dan duka,
-            kami memutuskan untuk melanjutkan hubungan kami ke jenjang yang lebih serius.
-            Dan kini, kami siap untuk memulai babak baru kehidupan kami bersama.]
-          </p>
-        </div>
-
-        {/* Second photo */}
-        <div className="relative">
-          <span className="absolute -bottom-4 -left-4 text-3xl text-primary/30">❀</span>
-          <span className="absolute -bottom-4 -right-4 text-3xl text-primary/30">❀</span>
-
-          <div className="w-full h-64 sm:h-80 rounded-lg overflow-hidden shadow-lg bg-gray-200">
-            <img
-              src="/assets/story-photo2.jpg"
-              alt="Our story continued"
-              className="w-full h-full object-cover"
-              onError={(e) => e.target.style.display = 'none'}
-            />
-          </div>
-        </div>
-
-        {/* Lantern and candle decorations */}
-        <div className="flex justify-center gap-6 text-4xl mt-8 opacity-40">
-          <span>🕯️</span>
-          <span>🏮</span>
-        </div>
+    <section id="story" className="bg-cream bg-ceremony-pattern bg-cover bg-center py-0">
+      {/* Photo 1 - Dining table */}
+      <div className="w-full">
+        <img
+          src="/assets/our_story_photo.png"
+          alt="Our Story - Dining Together"
+          className="w-full h-auto object-cover"
+        />
       </div>
-    </SectionWrapper>
+
+      {/* Story Card - Cream background */}
+      <div className="px-8 py-10 -mt-8 relative z-10 max-w-2xl mx-auto">
+        {/* Header */}
+        <h2 className="font-playfair font-bold text-3xl text-primary text-center mb-6">
+          Our Story 🥂
+        </h2>
+
+        {/* Paragraph 1 */}
+        <p className="font-dmSans text-xs text-primary leading-relaxed text-justify mb-4">
+          Kisah ini berawal di masa SMA, ketika pertemuan sederhana tumbuh menjadi
+          kebersamaan yang bermakna. Dari hari-hari yang diisi tawa, percakapan ringan,
+          hingga dukungan dalam langkah kecil maupun besar, Suci dan Seky belajar mengenal
+          satu sama lain dengan tulus. Waktu berjalan, membawa keduanya melalui fase
+          pertumbuhan, perubahan, dan pemahaman bahwa kebersamaan bukan sekadar hadir,
+          melainkan saling menemani.
+        </p>
+        
+        <p className="font-dmSans text-xs text-primary leading-relaxed text-justify mb-8">
+          Seiring berjalannya waktu, perjalanan itu berlanjut hingga hari ini, ketika
+          keduanya memantapkan hati untuk melangkah ke tahap yang lebih serius. Dengan
+          keyakinan yang tumbuh dari proses panjang, Suci dan Seky memilih untuk mengikat
+          janji dalam sebuah ikatan suci, siap melangkah bersama, saling menjaga, dan
+          menua dalam doa yang sama.
+        </p>
+      </div>
+
+      {/* Photo 2 - Mountain/Nature */}
+      <div className="w-full">
+        <img
+          src="/assets/our_story_carrousel1.png"
+          alt="Our Story - Mountain Adventure"
+          className="w-full h-auto object-cover"
+        />
+      </div>
+
+
+    </section>
   );
 }
