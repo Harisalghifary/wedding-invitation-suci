@@ -1,38 +1,35 @@
-import { SectionWrapper } from '../shared/SectionWrapper';
-import { weddingData } from '../../data/content';
+const photos = Array.from({ length: 12 }, (_, i) => i + 1);
 
 export default function GallerySection() {
   return (
-    <SectionWrapper id="gallery" background="primary">
-      <h3 className="font-josefin text-3xl sm:text-4xl text-cream text-center mb-12">Gallery</h3>
-
-      {/* 3x4 photo grid */}
-      <div className="grid grid-cols-3 gap-2 sm:gap-3 md:gap-4 mb-8">
-        {weddingData.gallery.map((photo) => (
-          <div
-            key={photo.id}
-            className="aspect-square overflow-hidden rounded-lg bg-cream/20"
-          >
-            <img
-              src={photo.src}
-              alt={photo.alt}
-              className="w-full h-full object-cover hover:scale-110 transition-transform duration-300"
-              loading="lazy"
-              onError={(e) => {
-                e.target.style.display = 'none';
-                e.target.parentElement.innerHTML = '<div class="w-full h-full flex items-center justify-center text-cream/50">📷</div>';
-              }}
-            />
-          </div>
-        ))}
+    <section id="gallery" className="bg-primary py-16 px-6">
+      {/* Fixed width container - 353px, centered */}
+      <div className="mx-auto" style={{ width: '353px' }}>
+        {/* 3x4 Grid: 109x171px cells, 13px gaps */}
+        <div className="grid grid-cols-3 gap-[13px]">
+          {photos.map((num) => (
+            <div
+              key={num}
+              className="w-[109px] h-[171px] overflow-hidden rounded-lg"
+            >
+              <img
+                src={`/assets/galeri ${num}.png`}
+                alt={`Gallery Photo ${num}`}
+                loading="lazy"
+                decoding="async"
+                className="w-full h-full object-cover"
+              />
+            </div>
+          ))}
+        </div>
       </div>
 
       {/* Heart decorations */}
-      <div className="flex justify-center gap-4 text-4xl text-cream/30">
-        <span>♥</span>
-        <span>♥</span>
-        <span>♥</span>
+      <div className="flex justify-center gap-4 mt-12">
+        <span className="text-cream text-4xl">♥</span>
+        <span className="text-cream text-5xl">♥</span>
+        <span className="text-cream text-4xl">♥</span>
       </div>
-    </SectionWrapper>
+    </section>
   );
 }

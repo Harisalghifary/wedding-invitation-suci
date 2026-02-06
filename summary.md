@@ -57,9 +57,9 @@ darkBrown: #5C3A34   (text on light backgrounds)
 2. **Countdown Section** - Real-time countdown with Playfair Display numbers
 3. **Quran Section** - Ar-Rum verse 21 (Arabic image + translation)
 4. **Profile Section** - Bride & Groom profiles with Oregano font
-5. **Event Section** - Ceremony details, venue, dresscode
-6. **Story Section** - Couple's story with photo placeholders
-7. **Gallery Section** - 3x4 photo grid (12 photos)
+5. **Event Section** - Ceremony details, venue, dresscode with bg-ceremony.png background
+6. **Story Section** - Couple's love story with actual content and photos (bg-ceremony-pattern)
+7. **Gallery Section** - Fixed 3x4 photo grid (109×171px cells, 13px gaps, 353px total width)
 8. **Interaction Section** - Wishes form + Bank account cards
 9. **Footer Section** - Thank you message and credits
 
@@ -291,9 +291,13 @@ Edit **[src/data/content.js](src/data/content.js)**:
 ### 2. Replace Photos
 Place photos in `public/assets/`:
 - `carousel-1.png` - Main couple photo (cover + hero)
-- `story-photo1.jpg` - Story section first photo
-- `story-photo2.jpg` - Story section second photo
-- `gallery/1.jpg` to `gallery/12.jpg` - Gallery photos
+- `our_story_photo.png` - Story section first photo (dining table)
+- `our_story_carrousel1.png` - Story section second photo (mountain)
+- `galeri 1.png` to `galeri 12.png` - Gallery photos (3x4 grid)
+- `decor_venue.gif` - Ballroom decoration illustration
+- `gedung.png` - Venue building sketch
+- `ring.gif` - Wedding ring icon
+- `pengantin.png` - Couple illustration
 - `couple.gif` - Couple illustration (Profile + bottom)
 - `Bird.gif` - Bird decoration with ribbon
 - `alarm.gif` - Alarm clock decoration
@@ -317,7 +321,8 @@ Edit **[tailwind.config.js](tailwind.config.js)** `fontFamily` section and updat
 
 ### 5. Update Story Text
 Edit **[src/components/Page2/StorySection.jsx](src/components/Page2/StorySection.jsx)**:
-- Replace placeholder text with your love story
+- Story content is now hardcoded (2 paragraphs in Indonesian)
+- Photos: `our_story_photo.png` and `our_story_carrousel1.png`
 
 ---
 
@@ -337,10 +342,14 @@ Mobile-first approach with Tailwind breakpoints:
 |-----------|------|------|--------|-------|
 | "The wedding of" | Love Light | 5xl-7xl | Regular | Hero header |
 | Section Titles | Josefin Sans | 3xl-4xl | Bold | Section headers |
+| **Ceremony Headers** | **Playfair Display** | **4xl** | **Bold** | **"The Ceremony", date, venue name, Dresscode** |
 | **Countdown Numbers** | **Playfair Display** | **5xl (48px)** | **Semi Bold (600)** | **Timer numbers** |
 | Countdown Labels | DM Sans | sm | Regular | Hari/Jam/Menit/Detik |
 | **Couple Names** | **Oregano** | **2xl (25px)** | **Regular** | **Profile names** |
+| Event Labels (Akad/Resepsi) | Love Light | 3xl | Regular | Script labels |
 | Body Text | DM Sans | base | Regular | Descriptions, paragraphs |
+| Story Text | DM Sans | xs | Regular | Story paragraphs (justified) |
+| Dresscode Labels | DM Sans | xs | Italic | Color circle labels |
 | Buttons | DM Sans | base | Medium | All buttons |
 | Instagram Button | DM Sans | base | Regular | Social links |
 
@@ -402,6 +411,35 @@ npm run build
 - Removed bg-arrum overlay (only bg-opening.png)
 - Added padding-bottom for overlap effect
 
+### ✅ Event Section Overhaul (Latest)
+- Custom `<section>` with `bg-ceremony-pattern bg-cover bg-center` (replaces SectionWrapper)
+- All headers use Playfair Display font (The Ceremony, date, venue name, Dresscode)
+- Venue name "Ballroom Grand Tjokro Premiere Bandung" now `font-playfair` (was `font-josefin`)
+- Ring icon enlarged to `w-16 h-16` (was `w-12 h-12`)
+- "Sabtu" displayed as decorative divider with horizontal lines
+- Added `decor_venue.gif` ballroom illustration between event details and dresscode
+- Dresscode: 5 color circles in single row with exact hex colors (#FFFFFF, #C8B1A0, #B6928D, #768064, #754B4D)
+- Each circle has italic DM Sans label below
+
+### ✅ Story Section Overhaul (Latest)
+- Replaced placeholder text with actual Indonesian story content (2 paragraphs)
+- Background: `bg-ceremony-pattern` with cream fallback
+- Photo 1: `our_story_photo.png` (top, full-width)
+- Photo 2: `our_story_carrousel1.png` (bottom, full-width)
+- Story card overlaps Photo 1 with `-mt-8` and `rounded-t-3xl`
+- Header: Playfair Display "Our Story" (was Josefin Sans)
+- Body: DM Sans `text-xs` justified text
+- Removed SectionWrapper, placeholder text, onError handlers
+
+### ✅ Gallery Section Overhaul (Latest)
+- Fixed 3x4 grid on ALL screen sizes (no responsive breakpoints)
+- Exact cell dimensions: 109px × 171px
+- Gap: 13px (horizontal and vertical)
+- Total grid width: 353px, centered with `mx-auto`
+- Images: `/assets/galeri 1.png` through `/assets/galeri 12.png`
+- Native lazy loading: `loading="lazy"` + `decoding="async"`
+- Removed SectionWrapper and weddingData dependency
+
 ---
 
 ## 📝 Notes
@@ -435,4 +473,4 @@ For issues or questions about the website implementation, refer to:
 
 **Built with ❤️ using React + Vite + Tailwind CSS**
 
-**Latest Update:** Layered overlapping backgrounds, Playfair Display countdown, Oregano profile names
+**Latest Update:** Event section (Playfair fonts, dresscode fix, decor_venue.gif), Story section (actual content, correct photos), Gallery section (fixed 3x4 grid, 109×171px cells)
