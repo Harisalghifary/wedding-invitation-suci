@@ -1,6 +1,5 @@
 import { SectionWrapper } from '../shared/SectionWrapper';
 import { CountdownTimer } from '../shared/CountdownTimer';
-import { Button } from '../shared/Button';
 import { weddingData } from '../../data/content';
 
 export default function CountdownSection() {
@@ -10,25 +9,50 @@ export default function CountdownSection() {
   };
 
   return (
-    <SectionWrapper id="countdown" background="cream">
-      <div className="text-center">
-        {/* Large S monogram with floral border */}
-        <div className="font-loveLight text-7xl text-primary mb-8">S</div>
+    <SectionWrapper id="countdown" background="transparent" className="relative pt-16 px-6">
+      {/* S monogram - logo_ss.png */}
+      <div className="text-center mb-8">
+        <img
+          src="/assets/logo_ss.png"
+          alt="S Monogram"
+          className="w-20 h-20 mx-auto opacity-60"
+        />
+      </div>
 
+      {/* Countdown card - centered with max-width */}
+      <div className="max-w-md mx-auto bg-cream rounded-3xl px-8 py-12 shadow-lg relative">
+        {/* Alarm clock GIF - positioned outside bottom-left */}
+        <img
+          src="/assets/alarm.gif"
+          alt="Alarm Clock"
+          className="absolute -left-10 -bottom-10 w-20 h-20"
+          onError={(e) => e.target.style.display = 'none'}
+        />
+
+        {/* Countdown timer */}
         <CountdownTimer targetDate={weddingData.event.date} />
+      </div>
 
-        {/* Decorative alarm clock placeholder */}
-        <div className="text-6xl my-8">⏰</div>
-
-        <Button onClick={handleSaveDate} variant="primary">
+      {/* Save the Date button - CENTERED */}
+      <div className="flex justify-center mt-8">
+        <button
+          onClick={handleSaveDate}
+          className="inline-flex items-center gap-2 bg-primary text-cream font-dmSans font-medium px-8 py-3 rounded-full hover:bg-darkBrown transition-colors shadow-lg"
+        >
+          <img
+            src="/assets/calendar.png"
+            alt="Calendar"
+            className="w-5 h-5"
+            onError={(e) => e.target.style.display = 'none'}
+          />
           Save the Date
-        </Button>
+        </button>
+      </div>
 
-        {/* Heart decorations */}
-        <div className="mt-8 text-4xl space-x-4">
-          <span>♥</span>
-          <span>♥</span>
-        </div>
+      {/* Heart decorations */}
+      <div className="flex justify-center gap-4 text-4xl text-primary/30 mt-8">
+        <span>♥</span>
+        <span>♥</span>
       </div>
     </SectionWrapper>
   );

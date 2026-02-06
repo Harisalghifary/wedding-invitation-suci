@@ -16,6 +16,8 @@ export default {
         loveLight: ['"Love Light"', 'cursive'],
         josefin: ['"Josefin Sans"', 'sans-serif'],
         dmSans: ['"DM Sans"', 'sans-serif'],
+        playfair: ['"Playfair Display"', 'serif'],
+        oregano: ['Oregano', 'cursive'],
       },
       backgroundImage: {
         'cover-pattern': "url('/assets/bg-cover.png')",

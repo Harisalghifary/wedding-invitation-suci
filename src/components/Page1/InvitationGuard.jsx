@@ -29,13 +29,13 @@ export default function InvitationGuard({ onOpen }) {
         <h1 className="font-loveLight text-6xl sm:text-7xl mb-8">Seky</h1>
 
         {/* Couple Photo Placeholder */}
-        <div className="w-40 h-40 sm:w-48 sm:h-48 rounded-full overflow-hidden border-4 border-cream mb-6">
+        {/* <div className="w-40 h-40 sm:w-48 sm:h-48 rounded-full overflow-hidden border-4 border-cream mb-6">
           <img
             src="/assets/carousel-1.png"
             alt="Suci & Seky"
             className="w-full h-full object-cover"
           />
-        </div>
+        </div> */}
 
         <p className="font-josefin text-sm mb-12">Kepada: Haris dan Rezkita</p>
 

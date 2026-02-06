@@ -7,13 +7,18 @@ import StorySection from '../Page2/StorySection';
 import GallerySection from '../Page2/GallerySection';
 import InteractionSection from '../Page2/InteractionSection';
 import FooterSection from '../Page2/FooterSection';
+import { GradientWrapper } from './GradientWrapper';
 
 export default function MainLayout() {
   return (
     <div className="w-full overflow-x-hidden">
       <HeroSection />
-      <CountdownSection />
-      <QuranSection />
+
+      <GradientWrapper>
+        <CountdownSection />
+        <QuranSection />
+      </GradientWrapper>
+
       <ProfileSection />
       <EventSection />
       <StorySection />

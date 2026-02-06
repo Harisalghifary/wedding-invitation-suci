@@ -2,10 +2,11 @@ import { SectionWrapper } from '../shared/SectionWrapper';
 
 export default function HeroSection() {
   return (
-    <SectionWrapper id="hero" background="primary" className="relative">
-      {/* Background pattern */}
+    <SectionWrapper id="hero" background="primary" className="relative pb-40">
+      {/* Base background - bg-opening.png */}
       <div
-        className="absolute inset-0 bg-arrum-pattern bg-cover bg-center opacity-30"
+        className="absolute inset-0 bg-cover bg-center"
+        style={{ backgroundImage: "url('/assets/bg-opening.png')" }}
         aria-hidden="true"
       />
 
@@ -34,11 +35,13 @@ export default function HeroSection() {
           <span className="absolute -bottom-4 -left-4 text-2xl">♥</span>
         </div>
 
-        {/* Decorative floral line art placeholder */}
-        <div className="text-cream/60 mb-8">
-          <svg width="200" height="40" viewBox="0 0 200 40" className="mx-auto">
-            <path d="M10 20 Q 50 10, 100 20 T 190 20" stroke="currentColor" fill="none" strokeWidth="1"/>
-          </svg>
+        {/* Bird decoration with ribbon */}
+        <div className="mb-8">
+          <img
+            src="/assets/Bird.gif"
+            alt="Birds with ribbon"
+            className="w-48 h-auto mx-auto"
+          />
         </div>
 
         {/* Large S monogram */}
