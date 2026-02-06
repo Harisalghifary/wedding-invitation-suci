@@ -18,6 +18,8 @@ export default {
         dmSans: ['"DM Sans"', 'sans-serif'],
         playfair: ['"Playfair Display"', 'serif'],
         oregano: ['Oregano', 'cursive'],
+        passions: ['"Passions Conflict"', 'cursive'],
+        poppins: ['Poppins', 'sans-serif'],
       },
       backgroundImage: {
         'cover-pattern': "url('/assets/bg-cover.png')",

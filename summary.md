@@ -25,6 +25,8 @@ A beautiful, mobile-responsive two-page wedding invitation website for Suci & Se
 - **DM Sans** - Body text, buttons, labels (sans-serif)
 - **Playfair Display** - Countdown numbers (serif, semi-bold)
 - **Oregano** - Couple names in profiles (cursive, regular)
+- **Passions Conflict** - "Terima Kasih" script text in footer (cursive, 80px)
+- **Poppins** - Copyright bar text (sans-serif, 8px)
 
 ### Color Palette
 ```css
@@ -60,16 +62,17 @@ darkBrown: #5C3A34   (text on light backgrounds)
 5. **Event Section** - Ceremony details, venue, dresscode with bg-ceremony.png background
 6. **Story Section** - Couple's love story with actual content and photos (bg-ceremony-pattern)
 7. **Gallery Section** - Fixed 3x4 photo grid (109×171px cells, 13px gaps, 353px total width)
-8. **Interaction Section** - Wishes form + Bank account cards
-9. **Footer Section** - Thank you message and credits
+8. **Interaction Section** - Wishes form (URL param name, localStorage, scrollable display) + Wedding Gift (gradient bank cards, copy icon, gift registry link)
+9. **Footer Section** - Photo frame (3 stacked photos), "Terima Kasih" (Passions Conflict 80px), car illustration, S monogram, black copyright bar
 
 ### Interactive Features
 - ⏰ **Real-time countdown timer** (days, hours, minutes, seconds)
-- 📝 **Wishes form** with validation (name, message)
-- 💳 **Copy-to-clipboard** for bank account numbers
+- 📝 **Wishes form** with URL param name support (?name=GuestName), localStorage persistence, scrollable display
+- 💳 **Copy-to-clipboard** for bank account numbers with money-transfer.svg icon
+- 🎁 **Gift registry link** button (Google Sheets placeholder)
 - 🗺️ **Google Maps integration** for venue location
 - 📱 **Instagram links** for bride and groom
-- 💾 **localStorage** for wishes storage (ready for backend migration)
+- 💾 **localStorage** for wishes storage (`weddingWishes` key, ready for backend migration)
 - 🎨 **Layered overlapping backgrounds** - Hero section overlaps with Countdown/Quran
 
 ---
@@ -90,7 +93,12 @@ darkBrown: #5C3A34   (text on light backgrounds)
 │       ├── calendar.png          # Calendar icon for button
 │       ├── couple.gif            # Couple illustration
 │       ├── bismillah.png         # Bismillah Arabic text
-│       └── logo_ss.png           # S monogram logo
+│       ├── logo_ss.png           # S monogram logo
+│       ├── money-transfer.svg   # Copy icon for bank cards
+│       ├── car.png              # Car with ribbon illustration
+│       ├── footer_photo1.png    # Footer photo frame 1
+│       ├── footer_photo2.png    # Footer photo frame 2
+│       └── footer_photo3.png    # Footer photo frame 3
 ├── src/
 │   ├── components/
 │   │   ├── Page1/
@@ -229,9 +237,17 @@ The website uses a sophisticated layered background system where sections overla
 - Transparent background (inherits from GradientWrapper)
 
 **[src/components/Page2/InteractionSection.jsx](src/components/Page2/InteractionSection.jsx)** - Interactive features
-- Wishes form with `react-hook-form` validation
-- Bank account cards with copy-to-clipboard
-- localStorage integration
+- **WishesSection:** Guest name from URL param (?name=), localStorage persistence (`weddingWishes`), scrollable wishes display (max 10), right-aligned submit button
+- **WeddingGiftSection:** Gradient bank cards with money-transfer.svg copy icon, "Nama akun" labels, "Daftar Pilihan Hadiah" gift registry link button
+- No longer uses `react-hook-form` or `SectionWrapper`
+
+**[src/components/Page2/FooterSection.jsx](src/components/Page2/FooterSection.jsx)** - Footer
+- Photo frame: #5B322D bg, 3 stacked photos (273×167px, 9px gap), rounded-3xl
+- Wedding date: DM Sans 20px
+- "Terima Kasih": Passions Conflict 80px script font
+- Car illustration: `/assets/car.png`
+- S monogram: `/assets/logo_ss.png`
+- Copyright bar: black bg, Poppins 8px, full width
 
 **[src/hooks/useCountdown.js](src/hooks/useCountdown.js)** - Countdown timer
 - Real-time calculation every second
@@ -242,12 +258,12 @@ The website uses a sophisticated layered background system where sections overla
 
 **[tailwind.config.js](tailwind.config.js)** - Design system
 - **Custom colors:** primary, cream, lightBrown, darkBrown
-- **Custom fonts:** loveLight, josefin, dmSans, playfair, oregano (5 fonts)
+- **Custom fonts:** loveLight, josefin, dmSans, playfair, oregano, passions, poppins (7 fonts)
 - **Background images:** cover-pattern, arrum-pattern, ceremony-pattern
 - **Transparent background:** Added to SectionWrapper
 
 **[index.html](index.html)** - HTML template
-- Google Fonts: Love Light, Josefin Sans, DM Sans, Playfair Display, Oregano
+- Google Fonts: Love Light, Josefin Sans, DM Sans, Playfair Display, Oregano, Passions Conflict, Poppins
 - Preconnect for performance optimization
 - Favicon: logo_ss.png
 
@@ -304,6 +320,11 @@ Place photos in `public/assets/`:
 - `calendar.png` - Calendar icon for button
 - `bismillah.png` - Bismillah Arabic text image
 - `logo_ss.png` - S monogram logo
+- `money-transfer.svg` - Copy icon for bank cards
+- `car.png` - Car with ribbon illustration (footer)
+- `footer_photo1.png` - Footer photo frame 1
+- `footer_photo2.png` - Footer photo frame 2
+- `footer_photo3.png` - Footer photo frame 3
 
 ### 3. Update Colors
 Edit **[tailwind.config.js](tailwind.config.js)** `colors` section:
@@ -352,6 +373,8 @@ Mobile-first approach with Tailwind breakpoints:
 | Dresscode Labels | DM Sans | xs | Italic | Color circle labels |
 | Buttons | DM Sans | base | Medium | All buttons |
 | Instagram Button | DM Sans | base | Regular | Social links |
+| "Terima Kasih" | Passions Conflict | 80px | Regular | Footer script text |
+| Copyright | Poppins | 8px | Regular | Copyright bar |
 
 ---
 
@@ -431,7 +454,7 @@ npm run build
 - Body: DM Sans `text-xs` justified text
 - Removed SectionWrapper, placeholder text, onError handlers
 
-### ✅ Gallery Section Overhaul (Latest)
+### ✅ Gallery Section Overhaul
 - Fixed 3x4 grid on ALL screen sizes (no responsive breakpoints)
 - Exact cell dimensions: 109px × 171px
 - Gap: 13px (horizontal and vertical)
@@ -440,17 +463,42 @@ npm run build
 - Native lazy loading: `loading="lazy"` + `decoding="async"`
 - Removed SectionWrapper and weddingData dependency
 
+### ✅ Interaction Section Overhaul (Latest)
+- **Wishes Section:** Guest name auto-filled from URL param (`?name=GuestName`), input hidden when param exists
+- Right-aligned submit button (not full width)
+- Scrollable wishes display (max-h-96, max 10 shown) with cream container
+- localStorage persistence (`weddingWishes` key), new wishes prepend
+- Empty state: "Belum ada ucapan"
+- Removed `react-hook-form` dependency, uses native form handling
+- **Wedding Gift Section:** Gradient bank cards (`from-[#764640] to-[#B16C63]`)
+- "Nomor rekening" and "Nama akun" labels on each card
+- Copy button using `/assets/money-transfer.svg` icon with "Copied!" feedback
+- "Daftar Pilihan Hadiah" gift registry link button (gradient bg)
+- Removed SectionWrapper, uses standalone `<section>` tags
+
+### ✅ Footer Section Overhaul (Latest)
+- Photo frame: `#5B322D` dark brown bg, rounded-3xl, 20px padding
+- 3 stacked photos (273×167px each, 9px gap)
+- Wedding date: DM Sans 20px, tracking-wide
+- "Terima Kasih": Passions Conflict 80px script font
+- Car illustration: `/assets/car.png` (w-40)
+- S monogram: `/assets/logo_ss.png` (w-16 h-16)
+- Copyright bar: black bg, full width, Poppins 8px
+- Added Passions Conflict + Poppins fonts to index.html and tailwind.config.js (now 7 fonts)
+- Removed SectionWrapper, uses native `<footer>` tag
+
 ---
 
 ## 📝 Notes
 
-- **Form submissions** currently save to `localStorage` - easy to migrate to backend API later
+- **Form submissions** save to `localStorage` (`weddingWishes` key) - easy to migrate to backend API later
+- **URL parameters** - Guest name from `?name=GuestName` auto-fills wishes form
 - **Countdown timer** uses real-time calculation (no time drift)
 - **Images** show fallback if not found (graceful error handling)
 - **Component architecture** allows easy swapping of placeholder content
 - **Mobile-optimized** with touch-friendly buttons (min 44x44px)
 - **Layered backgrounds** create sophisticated depth and visual hierarchy
-- **Typography hierarchy** uses 5 different fonts for clear visual distinction
+- **Typography hierarchy** uses 7 different fonts for clear visual distinction
 
 ---
 
@@ -473,4 +521,4 @@ For issues or questions about the website implementation, refer to:
 
 **Built with ❤️ using React + Vite + Tailwind CSS**
 
-**Latest Update:** Event section (Playfair fonts, dresscode fix, decor_venue.gif), Story section (actual content, correct photos), Gallery section (fixed 3x4 grid, 109×171px cells)
+**Latest Update:** Interaction section (wishes with URL params + localStorage, gradient bank cards with copy icon, gift registry link), Footer section (photo frame, Passions Conflict "Terima Kasih", car illustration, black copyright bar)

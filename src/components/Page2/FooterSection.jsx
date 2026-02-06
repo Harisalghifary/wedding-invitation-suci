@@ -1,48 +1,76 @@
-import { SectionWrapper } from '../shared/SectionWrapper';
-
 export default function FooterSection() {
+  const photos = [
+    '/assets/footer_1.png',
+    '/assets/footer_2.png',
+    '/assets/footer_3.png',
+  ];
+
   return (
-    <SectionWrapper id="footer" background="primary" className="pb-8">
-      <div className="text-center text-cream">
-        {/* Photo collage placeholder */}
-        <div className="flex justify-center gap-4 mb-8">
-          <div className="w-24 h-32 bg-cream/20 rounded-lg shadow-lg" />
-          <div className="w-24 h-32 bg-cream/20 rounded-lg shadow-lg transform translate-y-4" />
-          <div className="w-24 h-32 bg-cream/20 rounded-lg shadow-lg" />
+    <footer className="bg-primary">
+      {/* Main Footer Content */}
+      <div className="py-16 px-6">
+        {/* Photo Frame Container */}
+        <div
+          className="bg-[#5B322D] rounded-3xl p-5 mx-auto mb-8"
+          style={{ maxWidth: 'fit-content' }}
+        >
+          <div className="flex flex-col gap-[9px]">
+            {photos.map((src, i) => (
+              <div
+                key={i}
+                className="overflow-hidden rounded-lg"
+                style={{ width: '273px', height: '167px' }}
+              >
+                <img
+                  src={src}
+                  alt={`Wedding Photo ${i + 1}`}
+                  className="w-full h-full object-cover"
+                  loading="lazy"
+                />
+              </div>
+            ))}
+          </div>
         </div>
 
-        {/* Date */}
-        <div className="text-5xl font-bold mb-6">14.02.2026</div>
+        {/* Wedding Date */}
+        <p className="font-dmSans text-xl text-white text-center tracking-wide mb-6">
+          14.02.2026
+        </p>
 
-        {/* Thank you message */}
-        <p className="text-sm sm:text-base max-w-2xl mx-auto mb-6 leading-relaxed">
+        {/* Thank You Message */}
+        <p className="font-dmSans text-xs text-white text-center leading-relaxed max-w-xl mx-auto mb-8">
           Dari lubuk hati yang terdalam, kami mengucapkan terima kasih karena
           telah menjadi bagian dari hari istimewa kami.
         </p>
 
-        <h3 className="font-loveLight text-5xl mb-8">Terima Kasih</h3>
+        {/* "Terima Kasih" - Passions Conflict Script Font */}
+        <h2
+          className="font-passions text-white text-center mb-8"
+          style={{ fontSize: '80px', lineHeight: '1' }}
+        >
+          Terima Kasih
+        </h2>
 
-        {/* Car with ribbon illustration placeholder */}
-        <div className="text-6xl mb-8">🚗🎀</div>
+        {/* Car Illustration */}
+        <div className="flex justify-center mb-8">
+          <img
+            src="/assets/logo_ss.png"
+            alt="Car with Ribbon"
+            className="w-40 h-auto"
+          />
+        </div>
 
-        {/* Logo */}
-        <img
-          src="/assets/logo_ss.png"
-          alt="Logo"
-          className="w-16 h-16 mx-auto mb-4 opacity-80"
-        />
+      </div>
 
-        {/* Copyright */}
-        <p className="text-xs text-cream/60">
+      {/* Copyright Bar - Black Background */}
+      <div className="bg-black w-full py-3">
+        <p
+          className="font-poppins text-white text-center tracking-wide"
+          style={{ fontSize: '8px' }}
+        >
           © 2026 HARIKITA. ALL RIGHTS RESERVED.
         </p>
-
-        {/* Heart decorations */}
-        <div className="flex justify-center gap-4 text-2xl text-cream/30 mt-6">
-          <span>♥</span>
-          <span>♥</span>
-        </div>
       </div>
-    </SectionWrapper>
+    </footer>
   );
 }
