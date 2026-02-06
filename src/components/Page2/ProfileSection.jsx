@@ -9,9 +9,9 @@ const ProfileCard = ({ person, title }) => {
   const line2 = parentLines[1];
 
   return (
-    <div className="text-center py-12">
+    <div className="text-center py-8">
       {/* Title */}
-      <h2 className="font-josefin text-3xl font-bold text-cream mb-8">
+      <h2 className="font-josefin text-4xl font-semibold text-cream mb-12">
         {title}
       </h2>
 
@@ -52,7 +52,7 @@ const ProfileCard = ({ person, title }) => {
           href={`https://instagram.com/${person.instagram.replace('@', '')}`}
           target="_blank"
           rel="noopener noreferrer"
-          className="flex items-center gap-2 bg-cream text-primary font-dmSans px-6 py-2 rounded-full hover:bg-lightBrown transition-colors"
+          className="flex items-center gap-2 bg-cream text-black font-dmSans px-6 py-2 rounded-full hover:bg-lightBrown transition-colors"
         >
           <FaInstagram className="w-4 h-4" />
           {person.instagram}
@@ -72,14 +72,14 @@ export default function ProfileSection() {
   return (
     <SectionWrapper id="profile" background="primary">
       {/* Introduction card - cream background, rounded */}
-      <div className="p-6 sm:p-8 mb-12 text-center max-w-2xl mx-auto">
-        <p className="text-xs sm:text-xl text-cream mb-4 font-semibold">
+      <div className="p-6 sm:p-8 mb-6 text-center max-w-2xl mx-auto">
+        <p className="text-xs sm:text-xl text-cream mb-4 font-bold">
           Assalamu'alaikum Warahmatullah Wabarakatuh
         </p>
         <p className="text-xs text-cream/80">
           Dengan bahagia, kami mengundang Anda untuk menjadi bagian dari pernikahan ini.
         </p>
-        <div className="flex justify-center gap-4 mt-4 text-3xl text-primary/30">
+        <div className="flex justify-center gap-4 mt-2 text-3xl text-primary/30">
           <span>❀</span>
           <span>❀</span>
         </div>

@@ -34,7 +34,7 @@ export default function EventSection() {
 
           {/* Ring icon */}
           <div className="mb-4">
-            <img src="/assets/ring.gif" alt="Ring Icon" className="w-16 h-16 mx-auto" />
+            <img src="/assets/ring.gif" alt="Ring Icon" className="w-40 h-25 mx-auto" />
           </div>
 
           {/* Wedding Date */}

@@ -6,7 +6,7 @@ export default function QuranSection() {
     <SectionWrapper id="quran" background="transparent">
       <div className="text-center max-w-3xl mx-auto">
         {/* Bismillah */}
-        <img src="/assets/bismillah.png" alt="Bismillah" className="h-16 mx-auto mb-8" />
+        <img src="/assets/bismillah.png" alt="Bismillah" className="w-25 mx-auto mb-8" />
  
 
         {/* Heart decorations in corners */}
@@ -16,12 +16,12 @@ export default function QuranSection() {
         </div> */}
 
         {/* Translation */}
-        <p className="text-base sm:text-lg text-darkBrown leading-relaxed mb-6 mt-30 text-justify">
+        <p className="text-xs sm:text-lg text-darkBrown leading-relaxed px-[0.5] mb-2 mt-30 text-center">
           {weddingData.quranVerse.translation}
         </p>
 
         {/* Citation */}
-        <p className="text-sm text-darkBrown/70 italic mb-12">
+        <p className="text-xs text-darkBrown font-bold mb-12">
           {weddingData.quranVerse.reference}
         </p>
 
