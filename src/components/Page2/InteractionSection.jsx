@@ -54,7 +54,7 @@ function WishesSection() {
               value={name}
               onChange={(e) => setName(e.target.value)}
               placeholder="Nama Anda"
-              className="w-full bg-cream rounded-2xl px-6 py-3 mb-4 font-dmSans text-primary focus:outline-none focus:ring-2 focus:ring-lightBrown"
+              className="w-full bg-cream rounded-lg px-6 py-3 mb-4 font-dmSans text-primary focus:outline-none focus:ring-2 focus:ring-lightBrown"
             />
           )}
 
@@ -63,14 +63,14 @@ function WishesSection() {
             value={message}
             onChange={(e) => setMessage(e.target.value)}
             placeholder="Tulis ucapan Anda di sini..."
-            className="w-full bg-cream rounded-2xl px-6 py-4 min-h-[128px] font-dmSans text-primary resize-y focus:outline-none focus:ring-2 focus:ring-lightBrown"
+            className="w-full bg-cream rounded-lg px-6 py-4 min-h-[128px] font-dmSans text-primary resize-y focus:outline-none focus:ring-2 focus:ring-lightBrown"
           />
 
           {/* Submit button - RIGHT ALIGNED */}
           <div className="flex justify-end mt-4">
             <button
               type="submit"
-              className="bg-lightBrown text-primary font-josefin font-medium px-6 py-2 rounded-full hover:bg-lightBrown/90 transition"
+              className="bg-[#FFFAF2] opacity-75 text-xs font-dmSans text-primary font-medium px-2 py-2 rounded-lg hover:bg-lightBrown/90 transition"
             >
               Submit
             </button>
@@ -78,7 +78,7 @@ function WishesSection() {
         </form>
 
         {/* Recent wishes display */}
-        <div className="bg-cream rounded-3xl px-6 py-6 mt-8 max-h-96 overflow-y-auto">
+        <div className="bg-cream rounded-lg px-6 py-6 mt-8 max-h-96 overflow-y-auto">
           {wishes.length > 0 ? (
             wishes.slice(0, 10).map((wish, index) => (
               <div
@@ -117,31 +117,49 @@ function BankCard({ bank }) {
   };
 
   return (
-    <div className="bg-gradient-to-br from-[#A67C73] to-lightBrown rounded-3xl px-6 py-6 shadow-lg">
-      <h3 className="font-josefin font-bold text-xl text-white mb-4">
+  <div className="bg-gradient-to-br from-[#764640] to-[#B16C63] rounded-lg p-6 shadow-lg flex justify-between items-center">
+    {/* Left Side: Text Information */}
+    <div className="flex flex-col text-left">
+      <h3 className="font-josefin font-bold text-xs text-white mb-4 uppercase tracking-wide">
         {bank.bankName}
       </h3>
 
-      <p className="font-playfair font-bold text-3xl text-white tracking-wide mb-2">
-        {bank.accountNumber}
-      </p>
+      {/* Account Number Section */}
+      <div className="mb-3">
+        <p className="font-dmSans text-[10px] text-white/80">
+          Nomor rekening
+        </p>
+        <p className="font-dmSans text-xs text-white tracking-widest">
+          {bank.accountNumber}
+        </p>
+      </div>
 
-      <p className="font-dmSans text-sm text-white/90 mb-1">Nama akun</p>
-      <p className="font-dmSans text-lg text-white mb-4">{bank.accountName}</p>
-
-      <button
-        onClick={handleCopy}
-        className="w-full flex items-center justify-center gap-2 bg-white/20 hover:bg-white/30 text-white font-josefin font-medium px-6 py-3 rounded-full transition"
-      >
-        <img
-          src="/assets/money-transfer.svg"
-          alt=""
-          className="w-5 h-5"
-        />
-        {copied ? 'Copied!' : 'Copy Account Number'}
-      </button>
+      {/* Account Name Section */}
+      <div>
+        <p className="font-dmSans text-[10px] text-white/80">
+          Nama akun
+        </p>
+        <p className="font-dmSans text-xs text-white font-medium">
+          {bank.accountName}
+        </p>
+      </div>
     </div>
-  );
+
+    {/* Right Side: Icon Button */}
+    <button
+      onClick={handleCopy}
+      className="flex-shrink-0 ml-2 hover:scale-105 transition-transform duration-200"
+      aria-label="Copy Account Number"
+    >
+      <img
+        src="/assets/money-transfer.svg"
+        alt="Copy Icon"
+        // Increased size (w-16) to match the large icon in your design reference
+        className="w-17 h-17 object-contain opacity-90"
+      />
+    </button>
+  </div>
+);
 }
 
 function WeddingGiftSection() {
@@ -153,7 +171,7 @@ function WeddingGiftSection() {
         <h2 className="font-josefin font-bold text-4xl text-white mb-6">
           Wedding Gift
         </h2>
-        <p className="font-dmSans text-base text-white leading-relaxed max-w-2xl mx-auto">
+        <p className="font-dmSans text-xs text-white leading-relaxed max-w-2xl mx-auto">
           Kehadiran Anda di acara pernikahan kami adalah hadiah terindah. Namun,
           jika Anda ingin memberikan hadiah, kami menyediakan amplop digital.
         </p>

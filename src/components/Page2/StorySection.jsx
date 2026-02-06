@@ -11,9 +11,9 @@ export default function StorySection() {
       </div>
 
       {/* Story Card - Cream background */}
-      <div className="px-8 py-10 -mt-8 relative z-10 max-w-2xl mx-auto">
+      <div className="px-8 py-10 -mt-18 relative z-10 max-w-2xl mx-auto">
         {/* Header */}
-        <h2 className="font-playfair font-bold text-3xl text-primary text-center mb-6">
+        <h2 className="font-josefin font-semibold text-4xl text-primary text-center mb-6">
           Our Story 🥂
         </h2>
 

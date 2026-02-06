@@ -19,7 +19,7 @@ export default function EventSection() {
       <div className="max-w-2xl mx-auto">
         {/* The Ceremony */}
         <div className="text-center">
-          <h2 className="font-playfair font-bold text-4xl text-primary mb-8">
+          <h2 className="font-josefin font-semibold text-4xl text-primary mb-8">
             The Ceremony
           </h2>
 
@@ -38,32 +38,32 @@ export default function EventSection() {
           </div>
 
           {/* Wedding Date */}
-          <h3 className="font-playfair font-bold text-5xl sm:text-6xl text-primary tracking-wider mb-6">
+          <h3 className="font-dmSans font-black text-4xl sm:text-6xl text-primary tracking-wide mb-6">
             14 . 02 . 2026
           </h3>
 
           {/* Divider with Sabtu */}
           <div className="flex items-center justify-center gap-4 mb-8">
             <div className="w-20 h-px bg-primary" />
-            <span className="font-loveLight text-2xl text-primary">Sabtu</span>
+            <span className="font-loveLight text-4xl text-primary">Sabtu</span>
             <div className="w-20 h-px bg-primary" />
           </div>
 
           {/* Event Times - Two columns */}
-          <div className="grid grid-cols-2 gap-8 max-w-md mx-auto mb-8">
+          <div className="grid grid-cols-2 gap-8 max-w-md mx-auto mb-12">
             <div className="text-center">
-              <p className="font-loveLight text-3xl text-primary mb-2">
+              <p className="font-loveLight text-5xl text-primary mb-2">
                 {weddingData.event.akad.label}
               </p>
-              <p className="font-dmSans text-lg text-primary">
+              <p className="font-dmSans text-base text-primary">
                 {weddingData.event.akad.time}
               </p>
             </div>
             <div className="text-center">
-              <p className="font-loveLight text-3xl text-primary mb-2">
+              <p className="font-loveLight text-5xl text-primary mb-2">
                 {weddingData.event.resepsi.label}
               </p>
-              <p className="font-dmSans text-lg text-primary">
+              <p className="font-dmSans text-base text-primary">
                 {weddingData.event.resepsi.time}
               </p>
             </div>
@@ -75,7 +75,7 @@ export default function EventSection() {
           </h4>
 
           {/* Address */}
-          <p className="font-dmSans text-base text-primary mb-6">
+          <p className="font-dmSans text-xs text-primary mb-8">
             {weddingData.event.venue.address}
           </p>
 
@@ -100,16 +100,16 @@ export default function EventSection() {
 
         {/* Dresscode Section */}
         <div className=" px-8 py-10">
-          <h3 className="font-playfair font-bold text-3xl text-primary text-center mb-8">
+          <h3 className="font-josefin font-semibold text-4xl text-primary text-center mb-8">
             Dresscode <span className="text-3xl">❀</span>
           </h3>
 
           {/* Color circles - 5 in one row */}
-          <div className="flex flex-row justify-center items-start gap-4 mb-6">
+          <div className="flex flex-row justify-center items-start gap-2 mb-6">
             {dresscodeColors.map((item, index) => (
               <div key={index} className="flex flex-col items-center">
                 <div
-                  className={`w-16 h-16 rounded-full${item.border ? ' border-2 border-primary' : ''}`}
+                  className={`w-12 h-12 rounded-full${item.border ? ' border-2 border-primary' : ''}`}
                   style={{ backgroundColor: item.color }}
                 />
                 <p className="font-dmSans italic text-xs text-primary mt-2 text-center whitespace-pre-line">
@@ -120,7 +120,7 @@ export default function EventSection() {
           </div>
 
           {/* Description */}
-          <p className="font-dmSans text-sm text-primary text-center leading-relaxed mt-8 px-4">
+          <p className="font-dmSans text-xs text-primary text-center mt-8 px-4">
             Para tamu mohon berkenan mengenakan warna-warna berikut sebagai dresscode pada hari istimewa kami.
           </p>
 
