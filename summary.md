@@ -55,7 +55,7 @@ darkBrown: #5C3A34   (text on light backgrounds)
 
 ### Page 2: Main Website (9 Sections)
 
-1. **Hero Section** - "The wedding of" with couple photo and Bird.gif
+1. **Hero Section** - "The wedding of" with 4-photo auto-sliding carousel (402×638px responsive) and Bird.gif
 2. **Countdown Section** - Real-time countdown with Playfair Display numbers
 3. **Quran Section** - Ar-Rum verse 21 (Arabic image + translation)
 4. **Profile Section** - Bride & Groom profiles with Oregano font
@@ -87,7 +87,11 @@ darkBrown: #5C3A34   (text on light backgrounds)
 │       ├── bg-ceremony.png       # Ceremony section background
 │       ├── bg-cover.png          # Cover page background
 │       ├── bg-opening.png        # Hero section background
-│       ├── carousel-1.png        # Main couple photo
+│       ├── carousel-1.png        # Main couple photo (cover page)
+│       ├── hero_carrousel1.png   # Hero carousel slide 1
+│       ├── hero_carrousel2.png   # Hero carousel slide 2
+│       ├── hero_carrousel3.png   # Hero carousel slide 3
+│       ├── hero_carrousel4.png   # Hero carousel slide 4
 │       ├── Bird.gif              # Bird decoration with ribbon
 │       ├── alarm.gif             # Alarm clock decoration
 │       ├── calendar.png          # Calendar icon for button
@@ -150,9 +154,8 @@ The website uses a sophisticated layered background system where sections overla
 │  HERO SECTION (z-index: 1)          │
 │  bg-opening.png                     │
 │  - "The wedding of"                 │
-│  - Couple photo                     │
+│  - 4-photo carousel (auto-slide)    │
 │  - Bird.gif decoration              │
-│  - "S" monogram                     │
 │  - Padding-bottom: 160px (pb-40)    │
 └─────────────────────────────────────┘
          ↓ OVERLAPS -160px ↓
@@ -204,6 +207,10 @@ The website uses a sophisticated layered background system where sections overla
 
 **[src/components/Page2/HeroSection.jsx](src/components/Page2/HeroSection.jsx)** - Hero section
 - Background: `bg-opening.png` only (no overlay)
+- 4-photo auto-sliding carousel (CSS Transform, no library)
+- Photos: `hero_carrousel1-4.png`, auto-advance every 4s, infinite loop
+- Carousel container: `max-w-[402px]` responsive with `aspect-ratio: 402/638`
+- Decorative geometric shapes (lightBrown + blue-200) behind carousel
 - Bird.gif decoration at bottom
 - Padding-bottom: 160px for overlap
 - z-index: 1 (bottom layer)
@@ -306,7 +313,8 @@ Edit **[src/data/content.js](src/data/content.js)**:
 
 ### 2. Replace Photos
 Place photos in `public/assets/`:
-- `carousel-1.png` - Main couple photo (cover + hero)
+- `carousel-1.png` - Main couple photo (cover page)
+- `hero_carrousel1.png` to `hero_carrousel4.png` - Hero carousel slides (4 photos)
 - `our_story_photo.png` - Story section first photo (dining table)
 - `our_story_carrousel1.png` - Story section second photo (mountain)
 - `galeri 1.png` to `galeri 12.png` - Gallery photos (3x4 grid)
@@ -429,10 +437,16 @@ npm run build
 - Bismillah displayed as PNG image (bismillah.png)
 - Cleaner layout with better spacing
 
-### ✅ Hero Section Update
-- Bird.gif decoration added at bottom
-- Removed bg-arrum overlay (only bg-opening.png)
-- Added padding-bottom for overlap effect
+### ✅ Hero Section Carousel (Latest)
+- Replaced static single photo with 4-photo auto-sliding carousel
+- CSS Transform approach (no external library) with `translateX` transitions
+- Photos: `hero_carrousel1.png` through `hero_carrousel4.png`
+- Auto-advance every 4 seconds with infinite loop
+- Responsive container: `max-w-[402px] w-full` with `aspect-ratio: 402/638`
+- Decorative geometric shapes (lightBrown + blue-200) positioned behind carousel
+- Heart emoji decorations at corners
+- Bird.gif decoration below carousel
+- Removed redundant "S" monogram (already in CountdownSection)
 
 ### ✅ Event Section Overhaul (Latest)
 - Custom `<section>` with `bg-ceremony-pattern bg-cover bg-center` (replaces SectionWrapper)
@@ -521,4 +535,4 @@ For issues or questions about the website implementation, refer to:
 
 **Built with ❤️ using React + Vite + Tailwind CSS**
 
-**Latest Update:** Interaction section (wishes with URL params + localStorage, gradient bank cards with copy icon, gift registry link), Footer section (photo frame, Passions Conflict "Terima Kasih", car illustration, black copyright bar)
+**Latest Update:** Hero section carousel (4-photo auto-slide, CSS Transform, responsive 402×638px container)

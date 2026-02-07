@@ -11,7 +11,7 @@ import { GradientWrapper } from './GradientWrapper';
 
 export default function MainLayout() {
   return (
-    <div className="w-full overflow-x-hidden">
+    <div className="w-full overflow-x-hidden bg-primary">
       <HeroSection />
 
       <GradientWrapper>

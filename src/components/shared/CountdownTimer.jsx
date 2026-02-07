@@ -13,7 +13,7 @@ export const CountdownTimer = ({ targetDate }) => {
   );
 
   return (
-    <div className="grid grid-cols-4 gap-4 text-center">
+    <div className="grid grid-cols-4 gap-10 text-center">
       <CountdownItem value={days} label="Hari" />
       <CountdownItem value={hours} label="Jam" />
       <CountdownItem value={minutes} label="Menit" />

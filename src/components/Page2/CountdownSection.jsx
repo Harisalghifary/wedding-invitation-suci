@@ -10,22 +10,32 @@ export default function CountdownSection() {
 
   return (
     <SectionWrapper id="countdown" background="transparent" className="relative pt-16 px-6">
-      {/* S monogram - logo_ss.png */}
+
+      {/* Bird decoration with ribbon - FLIPPED horizontally */}
       <div className="text-center mb-8">
+        <img
+          src="/assets/Bird.gif"
+          alt="Birds with ribbon"
+          className="w-56 h-auto mx-auto scale-x-[-1]"
+        />
+      </div>
+
+      {/* S monogram - LARGER */}
+      <div className="text-center mb-12">
         <img
           src="/assets/logo_ss.png"
           alt="S Monogram"
-          className="w-20 h-20 mx-auto opacity-60"
+          className="w-40 h-40 mx-auto"
         />
       </div>
 
       {/* Countdown card - centered with max-width */}
-      <div className="max-w-md mx-auto bg-cream rounded-3xl px-8 py-12 shadow-lg relative">
-        {/* Alarm clock GIF - positioned outside bottom-left */}
+      <div className="max-w-md mx-auto bg-[#FFFAF2] rounded-3xl px-10 py-14 shadow-xl relative">
+        {/* Alarm clock GIF - positioned outside bottom-left, LARGER */}
         <img
           src="/assets/alarm.gif"
           alt="Alarm Clock"
-          className="absolute -left-10 -bottom-10 w-20 h-20"
+          className="absolute -left-12 -bottom-12 w-28 h-28 z-20"
           onError={(e) => e.target.style.display = 'none'}
         />
 
@@ -40,10 +50,9 @@ export default function CountdownSection() {
           className="inline-flex items-center gap-2 bg-primary text-cream font-dmSans font-medium px-8 py-3 rounded-full hover:bg-darkBrown transition-colors shadow-lg"
         >
           <img
-            src="/assets/calendar.png"
+            src="/assets/calendar.svg"
             alt="Calendar"
             className="w-5 h-5"
-            onError={(e) => e.target.style.display = 'none'}
           />
           Save the Date
         </button>

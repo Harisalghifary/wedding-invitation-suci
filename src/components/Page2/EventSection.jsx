@@ -24,11 +24,11 @@ export default function EventSection() {
           </h2>
 
           {/* Venue illustration */}
-          <div className="mb-6">
+          <div className="mb-6 ">
             <img
               src="/assets/gedung.png"
               alt="Venue Illustration"
-              className="w-full max-w-lg mx-auto h-auto"
+              className="w-full max-w-lg mx-auto h-auto mix-blend-multiply opacity-90"
             />
           </div>
 
@@ -90,9 +90,9 @@ export default function EventSection() {
         </div>
 
         {/* Ballroom Illustration */}
-        <div className="my-12">
+        <div className="my-12 mix-blend-multiply opacity-70">
           <img
-            src="/assets/decor_venue.gif"
+            src="/assets/inside_venue_white.gif"
             alt="Ballroom Decoration"
             className="w-full rounded-lg"
           />
