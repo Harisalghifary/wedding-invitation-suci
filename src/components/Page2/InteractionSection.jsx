@@ -37,7 +37,7 @@ function WishesSection() {
       {/* Header */}
       <div className="text-center mb-8">
         <div className="flex items-center justify-center gap-3 mb-2">
-          <span className="text-white text-3xl">💝</span>
+          
           <h2 className="font-josefin font-bold text-4xl text-white">
             Wishes
           </h2>
@@ -167,7 +167,7 @@ function WeddingGiftSection() {
     <section className="bg-primary py-16 px-6">
       {/* Header */}
       <div className="text-center mb-6">
-        <span className="text-white text-4xl block mb-2">🎁</span>
+        
         <h2 className="font-josefin font-bold text-4xl text-white mb-6">
           Wedding Gift
         </h2>
@@ -200,9 +200,6 @@ function WeddingGiftSection() {
           Daftar Pilihan Hadiah
         </a>
 
-        <div className="mt-8">
-          <span className="text-white text-5xl">🎁</span>
-        </div>
       </div>
     </section>
   );

@@ -9,7 +9,7 @@ export default function CountdownSection() {
   };
 
   return (
-    <SectionWrapper id="countdown" background="transparent" className="relative pt-16 px-6">
+    <SectionWrapper id="countdown" background="transparent" className="relative pt-16 px-6 mb-50">
 
       {/* Bird decoration with ribbon - FLIPPED horizontally */}
       <div className="text-center mb-8">
@@ -30,7 +30,7 @@ export default function CountdownSection() {
       </div>
 
       {/* Countdown card - centered with max-width */}
-      <div className="max-w-md mx-auto bg-[#FFFAF2] rounded-3xl px-10 py-14 shadow-xl relative">
+      <div className="max-w-md mx-auto bg-[#FFFAF2] rounded-3xl px-6 py-14 shadow-xl relative">
         {/* Alarm clock GIF - positioned outside bottom-left, LARGER */}
         <img
           src="/assets/alarm.gif"
@@ -43,26 +43,23 @@ export default function CountdownSection() {
         <CountdownTimer targetDate={weddingData.event.date} />
       </div>
 
-      {/* Save the Date button - CENTERED */}
-      <div className="flex justify-center mt-8">
-        <button
-          onClick={handleSaveDate}
-          className="inline-flex items-center gap-2 bg-primary text-cream font-dmSans font-medium px-8 py-3 rounded-full hover:bg-darkBrown transition-colors shadow-lg"
-        >
-          <img
-            src="/assets/calendar.svg"
-            alt="Calendar"
-            className="w-5 h-5"
-          />
-          Save the Date
-        </button>
-      </div>
+{/* Save the Date button */}
+<div className="flex justify-center mt-8">
+  <button
+    onClick={handleSaveDate}
+    className="inline-flex items-center gap-2 bg-primary text-cream font-dmSans font-semibold px-8 py-3 rounded-full hover:bg-darkBrown transition-colors shadow-lg"
+  >
+    <img
+      src="/assets/calendar.svg"
+      alt="Calendar"
+      // ADDED: 'brightness-0 invert' to turn the icon white
+      className="w-5 h-5 brightness-0 invert"
+    />
+    Save the Date
+  </button>
+</div>
 
-      {/* Heart decorations */}
-      <div className="flex justify-center gap-4 text-4xl text-primary/30 mt-8">
-        <span>♥</span>
-        <span>♥</span>
-      </div>
+
     </SectionWrapper>
   );
 }

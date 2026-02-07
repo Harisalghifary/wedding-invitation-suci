@@ -36,10 +36,6 @@ export default function HeroSection() {
         <div className="relative mb-12 max-w-[402px] w-full" style={{ aspectRatio: '402/638' }}>
 
 
-          {/* Hearts */}
-          <span className="absolute -top-4 -right-4 text-3xl text-white/70">♥</span>
-          <span className="absolute -bottom-4 -left-4 text-2xl text-white/70">♥</span>
-
           {/* Carousel */}
           <div className="relative w-full h-full z-20 overflow-hidden rounded-lg shadow-2xl">
             {photos.map((photo, index) => (

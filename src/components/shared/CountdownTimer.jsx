@@ -5,7 +5,7 @@ export const CountdownTimer = ({ targetDate }) => {
 
   const CountdownItem = ({ value, label }) => (
     <div className="text-center">
-      <div className="font-playfair font-semibold text-5xl text-primary">
+      <div className="font-playfair font-semibold text-4xl text-primary">
         {String(value).padStart(2, '0')}
       </div>
       <div className="font-dmSans text-sm text-primary mt-2">{label}</div>

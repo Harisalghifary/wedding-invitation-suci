@@ -126,8 +126,6 @@ export default function EventSection() {
 
           {/* Dress & Suit Icons */}
           <div className="flex justify-center items-center gap-4 mt-6">
-            <span className="text-4xl">👗</span>
-            <span className="text-4xl">🤵</span>
           </div>
         </div>
       </div>

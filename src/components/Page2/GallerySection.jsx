@@ -24,12 +24,6 @@ export default function GallerySection() {
         </div>
       </div>
 
-      {/* Heart decorations */}
-      <div className="flex justify-center gap-4 mt-12">
-        <span className="text-cream text-4xl">♥</span>
-        <span className="text-cream text-5xl">♥</span>
-        <span className="text-cream text-4xl">♥</span>
-      </div>
     </section>
   );
 }
