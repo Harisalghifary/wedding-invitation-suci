@@ -15,32 +15,39 @@ const ProfileCard = ({ person, title }) => {
         {title}
       </h2>
 
-      {/* Photo frame - transparent background, no cream bg */}
-      <div className="relative inline-block mb-6">
-        {/* Decorative frame borders - white/cream */}
-        <div className="absolute -top-2 -left-2 w-8 h-8 border-t-2 border-l-2 border-cream" />
-        <div className="absolute -top-2 -right-2 w-8 h-8 border-t-2 border-r-2 border-cream" />
-        <div className="absolute -bottom-2 -left-2 w-8 h-8 border-b-2 border-l-2 border-cream" />
-        <div className="absolute -bottom-2 -right-2 w-8 h-8 border-b-2 border-r-2 border-cream" />
+{/* Wrapper: Added mt-8 to give room for the crown at the top */}
+<div className="relative inline-block mb-6 mt-8">
 
-        {/* Crown decoration on top */}
-        <div className="absolute -top-8 left-1/2 transform -translate-x-1/2 text-3xl">
-          👑
-        </div>
+{/* DYNAMIC DECORATION (Sketch) */}
+  <img 
+    // 1. Dynamic Source: uses 'bride.gif' or 'groom.gif' based on nickname
+    src={person.nickname === 'Suci' ? "/assets/bride.gif" : "/assets/groom.gif"}
+    alt="Decoration"
+    
+    // 2. Dynamic Position & Style
+    className={`absolute bottom-0 w-48 h-auto z-0 brightness-0 invert opacity-80 
+      ${person.nickname === 'Suci' 
+        ? '-left-28'   // Bride: Peeking from Left
+        : '-right-28 scale-x-[-1]' // Groom: Peeking from Right + Flipped horizontally
+      }
+    `}
+  />
 
-        {/* Photo - use couple.gif, NO background */}
-        <div className="w-64 h-80 rounded-lg overflow-hidden">
-          <img
-            src="/assets/carousel-1.png"
-            alt={person.nickname}
-            className="w-full h-full object-cover"
-            onError={(e) => {
-              e.target.src = person.photo; // Fallback to original photo
-            }}
-          />
-        </div>
-      </div>
-
+  {/* FIX 1: Photo Frame */}
+  {/* Removed 'overflow-hidden', 'rounded-lg', and fixed 'h-80' */}
+  {/* Added 'relative z-10' to ensure it sits ON TOP of the GIF */}
+  <div className="relative z-10 w-64 h-auto">
+    <img
+      src={`/assets/${person.frameImage}`}
+      alt={person.nickname}
+      // Changed object-cover to object-contain so the full frame is visible
+      className="w-full h-auto object-contain drop-shadow-xl"
+      onError={(e) => {
+        e.target.src = person.photo; 
+      }}
+    />
+  </div>
+</div>
       {/* Name - Oregano font, text-2xl (25px) */}
       <h3 className="font-oregano text-2xl text-cream mt-6 px-4">
         {person.fullName}

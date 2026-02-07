@@ -5,14 +5,14 @@ export const weddingData = {
       nickname: 'Suci',
       parents: 'Putri pertama dari Bapak Deden Mintaredja Tedja P. R. & Ibu Nina Erytriana',
       instagram: '@sucikaylafebita',
-      photo: '/assets/carousel-1.png',
+      photo: '/assets/bride_photo_frame.png',
     },
     groom: {
       fullName: 'Seky Prasdhika Pebransha, S. H.',
       nickname: 'Seky',
       parents: 'Putra kedua dari Bapak Suhenda & Ibu Esih Sukaesih',
       instagram: '@prasdhikas',
-      photo: '/assets/carousel-1.png',
+      photo: '/assets/groom_photo_frame.png',
     },
   },
   event: {

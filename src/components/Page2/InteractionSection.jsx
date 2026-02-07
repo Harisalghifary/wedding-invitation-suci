@@ -1,35 +1,117 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { weddingData } from '../../data/content';
+import { supabase } from '../../lib/supabase';
 
 // ─── Wishes Section ─────────────────────────────────────────────────────────
 
 function WishesSection() {
   const [name, setName] = useState(() => {
     const params = new URLSearchParams(window.location.search);
-    return params.get('name') || '';
+    return params.get('name') || params.get('to') || '';
   });
   const [message, setMessage] = useState('');
-  const [wishes, setWishes] = useState(() => {
-    const saved = localStorage.getItem('weddingWishes');
-    return saved ? JSON.parse(saved) : [];
-  });
+  const [wishes, setWishes] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [fetchingWishes, setFetchingWishes] = useState(true);
+  const [error, setError] = useState(null);
+  const [submitSuccess, setSubmitSuccess] = useState(false);
 
-  const hasUrlName = !!new URLSearchParams(window.location.search).get('name');
+  const hasUrlName = (() => {
+    const params = new URLSearchParams(window.location.search);
+    return !!(params.get('name') || params.get('to'));
+  })();
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (!name.trim() || !message.trim()) return;
+  // Fetch wishes from Supabase
+  const fetchWishes = async () => {
+    if (!supabase) { setFetchingWishes(false); return; }
+    try {
+      setFetchingWishes(true);
+      const { data, error } = await supabase
+        .from('wishes')
+        .select('*')
+        .order('created_at', { ascending: false })
+        .limit(10);
 
-    const newWish = {
-      name: name.trim(),
-      message: message.trim(),
-      timestamp: new Date().toISOString(),
+      if (error) throw error;
+      setWishes(data || []);
+    } catch (err) {
+      console.error('Error fetching wishes:', err);
+      setError('Failed to load wishes');
+    } finally {
+      setFetchingWishes(false);
+    }
+  };
+
+  // Load wishes on mount + subscribe to real-time updates
+  useEffect(() => {
+    fetchWishes();
+
+    if (!supabase) return;
+
+    const channel = supabase
+      .channel('wishes_changes')
+      .on(
+        'postgres_changes',
+        { event: 'INSERT', schema: 'public', table: 'wishes' },
+        (payload) => {
+          setWishes((current) => [payload.new, ...current]);
+        }
+      )
+      .subscribe();
+
+    return () => {
+      supabase.removeChannel(channel);
     };
+  }, []);
 
-    const updated = [newWish, ...wishes];
-    setWishes(updated);
-    localStorage.setItem('weddingWishes', JSON.stringify(updated));
-    setMessage('');
+  // Handle form submission
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    if (!name.trim() || !message.trim()) {
+      setError('Mohon isi nama dan ucapan');
+      return;
+    }
+
+    try {
+      setLoading(true);
+      setError(null);
+
+      if (!supabase) throw new Error('Supabase not configured');
+      const { error } = await supabase
+        .from('wishes')
+        .insert([{ name: name.trim(), message: message.trim() }]);
+
+      if (error) throw error;
+
+      setMessage('');
+      setSubmitSuccess(true);
+      setTimeout(() => setSubmitSuccess(false), 3000);
+    } catch (err) {
+      console.error('Error submitting wish:', err);
+      setError('Gagal mengirim ucapan. Silakan coba lagi.');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // Format relative time
+  const formatDate = (dateString) => {
+    const diffMs = Date.now() - new Date(dateString).getTime();
+    const diffMins = Math.floor(diffMs / 60000);
+    const diffHours = Math.floor(diffMs / 3600000);
+    const diffDays = Math.floor(diffMs / 86400000);
+
+    if (diffMins < 1) return 'Baru saja';
+    if (diffMins < 60) return `${diffMins} menit lalu`;
+    if (diffHours < 24) return `${diffHours} jam lalu`;
+    if (diffDays < 7) return `${diffDays} hari lalu`;
+
+    return new Date(dateString).toLocaleDateString('id-ID', {
+      day: 'numeric',
+      month: 'short',
+      year: 'numeric',
+    });
   };
 
   return (
@@ -37,7 +119,6 @@ function WishesSection() {
       {/* Header */}
       <div className="text-center mb-8">
         <div className="flex items-center justify-center gap-3 mb-2">
-          
           <h2 className="font-josefin font-bold text-4xl text-white">
             Wishes
           </h2>
@@ -55,6 +136,7 @@ function WishesSection() {
               onChange={(e) => setName(e.target.value)}
               placeholder="Nama Anda"
               className="w-full bg-cream rounded-lg px-6 py-3 mb-4 font-dmSans text-primary focus:outline-none focus:ring-2 focus:ring-lightBrown"
+              disabled={loading}
             />
           )}
 
@@ -64,38 +146,65 @@ function WishesSection() {
             onChange={(e) => setMessage(e.target.value)}
             placeholder="Tulis ucapan Anda di sini..."
             className="w-full bg-cream rounded-lg px-6 py-4 min-h-[128px] font-dmSans text-primary resize-y focus:outline-none focus:ring-2 focus:ring-lightBrown"
+            disabled={loading}
           />
+
+          {/* Error message */}
+          {error && (
+            <p className="text-red-300 text-sm mt-2 font-dmSans">{error}</p>
+          )}
+
+          {/* Success message */}
+          {submitSuccess && (
+            <p className="text-green-300 text-sm mt-2 font-dmSans">
+              Ucapan berhasil dikirim!
+            </p>
+          )}
 
           {/* Submit button - RIGHT ALIGNED */}
           <div className="flex justify-end mt-4">
             <button
               type="submit"
-              className="bg-[#FFFAF2] opacity-75 text-xs font-dmSans text-primary font-medium px-2 py-2 rounded-lg hover:bg-lightBrown/90 transition"
+              disabled={loading}
+              className="bg-[#FFFAF2] opacity-75 text-xs font-dmSans text-primary font-medium px-2 py-2 rounded-lg hover:bg-lightBrown/90 transition disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              Submit
+              {loading ? 'Mengirim...' : 'Submit'}
             </button>
           </div>
         </form>
 
         {/* Recent wishes display */}
         <div className="bg-cream rounded-lg px-6 py-6 mt-8 max-h-96 overflow-y-auto">
-          {wishes.length > 0 ? (
-            wishes.slice(0, 10).map((wish, index) => (
+          {fetchingWishes && (
+            <p className="text-center font-dmSans text-sm text-primary opacity-50">
+              Memuat ucapan...
+            </p>
+          )}
+
+          {!fetchingWishes && wishes.length > 0 &&
+            wishes.map((wish) => (
               <div
-                key={index}
-                className="bg-white rounded-xl px-4 py-3 mb-3 shadow-sm last:mb-0"
+                key={wish.id}
+                className="bg-white rounded-xl px-4 py-3 mb-3 shadow-sm last:mb-0 animate-fadeIn"
               >
-                <p className="font-dmSans font-bold text-sm text-primary mb-1">
-                  {wish.name}
-                </p>
+                <div className="flex justify-between items-start mb-1">
+                  <p className="font-dmSans font-bold text-sm text-primary">
+                    {wish.name}
+                  </p>
+                  <span className="font-dmSans text-xs text-gray-400">
+                    {formatDate(wish.created_at)}
+                  </span>
+                </div>
                 <p className="font-dmSans text-sm text-primary leading-relaxed">
                   {wish.message}
                 </p>
               </div>
             ))
-          ) : (
+          }
+
+          {!fetchingWishes && wishes.length === 0 && (
             <p className="text-center font-dmSans text-sm text-primary opacity-50">
-              Belum ada ucapan
+              Belum ada ucapan. Jadilah yang pertama!
             </p>
           )}
         </div>

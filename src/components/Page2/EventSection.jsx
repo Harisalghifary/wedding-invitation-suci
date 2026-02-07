@@ -101,7 +101,7 @@ export default function EventSection() {
         {/* Dresscode Section */}
         <div className=" px-8 py-10">
           <h3 className="font-josefin font-semibold text-4xl text-primary text-center mb-8">
-            Dresscode <span className="text-3xl">❀</span>
+            Dresscode 
           </h3>
 
           {/* Color circles - 5 in one row */}
