@@ -20,6 +20,7 @@ export default {
         oregano: ['Oregano', 'cursive'],
         passions: ['"Passions Conflict"', 'cursive'],
         poppins: ['Poppins', 'sans-serif'],
+        ptSerif: ['"PT Serif"', 'serif'],
       },
       keyframes: {
         fadeIn: {

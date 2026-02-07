@@ -38,7 +38,7 @@ export default function EventSection() {
           </div>
 
           {/* Wedding Date */}
-          <h3 className="font-dmSans font-black text-4xl sm:text-6xl text-primary tracking-wide mb-6">
+          <h3 className="font-dmSans font-black text-[40px] sm:text-6xl text-primary tracking-tightest drop-shadow-lg mb-6">
             14 . 02 . 2026
           </h3>
 
@@ -109,7 +109,7 @@ export default function EventSection() {
             {dresscodeColors.map((item, index) => (
               <div key={index} className="flex flex-col items-center">
                 <div
-                  className={`w-12 h-12 rounded-full${item.border ? ' border-2 border-primary' : ''}`}
+                  className={`w-12 h-12 rounded-full border-2 ${item.label.includes('white') ? 'border-white' : 'border-transparent'}`}
                   style={{ backgroundColor: item.color }}
                 />
                 <p className="font-dmSans italic text-xs text-primary mt-2 text-center whitespace-pre-line">

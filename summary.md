@@ -11,6 +11,7 @@ A beautiful, mobile-responsive two-page wedding invitation website for Suci & Se
 - **React 18** - Component-based UI framework
 - **Vite** - Fast development server and build tool
 - **Tailwind CSS** - Utility-first styling with custom design tokens
+- **Supabase** - Backend-as-a-Service for wishes storage and real-time updates
 - **react-hook-form** - Form validation and state management
 - **react-scroll** - Smooth scrolling between sections
 - **react-icons** - UI icon library (FaInstagram, FaCopy, FaCheck, etc.)
@@ -47,32 +48,32 @@ darkBrown: #5C3A34   (text on light backgrounds)
 ## ✨ Features
 
 ### Page 1: Invitation Guard
-- ✅ Full-screen cover with curtain effect (clipPath CSS)
-- ✅ Couple photo display (carousel-1.png)
-- ✅ "Open Invitation" button with envelope icon
-- ✅ Recipient name placeholder
+- ✅ Full-screen cover with background image (bg-cover.png)
+- ✅ Absolutely positioned layout: "Wedding Invitation" top-center, "Suci" upper-left, "&" center, "Seky" lower-right (diagonal arrangement)
+- ✅ "To" + guest name at bottom
+- ✅ "Open Invitation" button with envelope icon at bottom-center
 - ✅ Smooth transition to main page
 
 ### Page 2: Main Website (9 Sections)
 
 1. **Hero Section** - "The wedding of" with 4-photo auto-sliding carousel (402×638px responsive) and Bird.gif
-2. **Countdown Section** - Real-time countdown with Playfair Display numbers
+2. **Countdown Section** - Real-time countdown with Playfair Display numbers, flipped Bird.gif, large S monogram, #FFFAF2 card bg, calendar.svg icon
 3. **Quran Section** - Ar-Rum verse 21 (Arabic image + translation)
 4. **Profile Section** - Bride & Groom profiles with Oregano font
 5. **Event Section** - Ceremony details, venue, dresscode with bg-ceremony.png background
-6. **Story Section** - Couple's love story with actual content and photos (bg-ceremony-pattern)
+6. **Story Section** - Couple's love story with actual content, photos, and absolutely positioned decorative illustrations (chapel, glass, candle)
 7. **Gallery Section** - Fixed 3x4 photo grid (109×171px cells, 13px gaps, 353px total width)
-8. **Interaction Section** - Wishes form (URL param name, localStorage, scrollable display) + Wedding Gift (gradient bank cards, copy icon, gift registry link)
+8. **Interaction Section** - Wishes form (Supabase backend, real-time updates, URL param name) + Wedding Gift (gradient bank cards, copy icon, gift registry link)
 9. **Footer Section** - Photo frame (3 stacked photos), "Terima Kasih" (Passions Conflict 80px), car illustration, S monogram, black copyright bar
 
 ### Interactive Features
 - ⏰ **Real-time countdown timer** (days, hours, minutes, seconds)
-- 📝 **Wishes form** with URL param name support (?name=GuestName), localStorage persistence, scrollable display
+- 📝 **Wishes form** with Supabase backend, real-time updates via postgres_changes subscription, URL param name support (?name= or ?to=)
 - 💳 **Copy-to-clipboard** for bank account numbers with money-transfer.svg icon
 - 🎁 **Gift registry link** button (Google Sheets placeholder)
 - 🗺️ **Google Maps integration** for venue location
 - 📱 **Instagram links** for bride and groom
-- 💾 **localStorage** for wishes storage (`weddingWishes` key, ready for backend migration)
+- 💾 **Supabase** for wishes storage with real-time subscription (replaced localStorage)
 - 🎨 **Layered overlapping backgrounds** - Hero section overlaps with Countdown/Quran
 
 ---
@@ -94,7 +95,11 @@ darkBrown: #5C3A34   (text on light backgrounds)
 │       ├── hero_carrousel4.png   # Hero carousel slide 4
 │       ├── Bird.gif              # Bird decoration with ribbon
 │       ├── alarm.gif             # Alarm clock decoration
-│       ├── calendar.png          # Calendar icon for button
+│       ├── calendar.svg          # Calendar icon for Save the Date button
+│       ├── chapel.png           # Chapel decoration (Story section, left-top)
+│       ├── glass.png            # Champagne glasses decoration (Story section, right-top)
+│       ├── candle.png           # Candles decoration (Story section, right-bottom)
+│       ├── flower_frame.svg     # Flower frame decoration
 │       ├── couple.gif            # Couple illustration
 │       ├── bismillah.png         # Bismillah Arabic text
 │       ├── logo_ss.png           # S monogram logo
@@ -124,6 +129,8 @@ darkBrown: #5C3A34   (text on light backgrounds)
 │   │   └── layout/
 │   │       ├── MainLayout.jsx            # Container for all sections
 │   │       └── GradientWrapper.jsx       # Wraps Countdown + Quran with bg-arrum
+│   ├── lib/
+│   │   └── supabase.js                  # Supabase client initialization
 │   ├── hooks/
 │   │   ├── useCountdown.js               # Real-time countdown logic
 │   │   └── useScrollTo.js                # Smooth scroll helper
@@ -195,8 +202,9 @@ The website uses a sophisticated layered background system where sections overla
 - Handles page transition on "Open Invitation"
 
 **[src/components/Page1/InvitationGuard.jsx](src/components/Page1/InvitationGuard.jsx)** - Cover page
-- Curtain effect using CSS `clipPath`
 - Full-screen background image (bg-cover.png)
+- Absolutely positioned layout: names in diagonal arrangement (Suci upper-left, & center, Seky lower-right)
+- "To" + guest name and "Open Invitation" button at bottom
 - Opens main page on button click
 
 **[src/components/layout/GradientWrapper.jsx](src/components/layout/GradientWrapper.jsx)** - **NEW!**
@@ -216,12 +224,13 @@ The website uses a sophisticated layered background system where sections overla
 - z-index: 1 (bottom layer)
 
 **[src/components/Page2/CountdownSection.jsx](src/components/Page2/CountdownSection.jsx)** - Countdown timer
-- **NEW DESIGN:** Cream card with rounded-3xl corners
-- S monogram using `logo_ss.png` image
-- Countdown numbers: Playfair Display Semi Bold (48px)
-- Labels: DM Sans (small)
-- alarm.gif positioned outside bottom-left of card
-- Button with calendar.png icon
+- Bird.gif decoration flipped horizontally (`scale-x-[-1]`), w-56
+- S monogram using `logo_ss.png` image (w-40 h-40, large and prominent)
+- Countdown card: `#FFFAF2` background (not cream), rounded-3xl, shadow-xl
+- Countdown numbers: Playfair Display Semi Bold
+- Labels: DM Sans (text-sm)
+- alarm.gif positioned outside bottom-left of card (w-28 h-28, z-20)
+- Save the Date button with `calendar.svg` icon (brightness-0 invert for white)
 - Transparent background (inherits from GradientWrapper)
 
 **[src/components/shared/CountdownTimer.jsx](src/components/shared/CountdownTimer.jsx)** - Timer display
@@ -244,9 +253,16 @@ The website uses a sophisticated layered background system where sections overla
 - Transparent background (inherits from GradientWrapper)
 
 **[src/components/Page2/InteractionSection.jsx](src/components/Page2/InteractionSection.jsx)** - Interactive features
-- **WishesSection:** Guest name from URL param (?name=), localStorage persistence (`weddingWishes`), scrollable wishes display (max 10), right-aligned submit button
+- **WishesSection:** Supabase-backed with real-time updates (postgres_changes subscription)
+  - Guest name from URL param (`?name=` or `?to=`), input hidden when param exists
+  - Scrollable wishes display (max 10, max-h-96) with relative timestamps
+  - Loading states, error handling, success feedback
+  - fadeIn animation on new wish cards
 - **WeddingGiftSection:** Gradient bank cards with money-transfer.svg copy icon, "Nama akun" labels, "Daftar Pilihan Hadiah" gift registry link button
-- No longer uses `react-hook-form` or `SectionWrapper`
+
+**[src/lib/supabase.js](src/lib/supabase.js)** - Supabase client
+- Initializes Supabase client from env vars (VITE_SUPABASE_URL, VITE_SUPABASE_ANON_KEY)
+- Returns null if env vars missing (graceful degradation)
 
 **[src/components/Page2/FooterSection.jsx](src/components/Page2/FooterSection.jsx)** - Footer
 - Photo frame: #5B322D bg, 3 stacked photos (273×167px, 9px gap), rounded-3xl
@@ -267,7 +283,7 @@ The website uses a sophisticated layered background system where sections overla
 - **Custom colors:** primary, cream, lightBrown, darkBrown
 - **Custom fonts:** loveLight, josefin, dmSans, playfair, oregano, passions, poppins (7 fonts)
 - **Background images:** cover-pattern, arrum-pattern, ceremony-pattern
-- **Transparent background:** Added to SectionWrapper
+- **Animation:** fadeIn keyframe (0.3s ease-in-out, translateY(-10px) to 0)
 
 **[index.html](index.html)** - HTML template
 - Google Fonts: Love Light, Josefin Sans, DM Sans, Playfair Display, Oregano, Passions Conflict, Poppins
@@ -388,11 +404,19 @@ Mobile-first approach with Tailwind breakpoints:
 
 ## 🚢 Deployment
 
+### Environment Variables
+Set these in your hosting platform (Vercel/Netlify) or `.env` file:
+```
+VITE_SUPABASE_URL=<your-supabase-url>
+VITE_SUPABASE_ANON_KEY=<your-supabase-anon-key>
+```
+
 ### Vercel (Recommended)
 1. Push code to GitHub
 2. Import project on [vercel.com](https://vercel.com)
-3. Build settings auto-detected (Vite)
-4. Deploy!
+3. Add environment variables in Vercel dashboard
+4. Build settings auto-detected (Vite)
+5. Deploy!
 
 ### Netlify
 1. Push code to GitHub
@@ -419,12 +443,13 @@ npm run build
 - No gaps between sections
 
 ### ✅ Countdown Section Redesign
-- Added Playfair Display font for countdown numbers
-- S monogram now uses `logo_ss.png` image (not text)
-- Countdown card: cream background with `rounded-3xl`
-- alarm.gif positioned outside bottom-left of card
-- Button includes calendar.png icon
-- Perfect center alignment
+- Bird.gif flipped horizontally (`scale-x-[-1]`) and enlarged to w-56
+- S monogram enlarged to w-40 h-40 (was w-18 h-18), removed opacity
+- Countdown card background changed to `#FFFAF2` (was `bg-cream` / #F5EFE7)
+- Card padding increased to px-6 py-14, shadow-xl
+- alarm.gif enlarged to w-28 h-28 with z-20
+- Button icon changed from `calendar.png` to `calendar.svg` with `brightness-0 invert` for white color
+- CountdownTimer labels upgraded to text-sm (was text-xs)
 
 ### ✅ Profile Section Typography Fix
 - Added Oregano font for couple names (25px, regular weight)
@@ -458,15 +483,17 @@ npm run build
 - Dresscode: 5 color circles in single row with exact hex colors (#FFFFFF, #C8B1A0, #B6928D, #768064, #754B4D)
 - Each circle has italic DM Sans label below
 
-### ✅ Story Section Overhaul (Latest)
-- Replaced placeholder text with actual Indonesian story content (2 paragraphs)
-- Background: `bg-ceremony-pattern` with cream fallback
+### ✅ Story Section with Decorative Illustrations (Latest)
+- Absolutely positioned illustrations around story card:
+  - Chapel (`chapel.png`): top-left (-top-10, -left-6, w-32)
+  - Champagne glasses (`glass.png`): top-right (top-6, right-12, w-16)
+  - Candles (`candle.png`): bottom-right (-bottom-4, -right-4, w-24)
+  - All with opacity-80, pointer-events-none
 - Photo 1: `our_story_photo.png` (top, full-width)
 - Photo 2: `our_story_carrousel1.png` (bottom, full-width)
-- Story card overlaps Photo 1 with `-mt-8` and `rounded-t-3xl`
-- Header: Playfair Display "Our Story" (was Josefin Sans)
-- Body: DM Sans `text-xs` justified text
-- Removed SectionWrapper, placeholder text, onError handlers
+- Story card with relative positioning, mb-12 spacing
+- Header: Josefin Sans "Our Story"
+- Body: DM Sans `text-xs` justified text (2 paragraphs)
 
 ### ✅ Gallery Section Overhaul
 - Fixed 3x4 grid on ALL screen sizes (no responsive breakpoints)
@@ -477,18 +504,29 @@ npm run build
 - Native lazy loading: `loading="lazy"` + `decoding="async"`
 - Removed SectionWrapper and weddingData dependency
 
-### ✅ Interaction Section Overhaul (Latest)
-- **Wishes Section:** Guest name auto-filled from URL param (`?name=GuestName`), input hidden when param exists
-- Right-aligned submit button (not full width)
-- Scrollable wishes display (max-h-96, max 10 shown) with cream container
-- localStorage persistence (`weddingWishes` key), new wishes prepend
-- Empty state: "Belum ada ucapan"
-- Removed `react-hook-form` dependency, uses native form handling
-- **Wedding Gift Section:** Gradient bank cards (`from-[#764640] to-[#B16C63]`)
-- "Nomor rekening" and "Nama akun" labels on each card
-- Copy button using `/assets/money-transfer.svg` icon with "Copied!" feedback
-- "Daftar Pilihan Hadiah" gift registry link button (gradient bg)
-- Removed SectionWrapper, uses standalone `<section>` tags
+### ✅ Interaction Section - Supabase Integration (Latest)
+- **Wishes Section:** Migrated from localStorage to Supabase backend
+  - New file: `src/lib/supabase.js` - Supabase client with graceful null fallback
+  - New dependency: `@supabase/supabase-js`
+  - Environment variables: `VITE_SUPABASE_URL`, `VITE_SUPABASE_ANON_KEY` (in `.env`)
+  - Real-time updates via `postgres_changes` subscription (new wishes appear instantly)
+  - Loading states (`fetchingWishes`, `loading`) with user feedback
+  - Error handling with Indonesian error messages
+  - Success message "Ucapan berhasil dikirim!" (3s auto-dismiss)
+  - Relative timestamps (Baru saja, X menit lalu, X jam lalu, etc.)
+  - URL param support: `?name=` or `?to=` auto-fills guest name
+  - fadeIn animation on wish cards (Tailwind keyframe)
+  - Supabase table: `wishes` (id, name, message, created_at) with RLS policies
+- **Wedding Gift Section:** Unchanged (gradient bank cards, copy icon, gift registry)
+
+### ✅ InvitationGuard Absolute Positioning (Latest)
+- Switched from flex-column centered layout to absolute positioning
+- "Wedding Invitation" at top-center (top-20)
+- "Suci" at upper-left (top-[20%], left-[10%], text-[90px])
+- "&" at center (top-[32%], centered with translate)
+- "Seky" at lower-right (top-[45%], right-[10%], text-[90px])
+- "To" + guest name at bottom-44/bottom-36
+- Button at bottom-20, all elements use Love Light font for names
 
 ### ✅ Footer Section Overhaul (Latest)
 - Photo frame: `#5B322D` dark brown bg, rounded-3xl, 20px padding
@@ -505,8 +543,8 @@ npm run build
 
 ## 📝 Notes
 
-- **Form submissions** save to `localStorage` (`weddingWishes` key) - easy to migrate to backend API later
-- **URL parameters** - Guest name from `?name=GuestName` auto-fills wishes form
+- **Form submissions** save to Supabase (`wishes` table) with real-time subscription
+- **URL parameters** - Guest name from `?name=` or `?to=` auto-fills wishes form
 - **Countdown timer** uses real-time calculation (no time drift)
 - **Images** show fallback if not found (graceful error handling)
 - **Component architecture** allows easy swapping of placeholder content
@@ -535,4 +573,4 @@ For issues or questions about the website implementation, refer to:
 
 **Built with ❤️ using React + Vite + Tailwind CSS**
 
-**Latest Update:** Hero section carousel (4-photo auto-slide, CSS Transform, responsive 402×638px container)
+**Latest Update:** Supabase integration for wishes, InvitationGuard absolute positioning, Story section illustrations, Countdown section visual fixes

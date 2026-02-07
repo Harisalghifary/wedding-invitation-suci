@@ -5,15 +5,15 @@ export const CountdownTimer = ({ targetDate }) => {
 
   const CountdownItem = ({ value, label }) => (
     <div className="text-center">
-      <div className="font-playfair font-semibold text-4xl text-primary">
+      <div className="font-ptSerif font-bold text-4xl text-primary">
         {String(value).padStart(2, '0')}
       </div>
-      <div className="font-dmSans text-sm text-primary mt-2">{label}</div>
+      <div className="font-dmSans text-xs text-primary mt-3">{label}</div>
     </div>
   );
 
   return (
-    <div className="grid grid-cols-4 gap-10 text-center">
+    <div className="grid grid-cols-4 gap-3 text-center h-full items-center">
       <CountdownItem value={days} label="Hari" />
       <CountdownItem value={hours} label="Jam" />
       <CountdownItem value={minutes} label="Menit" />

@@ -49,7 +49,7 @@ const ProfileCard = ({ person, title }) => {
   </div>
 </div>
       {/* Name - Oregano font, text-2xl (25px) */}
-      <h3 className="font-oregano text-2xl text-cream mt-6 px-4">
+      <h3 className="font-oregano text-2xl text-cream mt-6">
         {person.fullName}
       </h3>
 

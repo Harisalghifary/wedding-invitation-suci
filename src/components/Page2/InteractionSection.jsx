@@ -7,7 +7,7 @@ import { supabase } from '../../lib/supabase';
 function WishesSection() {
   const [name, setName] = useState(() => {
     const params = new URLSearchParams(window.location.search);
-    return params.get('name') || params.get('to') || '';
+    return params.get('to') || params.get('name') || '';
   });
   const [message, setMessage] = useState('');
   const [wishes, setWishes] = useState([]);
@@ -18,7 +18,7 @@ function WishesSection() {
 
   const hasUrlName = (() => {
     const params = new URLSearchParams(window.location.search);
-    return !!(params.get('name') || params.get('to'));
+    return !!(params.get('to') || params.get('name'));
   })();
 
   // Fetch wishes from Supabase
@@ -30,13 +30,13 @@ function WishesSection() {
         .from('wishes')
         .select('*')
         .order('created_at', { ascending: false })
-        .limit(10);
+        .limit(20);
 
       if (error) throw error;
       setWishes(data || []);
     } catch (err) {
       console.error('Error fetching wishes:', err);
-      setError('Failed to load wishes');
+      setError('Gagal memuat ucapan');
     } finally {
       setFetchingWishes(false);
     }
@@ -49,12 +49,16 @@ function WishesSection() {
     if (!supabase) return;
 
     const channel = supabase
-      .channel('wishes_changes')
+      .channel('wishes_realtime')
       .on(
         'postgres_changes',
         { event: 'INSERT', schema: 'public', table: 'wishes' },
         (payload) => {
-          setWishes((current) => [payload.new, ...current]);
+          setWishes((current) => {
+            // Avoid duplicates (in case we already added it locally)
+            if (current.some((w) => w.id === payload.new.id)) return current;
+            return [payload.new, ...current];
+          });
         }
       )
       .subscribe();
@@ -76,14 +80,19 @@ function WishesSection() {
     try {
       setLoading(true);
       setError(null);
+      setSubmitSuccess(false);
 
       if (!supabase) throw new Error('Supabase not configured');
-      const { error } = await supabase
+      const { data, error } = await supabase
         .from('wishes')
-        .insert([{ name: name.trim(), message: message.trim() }]);
+        .insert([{ name: name.trim(), message: message.trim() }])
+        .select()
+        .single();
 
       if (error) throw error;
 
+      // Immediately add to local state
+      setWishes((current) => [data, ...current]);
       setMessage('');
       setSubmitSuccess(true);
       setTimeout(() => setSubmitSuccess(false), 3000);
@@ -118,51 +127,54 @@ function WishesSection() {
     <section className="bg-primary py-16 px-6">
       {/* Header */}
       <div className="text-center mb-8">
-        <div className="flex items-center justify-center gap-3 mb-2">
-          <h2 className="font-josefin font-bold text-4xl text-white">
-            Wishes
-          </h2>
-        </div>
+        <h2 className="font-josefin font-bold text-4xl text-white">
+          Wishes
+        </h2>
       </div>
 
       {/* Form */}
       <div className="max-w-2xl mx-auto">
-        <form onSubmit={handleSubmit}>
-          {/* Name field - hidden if from URL */}
-          {!hasUrlName && (
-            <input
-              type="text"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              placeholder="Nama Anda"
-              className="w-full bg-cream rounded-lg px-6 py-3 mb-4 font-dmSans text-primary focus:outline-none focus:ring-2 focus:ring-lightBrown"
-              disabled={loading}
-            />
-          )}
+        <form onSubmit={handleSubmit} className="space-y-4">
+          {/* Name field - always visible, read-only if from URL */}
+          <input
+            type="text"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            placeholder="Nama Anda"
+            readOnly={hasUrlName}
+            className="w-full bg-cream rounded-2xl px-6 py-3 font-dmSans text-primary placeholder:text-primary/50 focus:outline-none focus:ring-2 focus:ring-lightBrown read-only:opacity-70"
+            disabled={loading}
+          />
 
           {/* Message textarea */}
           <textarea
             value={message}
             onChange={(e) => setMessage(e.target.value)}
             placeholder="Tulis ucapan Anda di sini..."
-            className="w-full bg-cream rounded-lg px-6 py-4 min-h-[128px] font-dmSans text-primary resize-y focus:outline-none focus:ring-2 focus:ring-lightBrown"
+            className="w-full bg-cream rounded-2xl px-6 py-4 min-h-[128px] font-dmSans text-primary placeholder:text-primary/50 resize-y focus:outline-none focus:ring-2 focus:ring-lightBrown"
             disabled={loading}
+            maxLength={500}
           />
+
+          {/* Character count */}
+          <p className="text-white/60 text-xs text-right">
+            {message.length}/500 karakter
+          </p>
 
           {/* Error message */}
           {error && (
-            <p className="text-red-300 text-sm mt-2 font-dmSans">{error}</p>
+            <p className="text-red-300 text-sm font-dmSans">{error}</p>
           )}
 
           {/* Success message */}
           {submitSuccess && (
-            <p className="text-green-300 text-sm mt-2 font-dmSans">
+            <p className="text-green-300 text-sm font-dmSans animate-fadeIn">
               Ucapan berhasil dikirim!
             </p>
           )}
 
           {/* Submit button - RIGHT ALIGNED */}
-          <div className="flex justify-end mt-4">
+          <div className="flex justify-end">
             <button
               type="submit"
               disabled={loading}
@@ -173,41 +185,55 @@ function WishesSection() {
           </div>
         </form>
 
-        {/* Recent wishes display */}
-        <div className="bg-cream rounded-lg px-6 py-6 mt-8 max-h-96 overflow-y-auto">
+        {/* Wishes display - scrollable, ~3-4 bubbles visible */}
+        <div
+          className="wishes-scroll bg-cream rounded-2xl px-6 py-6 mt-8 overflow-y-auto"
+          style={{ maxHeight: '340px', scrollBehavior: 'smooth' }}
+        >
           {fetchingWishes && (
-            <p className="text-center font-dmSans text-sm text-primary opacity-50">
-              Memuat ucapan...
-            </p>
+            <div className="text-center py-8">
+              <p className="font-dmSans text-sm text-primary opacity-50">
+                Memuat ucapan...
+              </p>
+            </div>
           )}
 
-          {!fetchingWishes && wishes.length > 0 &&
-            wishes.map((wish) => (
-              <div
-                key={wish.id}
-                className="bg-white rounded-xl px-4 py-3 mb-3 shadow-sm last:mb-0 animate-fadeIn"
-              >
-                <div className="flex justify-between items-start mb-1">
-                  <p className="font-dmSans font-bold text-sm text-primary">
-                    {wish.name}
+          {!fetchingWishes && wishes.length > 0 && (
+            <div className="space-y-3">
+              {wishes.map((wish) => (
+                <div
+                  key={wish.id}
+                  className="bg-white rounded-xl px-4 py-3 shadow-sm animate-fadeIn"
+                >
+                  <div className="flex justify-between items-start mb-1">
+                    <p className="font-dmSans font-bold text-sm text-primary">
+                      {wish.name}
+                    </p>
+                    <span className="font-dmSans text-xs text-gray-400 whitespace-nowrap ml-2">
+                      {formatDate(wish.created_at)}
+                    </span>
+                  </div>
+                  <p className="font-dmSans text-sm text-primary leading-relaxed">
+                    {wish.message}
                   </p>
-                  <span className="font-dmSans text-xs text-gray-400">
-                    {formatDate(wish.created_at)}
-                  </span>
                 </div>
-                <p className="font-dmSans text-sm text-primary leading-relaxed">
-                  {wish.message}
-                </p>
-              </div>
-            ))
-          }
+              ))}
+            </div>
+          )}
 
           {!fetchingWishes && wishes.length === 0 && (
-            <p className="text-center font-dmSans text-sm text-primary opacity-50">
+            <p className="text-center font-dmSans text-sm text-primary opacity-50 py-8">
               Belum ada ucapan. Jadilah yang pertama!
             </p>
           )}
         </div>
+
+        {/* Scroll hint */}
+        {!fetchingWishes && wishes.length > 4 && (
+          <p className="text-center text-white/60 text-xs mt-2 font-dmSans">
+            Scroll untuk melihat lebih banyak
+          </p>
+        )}
       </div>
     </section>
   );
@@ -301,7 +327,7 @@ function WeddingGiftSection() {
         </p>
 
         <a
-          href="#"
+          href="https://docs.google.com/spreadsheets/d/102w_H0DudAhGi6xaASkQu_udtdlBXg-v5bVbF5NUyn0/edit?usp=drivesdk"
           target="_blank"
           rel="noopener noreferrer"
           className="block w-full bg-gradient-to-r from-[#FFFAF2] to-[#AA8B87] hover:opacity-90 text-[#764640] text-xs font-dmSans py-2 transition rounded-lg"
