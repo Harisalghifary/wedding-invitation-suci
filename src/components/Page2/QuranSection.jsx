@@ -34,10 +34,17 @@ export default function QuranSection() {
         className="absolute left-0 right-0 z-10"
         style={{ bottom: '-120px' }}
       >
+        {/* Mobile: scale-150 stretched look */}
         <img
           src="/assets/flower_frame.png"
           alt="Flower Frame"
-          className="w-full h-[460px] bottom-5 object-cover object-top scale-150"
+          className="w-full h-[460px] object-cover object-top scale-150 md:hidden"
+        />
+        {/* Desktop: centered with max-width, no scale */}
+        <img
+          src="/assets/flower_frame.png"
+          alt="Flower Frame"
+          className="hidden md:block w-full max-w-4xl mx-auto h-[400px] object-contain"
         />
       </div>
     </section>
