@@ -53,27 +53,27 @@ export default function StorySection() {
       </div>
 
       {/* Story Card with Absolutely Positioned Illustrations */}
-      <div className="relative px-8 py-10 -mt-18 mb-12 z-10 max-w-2xl mx-auto">
+      <div className="relative px-8 py-10 mt-10 mb-12 z-10 max-w-2xl mx-auto">
 
         {/* 1. LEFT-TOP: Chapel */}
         <LazyImage
           src="/assets/chapel.png"
           alt="Chapel"
-          className="absolute -top-10 -left-6 w-32 h-auto opacity-80 pointer-events-none"
+          className="absolute -top-10 -left-12 w-[170px] h-[196px] opacity-80 object-cover scale-125 pointer-events-none"
         />
 
         {/* 2. RIGHT-TOP: Clinking Glasses */}
         <LazyImage
           src="/assets/glass.png"
           alt="Cheers"
-          className="absolute top-6 right-12 w-16 h-auto opacity-80 pointer-events-none"
+          className="absolute top-6 right-5 w-[131px] h-[120px] object-cover scale-125 opacity-80 pointer-events-none"
         />
 
         {/* 3. RIGHT-BOTTOM: Candles */}
         <LazyImage
           src="/assets/candle.png"
           alt="Candles"
-          className="absolute -bottom-4 -right-4 w-24 h-auto opacity-80 pointer-events-none"
+          className="absolute -bottom-10 -right-8 w-[127px] h-[160px] scale-x-[-1.25] scale-y-[1.25] object-cover opacity-80 pointer-events-none"
         />
 
         {/* Header */}
@@ -82,7 +82,7 @@ export default function StorySection() {
         </h2>
 
         {/* Paragraph 1 */}
-        <p className="font-dmSans text-xs text-primary leading-relaxed text-justify mb-4">
+        <p className="font-dmSans text-xs text-primary leading-relaxed text-justify mb-4 mt-16">
           Kisah ini berawal di masa SMA, ketika pertemuan sederhana tumbuh menjadi
           kebersamaan yang bermakna. Dari hari-hari yang diisi tawa, percakapan ringan,
           hingga dukungan dalam langkah kecil maupun besar, Suci dan Seky belajar mengenal
@@ -91,7 +91,7 @@ export default function StorySection() {
           melainkan saling menemani.
         </p>
 
-        <p className="font-dmSans text-xs text-primary leading-relaxed text-justify">
+        <p className="font-dmSans text-xs text-primary leading-relaxed text-justify mb-8">
           Seiring berjalannya waktu, perjalanan itu berlanjut hingga hari ini, ketika
           keduanya memantapkan hati untuk melangkah ke tahap yang lebih serius. Dengan
           keyakinan yang tumbuh dari proses panjang, Suci dan Seky memilih untuk mengikat
