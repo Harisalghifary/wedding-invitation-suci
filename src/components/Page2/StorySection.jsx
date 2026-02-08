@@ -1,5 +1,8 @@
 import { useState, useEffect, useMemo } from 'react';
+import { motion } from 'framer-motion';
 import LazyImage from '../shared/LazyImage';
+import { AnimateOnScroll, StaggerOnScroll, MotionChild } from '../shared/motion/MotionWrapper';
+import { floatFromLeft, floatFromRight, viewportConfig } from '../shared/motion/variants';
 
 export default function StorySection() {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -37,7 +40,7 @@ export default function StorySection() {
 
   return (
     <section id="story" className="bg-cream bg-ceremony-pattern bg-cover bg-center py-0">
-      {/* Photo 1 - Dissolve transition between two photos */}
+      {/* Photo 1 - Dissolve transition between two photos (keep CSS transition) */}
       <div className="w-full relative">
         {topPhotos.map((src, index) => (
           <img
@@ -53,55 +56,90 @@ export default function StorySection() {
       </div>
 
       {/* Story Card with Absolutely Positioned Illustrations */}
-      <div className="relative px-8 py-10 mt-10 mb-12 z-10 max-w-2xl mx-auto">
+      <AnimateOnScroll variant="fadeUp" className="relative px-8 py-10 mt-10 mb-12 z-10 max-w-2xl mx-auto">
 
         {/* 1. LEFT-TOP: Chapel */}
-        <LazyImage
-          src="/assets/chapel.png"
-          alt="Chapel"
-          className="absolute -top-10 -left-12 w-[170px] h-[196px] opacity-80 object-cover scale-125 pointer-events-none"
-        />
+        <motion.div
+          className="absolute -top-10 -left-12 w-[170px] h-[196px] pointer-events-none"
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewportConfig}
+          variants={floatFromLeft}
+          transition={{ delay: 0.3 }}
+        >
+          <LazyImage
+            src="/assets/chapel.png"
+            alt="Chapel"
+            className="w-full h-full opacity-80 object-cover scale-125"
+          />
+        </motion.div>
 
         {/* 2. RIGHT-TOP: Clinking Glasses */}
-        <LazyImage
-          src="/assets/glass.png"
-          alt="Cheers"
-          className="absolute top-6 right-5 w-[131px] h-[120px] object-cover scale-125 opacity-80 pointer-events-none"
-        />
+        <motion.div
+          className="absolute top-6 right-5 w-[131px] h-[120px] pointer-events-none"
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewportConfig}
+          variants={floatFromRight}
+          transition={{ delay: 0.4 }}
+        >
+          <LazyImage
+            src="/assets/glass.png"
+            alt="Cheers"
+            className="w-full h-full object-cover scale-125 opacity-80"
+          />
+        </motion.div>
 
         {/* 3. RIGHT-BOTTOM: Candles */}
-        <LazyImage
-          src="/assets/candle.png"
-          alt="Candles"
-          className="absolute -bottom-10 -right-8 w-[127px] h-[160px] scale-x-[-1.25] scale-y-[1.25] object-cover opacity-80 pointer-events-none"
-        />
+        <motion.div
+          className="absolute -bottom-10 -right-8 w-[127px] h-[160px] pointer-events-none"
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewportConfig}
+          variants={floatFromRight}
+          transition={{ delay: 0.5 }}
+        >
+          <LazyImage
+            src="/assets/candle.png"
+            alt="Candles"
+            className="w-full h-full scale-x-[-1.25] scale-y-[1.25] object-cover opacity-80"
+          />
+        </motion.div>
 
-        {/* Header */}
-        <h2 className="font-josefin font-semibold text-4xl text-primary text-center mb-6">
-          Our Story
-        </h2>
+        {/* Header + Paragraphs */}
+        <StaggerOnScroll>
+          <MotionChild variant="fadeUp">
+            <h2 className="font-josefin font-semibold text-4xl text-primary text-center mb-6">
+              Our Story
+            </h2>
+          </MotionChild>
 
-        {/* Paragraph 1 */}
-        <p className="font-dmSans text-xs text-primary leading-relaxed text-justify mb-4 mt-16">
-          Kisah ini berawal di masa SMA, ketika pertemuan sederhana tumbuh menjadi
-          kebersamaan yang bermakna. Dari hari-hari yang diisi tawa, percakapan ringan,
-          hingga dukungan dalam langkah kecil maupun besar, Suci dan Seky belajar mengenal
-          satu sama lain dengan tulus. Waktu berjalan, membawa keduanya melalui fase
-          pertumbuhan, perubahan, dan pemahaman bahwa kebersamaan bukan sekadar hadir,
-          melainkan saling menemani.
-        </p>
+          {/* Paragraph 1 */}
+          <MotionChild variant="fadeUp">
+            <p className="font-dmSans text-xs text-primary leading-relaxed text-justify mb-4 mt-16">
+              Kisah ini berawal di masa SMA, ketika pertemuan sederhana tumbuh menjadi
+              kebersamaan yang bermakna. Dari hari-hari yang diisi tawa, percakapan ringan,
+              hingga dukungan dalam langkah kecil maupun besar, Suci dan Seky belajar mengenal
+              satu sama lain dengan tulus. Waktu berjalan, membawa keduanya melalui fase
+              pertumbuhan, perubahan, dan pemahaman bahwa kebersamaan bukan sekadar hadir,
+              melainkan saling menemani.
+            </p>
+          </MotionChild>
 
-        <p className="font-dmSans text-xs text-primary leading-relaxed text-justify mb-8">
-          Seiring berjalannya waktu, perjalanan itu berlanjut hingga hari ini, ketika
-          keduanya memantapkan hati untuk melangkah ke tahap yang lebih serius. Dengan
-          keyakinan yang tumbuh dari proses panjang, Suci dan Seky memilih untuk mengikat
-          janji dalam sebuah ikatan suci, siap melangkah bersama, saling menjaga, dan
-          menua dalam doa yang sama.
-        </p>
-      </div>
+          <MotionChild variant="fadeUp">
+            <p className="font-dmSans text-xs text-primary leading-relaxed text-justify mb-8">
+              Seiring berjalannya waktu, perjalanan itu berlanjut hingga hari ini, ketika
+              keduanya memantapkan hati untuk melangkah ke tahap yang lebih serius. Dengan
+              keyakinan yang tumbuh dari proses panjang, Suci dan Seky memilih untuk mengikat
+              janji dalam sebuah ikatan suci, siap melangkah bersama, saling menjaga, dan
+              menua dalam doa yang sama.
+            </p>
+          </MotionChild>
+        </StaggerOnScroll>
+      </AnimateOnScroll>
 
       {/* Auto-sliding Carousel */}
-      <div className="w-full overflow-hidden relative">
+      <AnimateOnScroll variant="fadeIn" className="w-full overflow-hidden relative">
         <div
           className="flex transition-transform duration-700 ease-in-out will-change-transform"
           style={{ transform: `translateX(-${currentIndex * 100}%)` }}
@@ -129,8 +167,7 @@ export default function StorySection() {
             />
           ))}
         </div>
-      </div>
+      </AnimateOnScroll>
     </section>
   );
 }
-

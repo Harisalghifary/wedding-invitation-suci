@@ -1,4 +1,5 @@
 import { weddingData } from '../../data/content';
+import { AnimateOnScroll } from '../shared/motion/MotionWrapper';
 
 export default function QuranSection() {
   return (
@@ -12,25 +13,31 @@ export default function QuranSection() {
     >
       <div className="max-w-6xl mx-auto">
         {/* Bismillah */}
-        <div className="text-center" style={{ marginBottom: '138px' }}>
+        <AnimateOnScroll variant="fadeIn" className="text-center" style={{ marginBottom: '138px' }}>
           <img src="/assets/bismillah.png" alt="Bismillah" className="w-25 mx-auto" />
-        </div>
+        </AnimateOnScroll>
 
         {/* Translation */}
         <div className="max-w-2xl mx-auto mb-16">
-          <p className="text-xs sm:text-base text-darkBrown mb-4 text-center">
-            {weddingData.quranVerse.translation}
-          </p>
+          <AnimateOnScroll variant="fadeUp" delay={0.2}>
+            <p className="text-xs sm:text-base text-darkBrown mb-4 text-center">
+              {weddingData.quranVerse.translation}
+            </p>
+          </AnimateOnScroll>
 
           {/* Citation */}
-          <p className="text-xs text-darkBrown font-bold text-center">
-            {weddingData.quranVerse.reference}
-          </p>
+          <AnimateOnScroll variant="fadeUp" delay={0.3}>
+            <p className="text-xs text-darkBrown font-bold text-center">
+              {weddingData.quranVerse.reference}
+            </p>
+          </AnimateOnScroll>
         </div>
       </div>
 
       {/* Flower Frame - stretched at bottom, overflows into next section */}
-      <div
+      <AnimateOnScroll
+        variant="fadeScale"
+        delay={0.4}
         className="absolute left-0 right-0 z-10"
         style={{ bottom: '-120px' }}
       >
@@ -46,8 +53,7 @@ export default function QuranSection() {
           alt="Flower Frame"
           className="hidden md:block w-full max-w-4xl mx-auto h-[400px] object-contain"
         />
-      </div>
+      </AnimateOnScroll>
     </section>
   );
 }
-

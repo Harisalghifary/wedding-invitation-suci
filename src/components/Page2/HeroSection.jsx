@@ -1,4 +1,7 @@
 import { useState, useEffect } from 'react';
+import { motion } from 'framer-motion';
+import { AnimateOnScroll } from '../shared/motion/MotionWrapper';
+import { floatFromLeft, floatFromRight, viewportConfig } from '../shared/motion/variants';
 
 const photos = [
   '/assets/hero_carrousel1.png',
@@ -27,34 +30,45 @@ export default function HeroSection() {
       />
 
       <div className="relative z-30 flex flex-col items-center text-center text-cream max-w-6xl mx-auto">
-        <h2 className="font-loveLight text-6xl md:text-7xl mb-8">
-          The wedding of
-        </h2>
+        {/* Title with fadeIn animation */}
+        <AnimateOnScroll variant="fadeIn">
+          <h2 className="font-loveLight text-6xl md:text-7xl mb-8">
+            The wedding of
+          </h2>
+        </AnimateOnScroll>
 
         {/* Carousel with decorative shapes */}
-        <div className="relative mb-12 max-w-[402px] w-full" style={{ aspectRatio: '402/638' }}>
+        <AnimateOnScroll variant="fadeScale" delay={0.2} className="relative mb-12 max-w-[402px] w-full" style={{ aspectRatio: '402/638' }}>
 
           {/* Love GIF - Top Left (flipped) */}
-          <img
+          <motion.img
             src="/assets/love_3.gif"
             alt="Love decoration"
             className="absolute -left-4 -top-4 w-[123px] h-[166px] object-contain z-30 scale-x-[-0.5] scale-y-[0.5] saturate-150 contrast-150"
             loading="lazy"
             decoding="async"
             fetchPriority="low"
+            initial="hidden"
+            whileInView="visible"
+            viewport={viewportConfig}
+            variants={floatFromLeft}
+            transition={{ delay: 0.5 }}
           />
 
           {/* Love GIF - Top Right */}
-          <img
+          <motion.img
             src="/assets/love_3.gif"
             alt="Love decoration"
             className="absolute -right-4 top-20 w-[123px] h-[166px] object-contain scale-50 contrast-150 saturate-150 z-30"
             loading="lazy"
             decoding="async"
             fetchPriority="low"
+            initial="hidden"
+            whileInView="visible"
+            viewport={viewportConfig}
+            variants={floatFromRight}
+            transition={{ delay: 0.6 }}
           />
-
-
 
           {/* Carousel — only render visible + adjacent slides */}
           <div className="relative w-full h-full z-20 overflow-hidden rounded-lg shadow-2xl">
@@ -78,25 +92,36 @@ export default function HeroSection() {
             })}
           </div>
 
-        </div>
+        </AnimateOnScroll>
+
         {/* Spark GIF - Bottom Left */}
-        <img
+        <motion.img
           src="/assets/spark.gif"
           alt="Spark decoration"
           className="absolute -left-6 -bottom-12 w-[107px] h-[107px] scale-75 object-cover z-30"
           loading="lazy"
           decoding="async"
           fetchPriority="low"
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewportConfig}
+          variants={floatFromLeft}
+          transition={{ delay: 0.7 }}
         />
 
         {/* Spark GIF - Bottom Right */}
-        <img
+        <motion.img
           src="/assets/spark.gif"
           alt="Spark decoration"
           className="absolute -right-6 -bottom-0 w-[107px] h-[107px] object-cover scale-75 z-30"
           loading="lazy"
           decoding="async"
           fetchPriority="low"
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewportConfig}
+          variants={floatFromRight}
+          transition={{ delay: 0.8 }}
         />
       </div>
     </section>

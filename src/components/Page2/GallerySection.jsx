@@ -1,5 +1,6 @@
 import { memo, useMemo } from 'react';
 import LazyImage from '../shared/LazyImage';
+import { AnimateOnScroll, StaggerOnScroll, MotionChild } from '../shared/motion/MotionWrapper';
 
 const GallerySection = memo(function GallerySection() {
   // Memoize photos array to prevent recreation on each render
@@ -9,11 +10,12 @@ const GallerySection = memo(function GallerySection() {
     <section id="gallery" className="bg-gradient-to-b from-[#E8E1D8] to-primary pt-24 px-6 relative">
       {/* Fixed width container - 353px, centered */}
       <div className="mx-auto" style={{ width: '353px' }}>
-        {/* 3x4 Grid: 109x171px cells, 13px gaps */}
-        <div className="grid grid-cols-3 gap-[13px]">
+        {/* 3x4 Grid: 109x171px cells, 13px gaps - Staggered cascade effect */}
+        <StaggerOnScroll grid className="grid grid-cols-3 gap-[13px]">
           {photos.map((num) => (
-            <div
+            <MotionChild
               key={num}
+              variant="fadeScale"
               className="w-[109px] h-[171px] overflow-hidden drop-shadow-md"
             >
               <LazyImage
@@ -21,14 +23,14 @@ const GallerySection = memo(function GallerySection() {
                 alt={`Gallery Photo ${num}`}
                 className="w-full h-full object-cover"
               />
-            </div>
+            </MotionChild>
           ))}
-        </div>
+        </StaggerOnScroll>
       </div>
 
       {/* Bottom decorations - normal flow, centered */}
-      <div className="flex items-end justify-center gap-4 mt-8">
-                <img
+      <AnimateOnScroll variant="fadeUp" delay={0.3} className="flex items-end justify-center gap-4 mt-8">
+        <img
           src="/assets/love_2.gif"
           alt="Love decoration"
           className="w-[140px] h-[136px] scale-x-[-1] object-cover"
@@ -42,11 +44,9 @@ const GallerySection = memo(function GallerySection() {
           loading="lazy"
           decoding="async"
         />
-
-      </div>
+      </AnimateOnScroll>
     </section>
   );
 });
 
 export default GallerySection;
-
