@@ -69,14 +69,14 @@ export default function CountdownSection() {
         <img
           src="/assets/Bird.gif"
           alt="Birds with ribbon"
-          className="w-[432px] h-[215px] mx-auto scale-x-[-1]"
+          className="w-[432px] h-[215px] mx-auto scale-x-[-1] object-cover"
           loading="lazy"
           decoding="async"
         />
         <img
           src="/assets/logo_ss.png"
           alt="S Monogram"
-          className="w-[124px] h-[124px] mx-auto -mt-20"
+          className="w-[124px] h-[124px] mx-auto -mt-20 object-cover"
         />
       </div>
 
