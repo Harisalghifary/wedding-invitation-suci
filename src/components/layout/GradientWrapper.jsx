@@ -1,6 +1,6 @@
 export const GradientWrapper = ({ children }) => {
   return (
-    <div className="relative -mt-64 z-20 overflow-visible">
+    <div className="relative -mt-96 z-20 overflow-visible">
       {/* bg-arrum.png - shared background for Countdown + Quran sections */}
       <div
         className="absolute inset-0 bg-cover bg-top"

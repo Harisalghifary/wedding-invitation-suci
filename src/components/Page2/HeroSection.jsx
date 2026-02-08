@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import { SectionWrapper } from '../shared/SectionWrapper';
 
 const photos = [
   '/assets/hero_carrousel1.png',
@@ -19,15 +18,15 @@ export default function HeroSection() {
   }, []);
 
   return (
-    <SectionWrapper id="hero" background="primary" className="relative ">
-      {/* Base background - bg-opening.png */}
+    <section id="hero" className="relative py-16 px-4 sm:px-6 md:px-8 overflow-hidden">
+      {/* Base background - bg-opening.png, extended beyond bounds to hide transparent edges */}
       <div
-        className="h-[850px] w-full aspect-3/4 z-0 absolute inset-0 bg-cover bg-center"
+        className="absolute -inset-8 z-0 bg-cover bg-center"
         style={{ backgroundImage: "url('/assets/bg-opening.png')" }}
         aria-hidden="true"
       />
 
-      <div className="relative z-30 flex flex-col items-center text-center text-cream">
+      <div className="relative z-30 flex flex-col items-center text-center text-cream max-w-6xl mx-auto">
         <h2 className="font-loveLight text-6xl sm:text-6xl md:text-7xl mb-8">
           The wedding of
         </h2>
@@ -90,6 +89,6 @@ export default function HeroSection() {
         </div>
 
       </div>
-    </SectionWrapper>
+    </section>
   );
 }

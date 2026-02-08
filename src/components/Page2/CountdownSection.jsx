@@ -62,10 +62,10 @@ export default function CountdownSection() {
   };
 
   return (
-    <SectionWrapper id="countdown" background="transparent" className="relative pt-16 mt-20 px-6 mb-50">
+    <SectionWrapper id="countdown" background="transparent" className="relative pt-16 px-6 mb-50">
 
       {/* Bird + Logo grouped together */}
-      <div className="text-center">
+      <div className="text-center mt-48">
         <img
           src="/assets/Bird.gif"
           alt="Birds with ribbon"
