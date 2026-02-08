@@ -5,7 +5,9 @@
       "Bash(npm run build:*)",
       "Bash(ls:*)",
       "Read(//Users/xbox/github/suci-wedding/**)",
-      "Bash(npx vite build:*)"
+      "Bash(npx vite build:*)",
+      "Bash(wc:*)",
+      "Bash(grep:*)"
     ]
   }
 }

@@ -42,7 +42,7 @@ export default function MusicToggle() {
 
   return (
     <>
-      <audio ref={audioRef} src="/assets/song-nadin.mp3" loop preload="auto" />
+      <audio ref={audioRef} src="/assets/song-nadin.mp3" loop preload="none" />
 
       <button
         onClick={toggle}

@@ -1,4 +1,5 @@
 import { lazy, Suspense } from 'react';
+import ErrorBoundary from '../shared/ErrorBoundary';
 import HeroSection from '../Page2/HeroSection';
 import { GradientWrapper } from './GradientWrapper';
 import LazySection from '../shared/LazySection';
@@ -24,6 +25,7 @@ const SectionSkeleton = ({ minHeight = '50vh' }) => (
 
 export default function MainLayout() {
   return (
+    <ErrorBoundary>
     <div className="w-full overflow-x-hidden bg-primary">
       {/* Hero loads immediately for fast FCP */}
       <HeroSection />
@@ -77,6 +79,7 @@ export default function MainLayout() {
         </Suspense>
       </LazySection>
     </div>
+    </ErrorBoundary>
   );
 }
 

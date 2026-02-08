@@ -39,6 +39,7 @@ const downloadICSFile = (event) => {
   link.download = 'wedding-suci-seky.ics';
   document.body.appendChild(link);
   link.click();
+  URL.revokeObjectURL(link.href);
   document.body.removeChild(link);
 };
 
@@ -69,6 +70,8 @@ export default function CountdownSection() {
         <img
           src="/assets/Bird.gif"
           alt="Birds with ribbon"
+          width={432}
+          height={215}
           className="w-[432px] h-[215px] mx-auto scale-x-[-1] object-cover"
           loading="lazy"
           decoding="async"
@@ -76,32 +79,16 @@ export default function CountdownSection() {
         <img
           src="/assets/logo_ss.png"
           alt="S Monogram"
+          width={124}
+          height={124}
           className="w-[124px] h-[124px] mx-auto -mt-20 object-cover"
+          loading="lazy"
+          decoding="async"
         />
       </div>
 
       {/* Countdown + Save the Date container */}
       <div className="relative max-w-lg mx-auto mb-10">
-
-        {/* Love 1 - Left Side */}
-        <img
-          src="/assets/love_1.gif"
-          alt="Love"
-          className="absolute -left-16 top-1/3 -translate-y-1/2 w-20 h-20 z-10"
-          onError={(e) => e.target.style.display = 'none'}
-          loading="lazy"
-          decoding="async"
-        />
-
-        {/* Love 2 - Right Side */}
-        <img
-          src="/assets/love_2.gif"
-          alt="Love"
-          className="absolute -right-16 top-1/2 w-24 h-24 z-10"
-          onError={(e) => e.target.style.display = 'none'}
-          loading="lazy"
-          decoding="async"
-        />
 
         {/* Ribbon - Top-Right of card */}
         <img

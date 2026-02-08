@@ -43,12 +43,9 @@ const ProfileCard = ({ person, title }) => {
         {/* Photo Frame */}
         <div className="relative z-10 w-70 h-auto">
           <LazyImage
-            src={`/assets/${person.frameImage}`}
+            src={person.photo}
             alt={person.nickname}
             className="w-full h-auto object-contain drop-shadow-xl"
-            onError={(e) => {
-              e.target.src = person.photo;
-            }}
           />
         </div>
       </div>

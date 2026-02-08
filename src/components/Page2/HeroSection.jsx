@@ -27,7 +27,7 @@ export default function HeroSection() {
       />
 
       <div className="relative z-30 flex flex-col items-center text-center text-cream max-w-6xl mx-auto">
-        <h2 className="font-loveLight text-6xl sm:text-6xl md:text-7xl mb-8">
+        <h2 className="font-loveLight text-6xl md:text-7xl mb-8">
           The wedding of
         </h2>
 
@@ -56,17 +56,26 @@ export default function HeroSection() {
 
 
 
-          {/* Carousel */}
+          {/* Carousel — only render visible + adjacent slides */}
           <div className="relative w-full h-full z-20 overflow-hidden rounded-lg shadow-2xl">
-            {photos.map((photo, index) => (
-              <img
-                key={index}
-                src={photo}
-                alt={`Wedding Photo ${index + 1}`}
-                className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 ease-in-out"
-                style={{ transform: `translateX(${(index - currentIndex) * 100}%)` }}
-              />
-            ))}
+            {photos.map((photo, index) => {
+              const diff = (index - currentIndex + photos.length) % photos.length;
+              if (diff > 1 && diff < photos.length - 1) return null;
+              const isFirst = index === 0;
+              return (
+                <img
+                  key={photo}
+                  src={photo}
+                  alt={`Wedding Photo ${index + 1}`}
+                  width={402}
+                  height={638}
+                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 ease-in-out"
+                  style={{ transform: `translateX(${(index - currentIndex) * 100}%)` }}
+                  loading={isFirst ? 'eager' : 'lazy'}
+                  fetchPriority={isFirst ? 'high' : 'low'}
+                />
+              );
+            })}
           </div>
 
         </div>
