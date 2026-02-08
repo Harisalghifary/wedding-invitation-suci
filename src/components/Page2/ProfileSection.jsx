@@ -36,7 +36,7 @@ const ProfileCard = ({ person, title }) => {
   {/* FIX 1: Photo Frame */}
   {/* Removed 'overflow-hidden', 'rounded-lg', and fixed 'h-80' */}
   {/* Added 'relative z-10' to ensure it sits ON TOP of the GIF */}
-  <div className="relative z-10 w-64 h-auto">
+  <div className="relative z-10 w-70 h-auto">
     <img
       src={`/assets/${person.frameImage}`}
       alt={person.nickname}
@@ -59,7 +59,7 @@ const ProfileCard = ({ person, title }) => {
           href={`https://instagram.com/${person.instagram.replace('@', '')}`}
           target="_blank"
           rel="noopener noreferrer"
-          className="flex items-center gap-2 bg-cream text-black font-dmSans px-6 py-2 rounded-full hover:bg-lightBrown transition-colors"
+          className="flex items-center gap-2 bg-cream text-black text-xs font-dmSans px-6 py-2 font-bold rounded-full hover:bg-lightBrown transition-colors"
         >
           <FaInstagram className="w-4 h-4" />
           {person.instagram}
@@ -79,17 +79,10 @@ export default function ProfileSection() {
   return (
     <SectionWrapper id="profile" background="primary">
       {/* Introduction card - cream background, rounded */}
-      <div className="p-6 sm:p-8 mb-6 text-center max-w-2xl mx-auto">
-        <p className="text-xs sm:text-xl text-cream mb-4 font-bold">
-          Assalamu'alaikum Warahmatullah Wabarakatuh
-        </p>
+      <div className="p-6 sm:p-8 text-center max-w-2xl px-12 mx-auto">
         <p className="text-xs text-cream/80">
           Dengan bahagia, kami mengundang Anda untuk menjadi bagian dari pernikahan ini.
         </p>
-        <div className="flex justify-center gap-4 mt-2 text-3xl text-primary/30">
-          <span>❀</span>
-          <span>❀</span>
-        </div>
       </div>
 
       {/* The Bride */}

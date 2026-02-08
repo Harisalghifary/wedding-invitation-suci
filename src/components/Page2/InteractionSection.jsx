@@ -189,7 +189,7 @@ function WishesSection() {
             <button
               type="submit"
               disabled={loading}
-              className="bg-[#FFFAF2] opacity-75 text-xs font-dmSans text-primary font-medium px-2 py-2 rounded-lg hover:bg-lightBrown/90 transition disabled:opacity-50 disabled:cursor-not-allowed"
+              className="bg-[#FFFAF2] opacity-75 text-xs font-dmSans text-black font-bold px-2 py-2 rounded-lg hover:bg-lightBrown/90 transition disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {loading ? 'Mengirim...' : 'Submit'}
             </button>
@@ -339,7 +339,7 @@ function WeddingGiftSection() {
           href="https://docs.google.com/spreadsheets/d/102w_H0DudAhGi6xaASkQu_udtdlBXg-v5bVbF5NUyn0/edit?usp=drivesdk"
           target="_blank"
           rel="noopener noreferrer"
-          className="block w-full bg-gradient-to-r from-[#FFFAF2] to-[#AA8B87] hover:opacity-90 text-[#764640] text-xs font-dmSans py-2 transition rounded-lg"
+          className="block w-full bg-gradient-to-r from-[#FFFAF2] to-[#AA8B87] hover:opacity-90 text-[#764640] text-xs font-bold font-dmSans py-2 transition rounded-lg"
         >
           Daftar Pilihan Hadiah
         </a>

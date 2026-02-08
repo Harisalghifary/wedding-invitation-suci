@@ -13,7 +13,7 @@ export default function QuranSection() {
     >
       <div className="max-w-6xl mx-auto">
         {/* Bismillah */}
-        <div className="text-center mb-12">
+        <div className="text-center" style={{ marginBottom: '138px' }}>
           <img src="/assets/bismillah.png" alt="Bismillah" className="w-25 mx-auto" />
         </div>
 
@@ -30,12 +30,13 @@ export default function QuranSection() {
         </div>
       </div>
 
-      {/* Flower Frame - Full Width Bottom */}
+      {/* Flower Frame - Absolute Bottom, Full Width on Mobile */}
       <img
         src="/assets/flower_frame.png"
         alt="Flower Frame"
-        className="absolute bottom-0 left-0 w-full z-10"
+        className="absolute bottom-0 left-0 right-0 w-full z-10"
       />
     </section>
   );
 }
+

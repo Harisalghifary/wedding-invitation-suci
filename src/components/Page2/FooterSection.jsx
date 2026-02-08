@@ -86,7 +86,7 @@ export default function FooterSection() {
             src="/assets/car.png"
             alt="Car with Ribbon"
             style={{ filter: 'invert(1) sepia(0.3) saturate(0.5)' }}
-            className="w-[280px] h-auto mix-blend-exclusion opacity-70"
+            className="w-[400px] h-auto mix-blend-exclusion opacity-70"
           />
         </div>
 

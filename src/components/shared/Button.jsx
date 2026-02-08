@@ -1,4 +1,4 @@
-export const Button = ({ children, onClick, variant = 'primary', icon: Icon, ...props }) => {
+export const Button = ({ children, onClick, variant = 'primary', icon: Icon, className = '', ...props }) => {
   const variants = {
     primary: 'bg-primary text-cream hover:bg-primary/90',
     secondary: 'bg-cream text-primary hover:bg-lightBrown hover:text-cream',
@@ -10,7 +10,7 @@ export const Button = ({ children, onClick, variant = 'primary', icon: Icon, ...
       className={`
         px-6 py-3 rounded-full font-dmSans font-medium
         transition-all duration-300 flex items-center justify-center gap-2
-        shadow-lg hover:shadow-xl ${variants[variant]}
+        shadow-lg hover:shadow-xl ${variants[variant]} ${className}
       `}
       {...props}
     >
@@ -19,3 +19,4 @@ export const Button = ({ children, onClick, variant = 'primary', icon: Icon, ...
     </button>
   );
 };
+

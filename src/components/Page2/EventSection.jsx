@@ -1,5 +1,4 @@
 import { Button } from '../shared/Button';
-import { FaMapMarkedAlt } from 'react-icons/fa';
 import { weddingData } from '../../data/content';
 
 const dresscodeColors = [
@@ -34,7 +33,7 @@ export default function EventSection() {
 
           {/* Ring icon */}
           <div className="mb-4">
-            <img src="/assets/ring.gif" alt="Ring Icon" className="w-40 h-25 mx-auto" />
+            <img src="/assets/ring.gif" alt="Ring Icon" className="w-[224px] h-[123px] object-cover mx-auto" />
           </div>
 
           {/* Wedding Date */}
@@ -42,35 +41,41 @@ export default function EventSection() {
             14 . 02 . 2026
           </h3>
 
-          {/* Divider with Sabtu */}
+          {/* Divider with Sabtu - circles at edges */}
           <div className="flex items-center justify-center gap-4 mb-8">
-            <div className="w-20 h-px bg-primary" />
+            <div className="flex items-center">
+              <div className="w-2 h-2 rounded-full bg-primary" />
+              <div className="w-20 h-px bg-primary" />
+            </div>
             <span className="font-loveLight text-4xl text-primary">Sabtu</span>
-            <div className="w-20 h-px bg-primary" />
+            <div className="flex items-center">
+              <div className="w-20 h-px bg-primary" />
+              <div className="w-2 h-2 rounded-full bg-primary" />
+            </div>
           </div>
 
           {/* Event Times - Two columns */}
-          <div className="grid grid-cols-2 gap-8 max-w-md mx-auto mb-12">
+          <div className="flex justify-center gap-12 mx-auto mb-12">
             <div className="text-center">
-              <p className="font-loveLight text-5xl text-primary mb-2">
+              <p className="font-loveLight text-[48px] leading-tight text-primary mb-2">
                 {weddingData.event.akad.label}
               </p>
-              <p className="font-dmSans text-base text-primary">
+              <p className="font-dmSans text-base font-semibold text-primary">
                 {weddingData.event.akad.time}
               </p>
             </div>
             <div className="text-center">
-              <p className="font-loveLight text-5xl text-primary mb-2">
+              <p className="font-loveLight text-[48px] leading-tight text-primary mb-2">
                 {weddingData.event.resepsi.label}
               </p>
-              <p className="font-dmSans text-base text-primary">
+              <p className="font-dmSans text-base font-semibold text-primary">
                 {weddingData.event.resepsi.time}
               </p>
             </div>
           </div>
 
           {/* Venue Name */}
-          <h4 className="font-playfair font-bold text-2xl text-primary mt-8 mb-2">
+          <h4 className="font-playfair font-bold text-2xl text-primary mt-8 mb-2 mx-auto px-4">
             {weddingData.event.venue.name}
           </h4>
 
@@ -82,7 +87,8 @@ export default function EventSection() {
           {/* Google Maps Button */}
           <div className="flex justify-center mb-12">
             <a href={weddingData.event.venue.mapsUrl} target="_blank" rel="noopener noreferrer">
-              <Button variant="primary" icon={FaMapMarkedAlt}>
+              <Button variant="primary" className="!px-4 !py-2 text-sm">
+                <img src="/assets/gmaps.png" alt="Google Maps" className="w-4 h-4 mr-2" />
                 Google Maps
               </Button>
             </a>
@@ -101,7 +107,7 @@ export default function EventSection() {
         {/* Dresscode Section */}
         <div className=" px-8 py-10">
           <h3 className="font-josefin font-semibold text-4xl text-primary text-center mb-8">
-            Dresscode 
+            Dresscode
           </h3>
 
           {/* Color circles - 5 in one row */}

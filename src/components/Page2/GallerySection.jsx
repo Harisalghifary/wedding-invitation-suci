@@ -5,7 +5,7 @@ const GallerySection = memo(function GallerySection() {
   const photos = useMemo(() => Array.from({ length: 12 }, (_, i) => i + 1), []);
 
   return (
-    <section id="gallery" className="bg-gradient-to-b from-[#E8E1D8] to-primary py-16 px-6">
+    <section id="gallery" className="bg-gradient-to-b from-[#E8E1D8] to-primary py-24 px-6">
       {/* Fixed width container - 353px, centered */}
       <div className="mx-auto" style={{ width: '353px' }}>
         {/* 3x4 Grid: 109x171px cells, 13px gaps */}
