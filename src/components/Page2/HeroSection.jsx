@@ -13,7 +13,7 @@ export default function HeroSection() {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % photos.length);
-    }, 4000);
+    }, 2500);
     return () => clearInterval(interval);
   }, []);
 
@@ -54,7 +54,7 @@ export default function HeroSection() {
             fetchPriority="low"
           />
 
- 
+
 
           {/* Carousel */}
           <div className="relative w-full h-full z-20 overflow-hidden rounded-lg shadow-2xl">
@@ -70,25 +70,25 @@ export default function HeroSection() {
           </div>
 
         </div>
-         {/* Spark GIF - Bottom Left */}
-          <img
-            src="/assets/spark.gif"
-            alt="Spark decoration"
-            className="absolute -left-6 -bottom-12 w-[107px] h-[107px] scale-75 object-cover z-30"
-            loading="lazy"
-            decoding="async"
-            fetchPriority="low"
-          />
+        {/* Spark GIF - Bottom Left */}
+        <img
+          src="/assets/spark.gif"
+          alt="Spark decoration"
+          className="absolute -left-6 -bottom-12 w-[107px] h-[107px] scale-75 object-cover z-30"
+          loading="lazy"
+          decoding="async"
+          fetchPriority="low"
+        />
 
-          {/* Spark GIF - Bottom Right */}
-          <img
-            src="/assets/spark.gif"
-            alt="Spark decoration"
-            className="absolute -right-6 -bottom-0 w-[107px] h-[107px] object-cover scale-75 z-30"
-            loading="lazy"
-            decoding="async"
-            fetchPriority="low"
-          />
+        {/* Spark GIF - Bottom Right */}
+        <img
+          src="/assets/spark.gif"
+          alt="Spark decoration"
+          className="absolute -right-6 -bottom-0 w-[107px] h-[107px] object-cover scale-75 z-30"
+          loading="lazy"
+          decoding="async"
+          fetchPriority="low"
+        />
       </div>
     </section>
   );
