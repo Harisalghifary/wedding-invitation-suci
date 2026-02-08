@@ -135,14 +135,14 @@ function WishesSection() {
   return (
     <section className="bg-primary px-6">
       {/* Header */}
-      <div className="text-center mb-8 relative">
+      <div className="text-center mb-8 relative mx-auto w-fit">
         {/* Love 4 - Left of header */}
         <img
           src="/assets/love_4.png"
           alt="Love"
-          className="absolute top-0 left-4 w-[100px] h-[100px] object-cover z-10 scale-150"
+          className="absolute -left-20 top-0 w-[100px] h-[100px] object-cover z-10 scale-150"
         />
-        <div className="flex items-center justify-center gap-3 mb-2">
+        <div className="flex items-center justify-center gap-3 mb-2 mx-auto w-fit">
           <h2 className="font-josefin font-bold text-4xl text-white">
             Wishes
           </h2>
@@ -330,7 +330,7 @@ function WeddingGiftSection() {
     <section className="bg-primary pb-16 px-6">
       {/* Header */}
       <div className="text-center mb-6">
-        <div className="relative inline-block mb-6">
+        <div className="relative inline-block mb-6 mx-auto">
           <h2 className="font-josefin font-bold text-4xl text-white">
             Wedding Gift
           </h2>

@@ -41,7 +41,7 @@ export default function FooterSection() {
       <div className="pt-16 px-6 relative z-0 drop-shadow-xl">
         {/* Photo Frame Container */}
         <div
-          className="bg-[#5B322D] p-5 mx-auto mb-8 rounded-xl"
+          className="bg-[#5B322D] p-5 mx-auto  mb-8 rounded-xl"
           style={{
             maxWidth: 'fit-content',
             boxShadow: '7px 10px 25px 2px rgba(0,0,0,0.4)'

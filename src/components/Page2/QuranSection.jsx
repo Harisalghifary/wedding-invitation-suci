@@ -37,7 +37,7 @@ export default function QuranSection() {
         <img
           src="/assets/flower_frame.png"
           alt="Flower Frame"
-          className="w-full h-auto bottom-5 object-cover object-top scale-150"
+          className="w-full h-[460px] bottom-5 object-cover object-top scale-150"
         />
       </div>
     </section>
