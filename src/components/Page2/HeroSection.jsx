@@ -22,7 +22,7 @@ export default function HeroSection() {
     <SectionWrapper id="hero" background="primary" className="relative ">
       {/* Base background - bg-opening.png */}
       <div
-        className="h-[850px] w-screen z-0 absolute inset-0 bg-cover bg-center"
+        className="h-[850px] w-full aspect-3/4 z-0 absolute inset-0 bg-cover bg-center"
         style={{ backgroundImage: "url('/assets/bg-opening.png')" }}
         aria-hidden="true"
       />

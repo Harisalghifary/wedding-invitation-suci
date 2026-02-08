@@ -6,9 +6,8 @@ export default function QuranSection() {
       id="quran"
       className="relative px-6 overflow-visible"
       style={{
-        minHeight: '100vh',
         paddingTop: '80px',
-        paddingBottom: '180px',
+        paddingBottom: '200px',
       }}
     >
       <div className="max-w-6xl mx-auto">
@@ -19,7 +18,7 @@ export default function QuranSection() {
 
         {/* Translation */}
         <div className="max-w-2xl mx-auto mb-16">
-          <p className="text-xs sm:text-base text-darkBrown leading-relaxed px-8 mb-8 text-center">
+          <p className="text-xs sm:text-base text-darkBrown mb-4 text-center">
             {weddingData.quranVerse.translation}
           </p>
 
@@ -33,12 +32,12 @@ export default function QuranSection() {
       {/* Flower Frame - stretched at bottom, overflows into next section */}
       <div
         className="absolute left-0 right-0 z-10"
-        style={{ bottom: '-60px' }}
+        style={{ bottom: '-120px' }}
       >
         <img
           src="/assets/flower_frame.png"
           alt="Flower Frame"
-          className="w-full h-auto max-h-[280px] object-cover object-top"
+          className="w-full h-auto bottom-5 object-cover object-top scale-150"
         />
       </div>
     </section>

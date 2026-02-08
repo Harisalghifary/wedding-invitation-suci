@@ -64,8 +64,8 @@ export default function CountdownSection() {
   return (
     <SectionWrapper id="countdown" background="transparent" className="relative pt-16 px-6 mb-50">
 
-      {/* Bird decoration with ribbon - FLIPPED horizontally */}
-      <div className="text-center mb-0">
+      {/* Bird + Logo grouped together */}
+      <div className="text-center">
         <img
           src="/assets/Bird.gif"
           alt="Birds with ribbon"
@@ -73,25 +73,21 @@ export default function CountdownSection() {
           loading="lazy"
           decoding="async"
         />
-      </div>
-
-      {/* S monogram - LARGER */}
-      <div className="text-center mb-12">
         <img
           src="/assets/logo_ss.png"
           alt="S Monogram"
-          className="w-40 h-40 mx-auto"
+          className="w-[124px] h-[124px] mx-auto -mt-20"
         />
       </div>
 
-      {/* Countdown with Love GIFs */}
+      {/* Countdown + Save the Date container */}
       <div className="relative max-w-lg mx-auto mb-10">
 
         {/* Love 1 - Left Side */}
         <img
           src="/assets/love_1.gif"
           alt="Love"
-          className="absolute -left-16 top-1/2 -translate-y-1/2 w-20 h-20 z-10"
+          className="absolute -left-16 top-1/3 -translate-y-1/2 w-20 h-20 z-10"
           onError={(e) => e.target.style.display = 'none'}
           loading="lazy"
           decoding="async"
@@ -101,7 +97,27 @@ export default function CountdownSection() {
         <img
           src="/assets/love_2.gif"
           alt="Love"
-          className="absolute -right-16 bottom-0 w-24 h-24 z-10"
+          className="absolute -right-16 top-1/2 w-24 h-24 z-10"
+          onError={(e) => e.target.style.display = 'none'}
+          loading="lazy"
+          decoding="async"
+        />
+
+        {/* Ribbon - Top-Right of card */}
+        <img
+          src="/assets/ribbon.gif"
+          alt="Ribbon"
+          className="absolute -top-10 -right-4 w-[98px] h-[102px] z-10 object-cover scale-150 rotate-[15deg]"
+          onError={(e) => e.target.style.display = 'none'}
+          loading="lazy"
+          decoding="async"
+        />
+
+        {/* Alarm clock - Bottom-Left of card */}
+        <img
+          src="/assets/alarm.gif"
+          alt="Alarm Clock"
+          className="absolute left-[calc(50%-154px-56px)] rotate-[-15deg] top-[100px] w-[145px] h-[152px] z-20"
           onError={(e) => e.target.style.display = 'none'}
           loading="lazy"
           decoding="async"
@@ -112,65 +128,42 @@ export default function CountdownSection() {
           className="mx-auto bg-[#FFFAF2] rounded-2xl relative opacity-84"
           style={{ width: '308px', height: '144px', padding: '20px' }}
         >
-          {/* Ribbon - Top-Right - Larger */}
-          <img
-            src="/assets/ribbon.gif"
-            alt="Ribbon"
-            className="absolute -top-6 -right-6 w-[140px] h-[146px] z-10"
-            onError={(e) => e.target.style.display = 'none'}
-            loading="lazy"
-            decoding="async"
-          />
-
-          {/* Alarm clock GIF - Bottom-Left */}
-          <img
-            src="/assets/alarm.gif"
-            alt="Alarm Clock"
-            className="absolute -left-14 rotate-[-15deg] -bottom-16 w-[145px] h-[152px] z-20"
-            onError={(e) => e.target.style.display = 'none'}
-            loading="lazy"
-            decoding="async"
-          />
-
-          {/* Countdown timer */}
           <CountdownTimer targetDate={weddingData.event.date} />
+        </div>
+
+        {/* Save the Date button */}
+        <div className="flex justify-center mt-6">
+          <button
+            onClick={handleSaveDate}
+            className="inline-flex items-center gap-2 bg-primary text-cream font-dmSans font-semibold px-6 py-2.5 rounded-full hover:bg-darkBrown transition-colors text-xs"
+          >
+            <img
+              src="/assets/calendar.svg"
+              alt="Calendar"
+              className="w-4 h-4 brightness-0 invert"
+            />
+            Save the Date
+          </button>
         </div>
       </div>
 
-      {/* Save the Date button - SMALLER */}
-      <div className="flex justify-center">
-        <button
-          onClick={handleSaveDate}
-          className="inline-flex items-center gap-2 bg-primary text-cream font-dmSans font-medium px-6 py-2.5 rounded-full hover:bg-darkBrown transition-colors shadow-lg text-sm"
-        >
-          <img
-            src="/assets/calendar.svg"
-            alt="Calendar"
-            className="w-4 h-4 brightness-0 invert"
-          />
-          Save the Date
-        </button>
-      </div>
-
-      {/* Love GIFs - Absolute Bottom Right */}
-      <div className="absolute bottom-4 right-4 flex items-end gap-2 z-20">
-        <img
-          src="/assets/love_1.gif"
-          alt="Love decoration"
-          className="w-12 h-12"
-          onError={(e) => e.target.style.display = 'none'}
-          loading="lazy"
-          decoding="async"
-        />
-        <img
-          src="/assets/love_2_dark.gif"
-          alt="Love decoration"
-          className="w-16 h-16"
-          onError={(e) => e.target.style.display = 'none'}
-          loading="lazy"
-          decoding="async"
-        />
-      </div>
+      {/* Love decorations - Bottom Right */}
+      <img
+        src="/assets/love_1_dark.gif"
+        alt="Love decoration"
+        className="absolute -bottom-12 right-4 w-[112px] h-[117px] object-cover z-20 scale-150"
+        onError={(e) => e.target.style.display = 'none'}
+        loading="lazy"
+        decoding="async"
+      />
+      <img
+        src="/assets/love_2_dark.gif"
+        alt="Love decoration"
+        className="absolute -bottom-12 right-16 w-[58px] h-[72px] object-cover z-20"
+        onError={(e) => e.target.style.display = 'none'}
+        loading="lazy"
+        decoding="async"
+      />
 
     </SectionWrapper>
   );

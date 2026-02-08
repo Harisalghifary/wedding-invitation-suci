@@ -14,7 +14,7 @@ const GallerySection = memo(function GallerySection() {
           {photos.map((num) => (
             <div
               key={num}
-              className="w-[109px] h-[171px] overflow-hidden"
+              className="w-[109px] h-[171px] overflow-hidden drop-shadow-md"
             >
               <LazyImage
                 src={`/assets/galeri ${num}.png`}
