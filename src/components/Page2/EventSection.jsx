@@ -24,11 +24,27 @@ export default function EventSection() {
           </h2>
 
           {/* Venue illustration */}
-          <div className="mb-6 ">
+          <div className="relative mb-6">
             <LazyImage
               src="/assets/gedung.png"
               alt="Venue Illustration"
               className="w-full max-w-lg mx-auto h-auto mix-blend-multiply opacity-90"
+            />
+            {/* Firework left - flipped to point toward center */}
+            <img
+              src="/assets/firework.gif"
+              alt="Firework"
+              className="absolute top-0 left-1/2 w-1/2 h-full object-contain pointer-events-none z-10 scale-x-[-1]"
+              loading="lazy"
+              decoding="async"
+            />
+            {/* Firework right - points toward center */}
+            <img
+              src="/assets/firework.gif"
+              alt="Firework"
+              className="absolute -top-5 right-1/2 w-1/2 h-full object-contain pointer-events-none z-10"
+              loading="lazy"
+              decoding="async"
             />
           </div>
 
@@ -106,16 +122,16 @@ export default function EventSection() {
         </div>
 
         {/* Dresscode Section */}
-        <div className=" px-8 py-10">
+        <div className="relative py-10 text-center mb-16">
           {/* Header with bucket illustration */}
-          <div className="flex items-center justify-center gap-3 mb-8">
-            <h3 className="font-josefin font-semibold text-4xl text-primary text-center">
+          <div className="relative inline-block mb-8">
+            <h3 className="font-josefin font-semibold text-4xl text-primary">
               Dresscode
             </h3>
             <img
               src="/assets/bucket.png"
               alt="Bucket decoration"
-              className="w-12 h-12 object-contain"
+              className="absolute -top-2 -right-20 w-[140px] h-12 object-cover scale-125 rotate-[15deg] pointer-events-none"
             />
           </div>
 
@@ -134,26 +150,26 @@ export default function EventSection() {
             ))}
           </div>
 
+          {/* Shoes - left of description text */}
+          <img
+            src="/assets/shoes_dark.gif"
+            alt="Shoes"
+            className="absolute -left-20 bottom-10 w-[144px] h-[144px] object-cover rotate-[-10deg] scale-125 pointer-events-none"
+            loading="lazy"
+            decoding="async"
+          />
+
           {/* Description */}
-          <p className="font-dmSans text-xs text-primary text-center mt-8 px-4">
+          <p className="font-dmSans text-xs text-primary text-center mt-8 px-12">
             Para tamu mohon berkenan mengenakan warna-warna berikut sebagai dresscode pada hari istimewa kami.
           </p>
 
-          {/* Dress & Suit Icons */}
-          <div className="flex justify-center items-end gap-6 mt-6">
-            <LazyImage
-              src="/assets/attire.png"
-              alt="Attire"
-              className="w-24 h-auto object-contain"
-            />
-            <img
-              src="/assets/shoes_dark.gif"
-              alt="Shoes"
-              className="w-16 h-16 object-contain"
-              loading="lazy"
-              decoding="async"
-            />
-          </div>
+          {/* Attire - bottom-left */}
+          <LazyImage
+            src="/assets/attire.png"
+            alt="Attire"
+            className="absolute -bottom-15 -left-3 w-[151px] h-auto object-cover scale-150"
+          />
         </div>
       </div>
     </section>
