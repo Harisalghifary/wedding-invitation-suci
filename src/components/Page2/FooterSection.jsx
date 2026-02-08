@@ -14,25 +14,25 @@ export default function FooterSection() {
       <img
         src="/assets/love_1.gif"
         alt=""
-        className="absolute top-8 left-4 w-14 h-14 z-10 pointer-events-none"
+        className="absolute top-20 -left-6 w-[82px] h-[74px] object-cover scale-150 pointer-events-none rotate-[-15deg]"
         loading="lazy"
         decoding="async"
       />
 
       {/* Love 2 Dark - Left Center */}
       <img
-        src="/assets/love_2_dark.gif"
+        src="/assets/love_2.gif"
         alt=""
-        className="absolute top-1/2 -translate-y-1/2 left-4 w-16 h-16 z-10 pointer-events-none"
+        className="absolute top-1/2 -translate-y-1/2 -left-8 w-[94px] h-[94px] object-cover scale-150 pointer-events-none"
         loading="lazy"
         decoding="async"
       />
 
       {/* Love 2 Dark - Right Center */}
       <img
-        src="/assets/love_2_dark.gif"
+        src="/assets/love_2.gif"
         alt=""
-        className="absolute top-1/2 -translate-y-1/2 right-4 w-16 h-16 z-10 pointer-events-none"
+        className="absolute top-1/4 -translate-y-1/2 -right-8 w-[94px] h-[94px] object-cover scale-x-[-1.50] scale-y-[1.50] pointer-events-none"
         loading="lazy"
         decoding="async"
       />

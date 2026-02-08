@@ -311,8 +311,16 @@ function BankCard({ bank }) {
           className="w-17 h-17 object-contain opacity-90"
         />
       </button>
-            {/* Gift GIF - Bottom-right */}
-
+      {/* Gift GIF - Bottom-right (BCA only) */}
+      {bank.bankName.includes('BCA') && (
+        <img
+          src="/assets/gift.gif"
+          alt="Gift"
+          className="absolute -bottom-16 -right-12 w-[110px] h-[110px] object-cover pointer-events-none z-10"
+          loading="lazy"
+          decoding="async"
+        />
+      )}
     </div>
   );
 }
@@ -322,10 +330,18 @@ function WeddingGiftSection() {
     <section className="bg-primary pb-16 px-6">
       {/* Header */}
       <div className="text-center mb-6">
-
-        <h2 className="font-josefin font-bold text-4xl text-white mb-6">
-          Wedding Gift
-        </h2>
+        <div className="relative inline-block mb-6">
+          <h2 className="font-josefin font-bold text-4xl text-white">
+            Wedding Gift
+          </h2>
+          <img
+            src="/assets/amplop_2.gif"
+            alt="Envelope"
+            className="absolute -top-14 rotate-[30deg] -right-6 w-[75px] h-[75px] object-cover pointer-events-none"
+            loading="lazy"
+            decoding="async"
+          />
+        </div>
         <p className="font-dmSans text-xs text-white leading-relaxed max-w-2xl mx-auto">
           Kehadiran Anda di acara pernikahan kami adalah hadiah terindah. Namun,
           jika Anda ingin memberikan hadiah, kami menyediakan amplop digital.
