@@ -1,5 +1,4 @@
 import { SectionWrapper } from '../shared/SectionWrapper';
-import { FaInstagram } from 'react-icons/fa';
 import { weddingData } from '../../data/content';
 
 const ProfileCard = ({ person, title }) => {
@@ -64,7 +63,7 @@ const ProfileCard = ({ person, title }) => {
           rel="noopener noreferrer"
           className="flex items-center gap-2 bg-cream text-black text-xs font-dmSans px-6 py-2 font-bold rounded-full hover:bg-lightBrown transition-colors"
         >
-          <FaInstagram className="w-4 h-4" />
+          <img src="/assets/Instagram.png" alt="Instagram" className="w-4 h-4" />
           {person.instagram}
         </a>
       </div>
