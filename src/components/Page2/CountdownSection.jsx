@@ -70,6 +70,8 @@ export default function CountdownSection() {
           src="/assets/Bird.gif"
           alt="Birds with ribbon"
           className="w-[432px] h-[215px] mx-auto scale-x-[-1]"
+          loading="lazy"
+          decoding="async"
         />
       </div>
 
@@ -91,6 +93,8 @@ export default function CountdownSection() {
           alt="Love"
           className="absolute -left-16 top-1/2 -translate-y-1/2 w-20 h-20 z-10"
           onError={(e) => e.target.style.display = 'none'}
+          loading="lazy"
+          decoding="async"
         />
 
         {/* Love 2 - Right Side */}
@@ -99,6 +103,8 @@ export default function CountdownSection() {
           alt="Love"
           className="absolute -right-16 bottom-0 w-24 h-24 z-10"
           onError={(e) => e.target.style.display = 'none'}
+          loading="lazy"
+          decoding="async"
         />
 
         {/* Countdown Card - 308x144 */}
@@ -112,6 +118,8 @@ export default function CountdownSection() {
             alt="Ribbon"
             className="absolute -top-6 -right-6 w-[140px] h-[146px] z-10"
             onError={(e) => e.target.style.display = 'none'}
+            loading="lazy"
+            decoding="async"
           />
 
           {/* Alarm clock GIF - Bottom-Left */}
@@ -120,6 +128,8 @@ export default function CountdownSection() {
             alt="Alarm Clock"
             className="absolute -left-14 rotate-[-15deg] -bottom-16 w-[145px] h-[152px] z-20"
             onError={(e) => e.target.style.display = 'none'}
+            loading="lazy"
+            decoding="async"
           />
 
           {/* Countdown timer */}
@@ -149,12 +159,16 @@ export default function CountdownSection() {
           alt="Love decoration"
           className="w-12 h-12"
           onError={(e) => e.target.style.display = 'none'}
+          loading="lazy"
+          decoding="async"
         />
         <img
           src="/assets/love_2_dark.gif"
           alt="Love decoration"
           className="w-16 h-16"
           onError={(e) => e.target.style.display = 'none'}
+          loading="lazy"
+          decoding="async"
         />
       </div>
 

@@ -17,6 +17,8 @@ const ProfileCard = ({ person, title }) => {
         src={isBride ? "/assets/flower.gif" : "/assets/spark.gif"}
         alt="Decoration"
         className="absolute top-0 right-4 w-16 h-16 object-contain opacity-80 z-20"
+        loading="lazy"
+        decoding="async"
       />
 
       {/* Title */}
@@ -27,10 +29,10 @@ const ProfileCard = ({ person, title }) => {
       {/* Wrapper for photo frame and character decoration */}
       <div className="relative inline-block mb-6 mt-8">
         {/* Character decoration (bride/groom sketch) */}
-        <img
+        <LazyImage
           src={isBride ? "/assets/bride.gif" : "/assets/groom.gif"}
           alt="Decoration"
-          className={`absolute bottom-0 w-40 h-auto z-0 brightness-0 invert opacity-80 
+          className={`absolute bottom-0 w-40 h-auto z-0 brightness-0 invert opacity-80
             ${isBride
               ? '-left-20'
               : '-right-16'
@@ -40,7 +42,7 @@ const ProfileCard = ({ person, title }) => {
 
         {/* Photo Frame */}
         <div className="relative z-10 w-70 h-auto">
-          <img
+          <LazyImage
             src={`/assets/${person.frameImage}`}
             alt={person.nickname}
             className="w-full h-auto object-contain drop-shadow-xl"
@@ -98,7 +100,7 @@ export default function ProfileSection() {
       <div className="relative w-full max-w-[450px] flex justify-center items-center mx-auto">
         {/* Couple GIF */}
         <div className="w-full h-auto">
-          <img
+          <LazyImage
             src="/assets/couple.gif"
             alt="Couple Illustration"
             className="w-full h-auto"
@@ -110,6 +112,8 @@ export default function ProfileSection() {
           src="/assets/envelop1.gif"
           alt="Envelope"
           className="absolute -bottom-8 -left-8 w-20 h-20 object-contain opacity-90"
+          loading="lazy"
+          decoding="async"
         />
 
         {/* Bottom-right: Shoes */}
@@ -117,6 +121,8 @@ export default function ProfileSection() {
           src="/assets/shoes.gif"
           alt="Shoes"
           className="absolute -bottom-8 -right-8 w-20 h-20 object-contain opacity-90"
+          loading="lazy"
+          decoding="async"
         />
       </div>
     </SectionWrapper>

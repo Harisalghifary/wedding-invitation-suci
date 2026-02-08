@@ -32,11 +32,15 @@ const GallerySection = memo(function GallerySection() {
           src="/assets/love_1.gif"
           alt="Love decoration"
           className="w-12 h-12"
+          loading="lazy"
+          decoding="async"
         />
         <img
           src="/assets/love_2_dark.gif"
           alt="Love decoration"
           className="w-16 h-16"
+          loading="lazy"
+          decoding="async"
         />
       </div>
     </section>

@@ -40,6 +40,9 @@ export default function HeroSection() {
             src="/assets/love_1.gif"
             alt="Love decoration"
             className="absolute -left-8 -top-4 w-16 h-16 z-30 scale-x-[-1]"
+            loading="lazy"
+            decoding="async"
+            fetchPriority="low"
           />
 
           {/* Love GIF - Top Right */}
@@ -47,6 +50,9 @@ export default function HeroSection() {
             src="/assets/love_1.gif"
             alt="Love decoration"
             className="absolute -right-8 -top-4 w-16 h-16 z-30"
+            loading="lazy"
+            decoding="async"
+            fetchPriority="low"
           />
 
           {/* Spark GIF - Bottom Left */}
@@ -54,6 +60,9 @@ export default function HeroSection() {
             src="/assets/spark.gif"
             alt="Spark decoration"
             className="absolute -left-6 -bottom-6 w-14 h-14 z-30"
+            loading="lazy"
+            decoding="async"
+            fetchPriority="low"
           />
 
           {/* Spark GIF - Bottom Right */}
@@ -61,6 +70,9 @@ export default function HeroSection() {
             src="/assets/spark.gif"
             alt="Spark decoration"
             className="absolute -right-6 -bottom-6 w-14 h-14 z-30"
+            loading="lazy"
+            decoding="async"
+            fetchPriority="low"
           />
 
           {/* Carousel */}

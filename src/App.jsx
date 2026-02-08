@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import InvitationGuard from './components/Page1/InvitationGuard';
 import MainLayout from './components/layout/MainLayout';
+import MusicToggle from './components/shared/MusicToggle';
 
 function App() {
   const [isOpened, setIsOpened] = useState(false);
@@ -15,7 +16,10 @@ function App() {
       {!isOpened ? (
         <InvitationGuard onOpen={handleOpen} />
       ) : (
-        <MainLayout />
+        <>
+          <MainLayout />
+          <MusicToggle />
+        </>
       )}
     </div>
   );

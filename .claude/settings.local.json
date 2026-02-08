@@ -1,7 +1,11 @@
 {
   "permissions": {
     "allow": [
-      "Bash(npm install:*)"
+      "Bash(npm install:*)",
+      "Bash(npm run build:*)",
+      "Bash(ls:*)",
+      "Read(//Users/xbox/github/suci-wedding/**)",
+      "Bash(npx vite build:*)"
     ]
   }
 }

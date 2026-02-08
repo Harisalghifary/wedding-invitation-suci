@@ -15,6 +15,8 @@ export default function FooterSection() {
         src="/assets/love_1.gif"
         alt=""
         className="absolute top-8 left-4 w-14 h-14 z-10 pointer-events-none"
+        loading="lazy"
+        decoding="async"
       />
 
       {/* Love 2 Dark - Left Center */}
@@ -22,6 +24,8 @@ export default function FooterSection() {
         src="/assets/love_2_dark.gif"
         alt=""
         className="absolute top-1/2 -translate-y-1/2 left-4 w-16 h-16 z-10 pointer-events-none"
+        loading="lazy"
+        decoding="async"
       />
 
       {/* Love 2 Dark - Right Center */}
@@ -29,6 +33,8 @@ export default function FooterSection() {
         src="/assets/love_2_dark.gif"
         alt=""
         className="absolute top-1/2 -translate-y-1/2 right-4 w-16 h-16 z-10 pointer-events-none"
+        loading="lazy"
+        decoding="async"
       />
 
       {/* Main Footer Content */}

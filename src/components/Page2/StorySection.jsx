@@ -46,6 +46,8 @@ export default function StorySection() {
             alt={`Our Story ${index + 1}`}
             className={`w-full h-auto object-cover transition-opacity duration-1000 ease-in-out ${index === 0 ? 'relative' : 'absolute inset-0'
               } ${index === topPhotoIndex ? 'opacity-100' : 'opacity-0'}`}
+            loading="lazy"
+            decoding="async"
           />
         ))}
       </div>
@@ -101,7 +103,7 @@ export default function StorySection() {
       {/* Auto-sliding Carousel */}
       <div className="w-full overflow-hidden relative">
         <div
-          className="flex transition-transform duration-700 ease-in-out"
+          className="flex transition-transform duration-700 ease-in-out will-change-transform"
           style={{ transform: `translateX(-${currentIndex * 100}%)` }}
         >
           {carouselImages.map((src, index) => (

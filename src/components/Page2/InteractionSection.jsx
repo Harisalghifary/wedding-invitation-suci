@@ -135,7 +135,13 @@ function WishesSection() {
   return (
     <section className="bg-primary py-16 px-6">
       {/* Header */}
-      <div className="text-center mb-8">
+      <div className="text-center mb-8 relative">
+        {/* Love 4 - Left of header */}
+        <img
+          src="/assets/love_4.png"
+          alt="Love"
+          className="absolute -top-10 left-4 w-16 h-16"
+        />
         <div className="flex items-center justify-center gap-3 mb-2">
           <h2 className="font-josefin font-bold text-4xl text-white">
             Wishes
@@ -185,7 +191,13 @@ function WishesSection() {
           )}
 
           {/* Submit button - RIGHT ALIGNED */}
-          <div className="flex justify-end">
+          <div className="flex justify-end relative">
+            {/* Love 6 - Left of Submit */}
+            <img
+              src="/assets/love_6.png"
+              alt="Love"
+              className="absolute -left-10 top-1/2 -translate-y-1/2 w-14 h-14"
+            />
             <button
               type="submit"
               disabled={loading}
@@ -198,9 +210,15 @@ function WishesSection() {
 
         {/* Wishes display - scrollable, ~3-4 bubbles visible */}
         <div
-          className="wishes-scroll bg-cream rounded-2xl px-6 py-6 mt-8 overflow-y-auto"
+          className="wishes-scroll bg-cream rounded-2xl px-6 py-6 mt-8 overflow-y-auto relative"
           style={{ maxHeight: '340px', scrollBehavior: 'smooth' }}
         >
+          {/* Amplop 3 - Bottom-left */}
+          <img
+            src="/assets/amplop_3.png"
+            alt="Envelope"
+            className="absolute -bottom-8 -left-8 w-24 h-24 z-10"
+          />
           {fetchingWishes && (
             <p className="text-center font-dmSans text-sm text-primary opacity-50">
               Memuat ucapan...
@@ -261,7 +279,8 @@ function BankCard({ bank }) {
   };
 
   return (
-    <div className="bg-gradient-to-br from-[#764640] to-[#B16C63] rounded-lg p-6 shadow-lg flex justify-between items-center">
+    <div className="bg-gradient-to-br from-[#764640] to-[#B16C63] rounded-lg p-6 shadow-lg flex justify-between items-center relative">
+
       {/* Left Side: Text Information */}
       <div className="flex flex-col text-left">
         <h3 className="font-josefin font-bold text-xs text-white mb-4 uppercase tracking-wide">
@@ -302,6 +321,8 @@ function BankCard({ bank }) {
           className="w-17 h-17 object-contain opacity-90"
         />
       </button>
+            {/* Gift GIF - Bottom-right */}
+
     </div>
   );
 }

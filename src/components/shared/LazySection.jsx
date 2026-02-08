@@ -16,8 +16,8 @@ export default function LazySection({ children, minHeight = '50vh' }) {
         }
       },
       {
-        rootMargin: '0px',
-        threshold: 0.1  // Trigger when 10% visible
+        rootMargin: '200px',
+        threshold: 0.1  // Trigger when 10% visible (or 200px before entering viewport)
       }
     );
 

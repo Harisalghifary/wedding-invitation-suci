@@ -34,7 +34,7 @@ export default function EventSection() {
 
           {/* Ring icon */}
           <div className="mb-4">
-            <img src="/assets/ring.gif" alt="Ring Icon" className="w-[224px] h-[123px] object-cover mx-auto" />
+            <img src="/assets/ring.gif" alt="Ring Icon" className="w-[224px] h-[123px] object-cover mx-auto" loading="lazy" decoding="async" />
           </div>
 
           {/* Wedding Date */}
@@ -58,7 +58,7 @@ export default function EventSection() {
           {/* Event Times - Two columns */}
           <div className="flex justify-center gap-12 mx-auto mb-12">
             <div className="text-center">
-              <p className="font-loveLight text-[48px] leading-tight text-primary mb-2">
+              <p className="font-loveLight text-[48px] leading-tight text-primary mb-2 drop-shadow-md">
                 {weddingData.event.akad.label}
               </p>
               <p className="font-dmSans text-base font-semibold text-primary">
@@ -66,7 +66,7 @@ export default function EventSection() {
               </p>
             </div>
             <div className="text-center">
-              <p className="font-loveLight text-[48px] leading-tight text-primary mb-2">
+              <p className="font-loveLight text-[48px] leading-tight text-primary mb-2 drop-shadow-md">
                 {weddingData.event.resepsi.label}
               </p>
               <p className="font-dmSans text-base font-semibold text-primary">
@@ -150,6 +150,8 @@ export default function EventSection() {
               src="/assets/shoes_dark.gif"
               alt="Shoes"
               className="w-16 h-16 object-contain"
+              loading="lazy"
+              decoding="async"
             />
           </div>
         </div>
