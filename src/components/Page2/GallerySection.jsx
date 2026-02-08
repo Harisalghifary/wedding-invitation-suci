@@ -1,6 +1,9 @@
-const photos = Array.from({ length: 12 }, (_, i) => i + 1);
+import { memo, useMemo } from 'react';
 
-export default function GallerySection() {
+const GallerySection = memo(function GallerySection() {
+  // Memoize photos array to prevent recreation on each render
+  const photos = useMemo(() => Array.from({ length: 12 }, (_, i) => i + 1), []);
+
   return (
     <section id="gallery" className="bg-primary py-16 px-6">
       {/* Fixed width container - 353px, centered */}
@@ -23,7 +26,9 @@ export default function GallerySection() {
           ))}
         </div>
       </div>
-
     </section>
   );
-}
+});
+
+export default GallerySection;
+

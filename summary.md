@@ -24,7 +24,8 @@ A beautiful, mobile-responsive two-page wedding invitation website for Suci & Se
 - **Love Light** - Decorative headers (cursive) - "The wedding of"
 - **Josefin Sans** - Section headers (sans-serif, bold)
 - **DM Sans** - Body text, buttons, labels (sans-serif)
-- **Playfair Display** - Countdown numbers (serif, semi-bold)
+- **Playfair Display** - Ceremony headers (serif, semi-bold)
+- **PT Serif** - Countdown numbers (serif, bold)
 - **Oregano** - Couple names in profiles (cursive, regular)
 - **Passions Conflict** - "Terima Kasih" script text in footer (cursive, 80px)
 - **Poppins** - Copyright bar text (sans-serif, 8px)
@@ -50,31 +51,33 @@ darkBrown: #5C3A34   (text on light backgrounds)
 ### Page 1: Invitation Guard
 - ✅ Full-screen cover with background image (bg-cover.png)
 - ✅ Absolutely positioned layout: "Wedding Invitation" top-center, "Suci" upper-left, "&" center, "Seky" lower-right (diagonal arrangement)
-- ✅ "To" + guest name at bottom
-- ✅ "Open Invitation" button with envelope icon at bottom-center
+- ✅ Guest name from URL param (`?to=` or `?name=`), displays "Kepada: {name}" or fallback "Haris dan Rezkita"
+- ✅ "Open Invitation" button with `icon_envelop.png` image at bottom-center
 - ✅ Smooth transition to main page
 
 ### Page 2: Main Website (9 Sections)
 
 1. **Hero Section** - "The wedding of" with 4-photo auto-sliding carousel (402×638px responsive) and Bird.gif
-2. **Countdown Section** - Real-time countdown with Playfair Display numbers, flipped Bird.gif, large S monogram, #FFFAF2 card bg, calendar.svg icon
-3. **Quran Section** - Ar-Rum verse 21 (Arabic image + translation)
-4. **Profile Section** - Bride & Groom profiles with Oregano font
+2. **Countdown Section** - Real-time countdown with PT Serif Bold numbers, 308×144px card, ribbon.gif, love_1/2.gif decorations, alarm.gif, Save the Date with Google Calendar/Apple Calendar (.ics) integration
+3. **Quran Section** - Ar-Rum verse 21 (bismillah.png + translation), full-width flower_frame.png at bottom, min-height 100vh
+4. **Profile Section** - Bride & Groom profiles with Oregano font, groom.gif flipped horizontally
 5. **Event Section** - Ceremony details, venue, dresscode with bg-ceremony.png background
 6. **Story Section** - Couple's love story with actual content, photos, and absolutely positioned decorative illustrations (chapel, glass, candle)
 7. **Gallery Section** - Fixed 3x4 photo grid (109×171px cells, 13px gaps, 353px total width)
-8. **Interaction Section** - Wishes form (Supabase backend, real-time updates, URL param name) + Wedding Gift (gradient bank cards, copy icon, gift registry link)
-9. **Footer Section** - Photo frame (3 stacked photos), "Terima Kasih" (Passions Conflict 80px), car illustration, S monogram, black copyright bar
+8. **Interaction Section** - Wishes form (Supabase backend, real-time + force re-fetch, URL param name read-only, scrollable 340px container) + Wedding Gift (gradient bank cards, copy icon, Google Sheets gift registry link)
+9. **Footer Section** - Photo strip (3 rounded-xl photos with drop shadow), love animations (love_1_dark/love_2_dark/love_3.gif), "Terima Kasih" (Passions Conflict 80px), car illustration, black copyright bar
 
 ### Interactive Features
-- ⏰ **Real-time countdown timer** (days, hours, minutes, seconds)
-- 📝 **Wishes form** with Supabase backend, real-time updates via postgres_changes subscription, URL param name support (?name= or ?to=)
+- ⏰ **Real-time countdown timer** (days, hours, minutes, seconds) with PT Serif Bold font
+- 📅 **Save the Date** - Google Calendar (Android/desktop) + Apple Calendar (.ics download) integration
+- 📝 **Wishes form** with Supabase backend, real-time updates + force re-fetch after submit, URL param name read-only, scrollable container (340px max-height), custom scrollbar, 500 char limit
 - 💳 **Copy-to-clipboard** for bank account numbers with money-transfer.svg icon
-- 🎁 **Gift registry link** button (Google Sheets placeholder)
+- 🎁 **Gift registry link** button (Google Sheets: actual link)
 - 🗺️ **Google Maps integration** for venue location
 - 📱 **Instagram links** for bride and groom
-- 💾 **Supabase** for wishes storage with real-time subscription (replaced localStorage)
+- 💾 **Supabase** for wishes storage with real-time subscription + duplicate prevention
 - 🎨 **Layered overlapping backgrounds** - Hero section overlaps with Countdown/Quran
+- 💕 **Love animations** - Animated GIF decorations on countdown and footer sections
 
 ---
 
@@ -99,15 +102,22 @@ darkBrown: #5C3A34   (text on light backgrounds)
 │       ├── chapel.png           # Chapel decoration (Story section, left-top)
 │       ├── glass.png            # Champagne glasses decoration (Story section, right-top)
 │       ├── candle.png           # Candles decoration (Story section, right-bottom)
-│       ├── flower_frame.svg     # Flower frame decoration
+│       ├── flower_frame.png     # Flower frame decoration (Quran section bottom)
+│       ├── icon_envelop.png     # Envelope icon for invitation button
+│       ├── ribbon.gif           # Ribbon decoration (countdown card top-right)
+│       ├── love_1.gif           # Love animation (countdown section)
+│       ├── love_2.gif           # Love animation (countdown section)
+│       ├── love_1_dark.gif      # Love animation dark variant (footer)
+│       ├── love_2_dark.gif      # Love animation dark variant (footer)
+│       ├── love_3.gif           # Love animation variant (footer)
 │       ├── couple.gif            # Couple illustration
 │       ├── bismillah.png         # Bismillah Arabic text
 │       ├── logo_ss.png           # S monogram logo
 │       ├── money-transfer.svg   # Copy icon for bank cards
 │       ├── car.png              # Car with ribbon illustration
-│       ├── footer_photo1.png    # Footer photo frame 1
-│       ├── footer_photo2.png    # Footer photo frame 2
-│       └── footer_photo3.png    # Footer photo frame 3
+│       ├── footer_1.png         # Footer photo frame 1
+│       ├── footer_2.png         # Footer photo frame 2
+│       └── footer_3.png         # Footer photo frame 3
 ├── src/
 │   ├── components/
 │   │   ├── Page1/
@@ -204,7 +214,8 @@ The website uses a sophisticated layered background system where sections overla
 **[src/components/Page1/InvitationGuard.jsx](src/components/Page1/InvitationGuard.jsx)** - Cover page
 - Full-screen background image (bg-cover.png)
 - Absolutely positioned layout: names in diagonal arrangement (Suci upper-left, & center, Seky lower-right)
-- "To" + guest name and "Open Invitation" button at bottom
+- Guest name from URL params (`?to=` or `?name=`), displays "Kepada: {name}" or fallback
+- "Open Invitation" button with `icon_envelop.png` image (no react-icons dependency)
 - Opens main page on button click
 
 **[src/components/layout/GradientWrapper.jsx](src/components/layout/GradientWrapper.jsx)** - **NEW!**
@@ -224,19 +235,20 @@ The website uses a sophisticated layered background system where sections overla
 - z-index: 1 (bottom layer)
 
 **[src/components/Page2/CountdownSection.jsx](src/components/Page2/CountdownSection.jsx)** - Countdown timer
-- Bird.gif decoration flipped horizontally (`scale-x-[-1]`), w-56
+- Bird.gif decoration flipped horizontally (`scale-x-[-1]`), 432×215px
 - S monogram using `logo_ss.png` image (w-40 h-40, large and prominent)
-- Countdown card: `#FFFAF2` background (not cream), rounded-3xl, shadow-xl
-- Countdown numbers: Playfair Display Semi Bold
-- Labels: DM Sans (text-sm)
-- alarm.gif positioned outside bottom-left of card (w-28 h-28, z-20)
-- Save the Date button with `calendar.svg` icon (brightness-0 invert for white)
+- Countdown card: exact 308×144px, `#FFFAF2` background, rounded-2xl, opacity-84
+- love_1.gif (left) and love_2.gif (right) decorations around card
+- ribbon.gif at top-right of card (98×102px)
+- alarm.gif at bottom-left with rotation (-15deg, 145×152px)
+- Save the Date button: smaller (text-sm, px-6 py-2.5), `calendar.svg` icon
+- **Calendar integration:** Google Calendar for Android/desktop, .ics file download for Apple devices
 - Transparent background (inherits from GradientWrapper)
 
 **[src/components/shared/CountdownTimer.jsx](src/components/shared/CountdownTimer.jsx)** - Timer display
-- **Typography:** Playfair Display Semi Bold for numbers
-- DM Sans for labels (Hari, Jam, Menit, Detik)
-- Grid layout (4 columns)
+- **Typography:** PT Serif Bold (text-4xl) for numbers
+- DM Sans (text-xs) for labels (Hari, Jam, Menit, Detik)
+- Grid layout (4 columns, gap-3, h-full items-center)
 - No individual boxes (clean, minimal design)
 
 **[src/components/Page2/ProfileSection.jsx](src/components/Page2/ProfileSection.jsx)** - Profiles
@@ -248,29 +260,35 @@ The website uses a sophisticated layered background system where sections overla
 - Introduction card: cream background with rounded-3xl
 
 **[src/components/Page2/QuranSection.jsx](src/components/Page2/QuranSection.jsx)** - Quran verse
-- **Bismillah:** PNG image (bismillah.png)
-- Translation text with justify alignment
-- Transparent background (inherits from GradientWrapper)
+- Custom `<section>` (no SectionWrapper) with min-height 100vh
+- **Bismillah:** PNG image (bismillah.png) with mb-12 spacing
+- Translation text centered with max-w-2xl, mb-16 spacing
+- Full-width `flower_frame.png` at absolute bottom (left-0, w-full, z-10)
+- Padding: top 80px, bottom 120px for flower frame space
 
 **[src/components/Page2/InteractionSection.jsx](src/components/Page2/InteractionSection.jsx)** - Interactive features
-- **WishesSection:** Supabase-backed with real-time updates (postgres_changes subscription)
-  - Guest name from URL param (`?name=` or `?to=`), input hidden when param exists
-  - Scrollable wishes display (max 10, max-h-96) with relative timestamps
-  - Loading states, error handling, success feedback
-  - fadeIn animation on new wish cards
-- **WeddingGiftSection:** Gradient bank cards with money-transfer.svg copy icon, "Nama akun" labels, "Daftar Pilihan Hadiah" gift registry link button
+- **WishesSection:** Supabase-backed with real-time updates + force re-fetch after submit
+  - Guest name from URL param (`?to=` or `?name=`), input always visible but read-only when from URL
+  - Scrollable wishes display (limit 20, maxHeight 340px) with custom scrollbar CSS
+  - Duplicate prevention in real-time subscription
+  - 500 character limit with counter display
+  - Scroll hint when >4 wishes exist
+  - Loading states, error handling, success feedback with fadeIn animation
+- **WeddingGiftSection:** Gradient bank cards with money-transfer.svg copy icon, "Nama akun" labels, "Daftar Pilihan Hadiah" Google Sheets link (actual URL)
 
 **[src/lib/supabase.js](src/lib/supabase.js)** - Supabase client
 - Initializes Supabase client from env vars (VITE_SUPABASE_URL, VITE_SUPABASE_ANON_KEY)
 - Returns null if env vars missing (graceful degradation)
 
 **[src/components/Page2/FooterSection.jsx](src/components/Page2/FooterSection.jsx)** - Footer
-- Photo frame: #5B322D bg, 3 stacked photos (273×167px, 9px gap), rounded-3xl
+- Love animations: love_1_dark.gif, love_2_dark.gif, love_3.gif at absolute positions (left + right sides)
+- Photo strip: #5B322D bg, 3 stacked photos (273×167px, 9px gap), **rounded-xl with shadow-lg and sharp rendering**
+- Photo frame container: rounded-xl
 - Wedding date: DM Sans 20px
-- "Terima Kasih": Passions Conflict 80px script font
-- Car illustration: `/assets/car.png`
-- S monogram: `/assets/logo_ss.png`
+- "Terima Kasih": Passions Conflict 80px script font with tracking-tight
+- Car illustration: `/assets/car.png` with mix-blend-exclusion
 - Copyright bar: black bg, Poppins 8px, full width
+- Footer has `relative overflow-hidden` for love animation containment
 
 **[src/hooks/useCountdown.js](src/hooks/useCountdown.js)** - Countdown timer
 - Real-time calculation every second
@@ -281,14 +299,18 @@ The website uses a sophisticated layered background system where sections overla
 
 **[tailwind.config.js](tailwind.config.js)** - Design system
 - **Custom colors:** primary, cream, lightBrown, darkBrown
-- **Custom fonts:** loveLight, josefin, dmSans, playfair, oregano, passions, poppins (7 fonts)
+- **Custom fonts:** loveLight, josefin, dmSans, playfair, oregano, passions, poppins, ptSerif (8 fonts)
 - **Background images:** cover-pattern, arrum-pattern, ceremony-pattern
 - **Animation:** fadeIn keyframe (0.3s ease-in-out, translateY(-10px) to 0)
 
 **[index.html](index.html)** - HTML template
-- Google Fonts: Love Light, Josefin Sans, DM Sans, Playfair Display, Oregano, Passions Conflict, Poppins
+- Google Fonts: Love Light, Josefin Sans, DM Sans, Playfair Display, Oregano, Passions Conflict, Poppins, PT Serif (Bold 700)
 - Preconnect for performance optimization
 - Favicon: logo_ss.png
+
+**[src/index.css](src/index.css)** - Global styles
+- Tailwind base/components/utilities
+- Custom scrollbar styles for `.wishes-scroll` class (6px width, rounded, themed colors)
 
 ---
 
@@ -388,8 +410,8 @@ Mobile-first approach with Tailwind breakpoints:
 | "The wedding of" | Love Light | 5xl-7xl | Regular | Hero header |
 | Section Titles | Josefin Sans | 3xl-4xl | Bold | Section headers |
 | **Ceremony Headers** | **Playfair Display** | **4xl** | **Bold** | **"The Ceremony", date, venue name, Dresscode** |
-| **Countdown Numbers** | **Playfair Display** | **5xl (48px)** | **Semi Bold (600)** | **Timer numbers** |
-| Countdown Labels | DM Sans | sm | Regular | Hari/Jam/Menit/Detik |
+| **Countdown Numbers** | **PT Serif** | **4xl** | **Bold (700)** | **Timer numbers** |
+| Countdown Labels | DM Sans | xs | Regular | Hari/Jam/Menit/Detik |
 | **Couple Names** | **Oregano** | **2xl (25px)** | **Regular** | **Profile names** |
 | Event Labels (Akad/Resepsi) | Love Light | 3xl | Regular | Script labels |
 | Body Text | DM Sans | base | Regular | Descriptions, paragraphs |
@@ -573,4 +595,42 @@ For issues or questions about the website implementation, refer to:
 
 **Built with ❤️ using React + Vite + Tailwind CSS**
 
-**Latest Update:** Supabase integration for wishes, InvitationGuard absolute positioning, Story section illustrations, Countdown section visual fixes
+### ✅ Session 2 Updates (Latest)
+
+**InvitationGuard:**
+- Guest name from URL params (`?to=` or `?name=`), displays "Kepada: {name}"
+- Replaced FaEnvelope react-icon with `icon_envelop.png` image
+
+**Countdown Section Overhaul:**
+- Card resized to exact 308×144px with inline styles
+- Font changed from Playfair Display to PT Serif Bold (text-4xl)
+- Added ribbon.gif (top-right, 98×102px), love_1.gif (left), love_2.gif (right)
+- Alarm clock with rotation (-15deg) and larger size (145×152px)
+- Save the Date: Google Calendar for Android/desktop, .ics file for Apple devices
+- Button made smaller (text-sm, px-6 py-2.5)
+
+**Quran Section:**
+- Switched from SectionWrapper to custom `<section>` with min-height 100vh
+- Added full-width flower_frame.png at absolute bottom
+- Increased spacing: paddingTop 80px, paddingBottom 120px
+
+**Wedding Gift:**
+- Updated gift registry link from `#` to actual Google Sheets URL
+
+**Wishes Section:**
+- Force re-fetch after submit (replaces local state update for reliability)
+- Name field always visible, read-only when from URL parameter
+- Scrollable container (maxHeight 340px) with custom scrollbar CSS
+- Duplicate prevention in real-time subscription
+- 500 character limit with counter, scroll hint for >4 wishes
+
+**Footer Section:**
+- Added love animation GIFs (love_1_dark, love_2_dark, love_3) on left/right sides
+- Photo strip: rounded-xl corners with shadow-lg drop shadow
+- Sharp image rendering with imageRendering: auto
+
+**Fonts & Config:**
+- Added PT Serif Bold to Google Fonts import and Tailwind config (now 8 fonts)
+- Added custom scrollbar CSS to index.css
+
+**Latest Update:** Countdown overhaul, Quran flower frame, Wishes force re-fetch, Footer love animations, PT Serif font, Save the Date calendar integration

@@ -1,6 +1,7 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo, useCallback } from 'react';
 import { weddingData } from '../../data/content';
 import { supabase } from '../../lib/supabase';
+import { debounce } from '../../utils/debounce';
 
 // ─── Wishes Section ─────────────────────────────────────────────────────────
 
@@ -42,6 +43,17 @@ function WishesSection() {
     }
   };
 
+  // Debounced handler for real-time updates (300ms)
+  const debouncedAddWish = useMemo(
+    () => debounce((newWish) => {
+      setWishes((current) => {
+        if (current.some((w) => w.id === newWish.id)) return current;
+        return [newWish, ...current];
+      });
+    }, 300),
+    []
+  );
+
   // Load wishes on mount + subscribe to real-time updates
   useEffect(() => {
     fetchWishes();
@@ -54,18 +66,16 @@ function WishesSection() {
         'postgres_changes',
         { event: 'INSERT', schema: 'public', table: 'wishes' },
         (payload) => {
-          setWishes((current) => {
-            if (current.some((w) => w.id === payload.new.id)) return current;
-            return [payload.new, ...current];
-          });
+          debouncedAddWish(payload.new);
         }
       )
       .subscribe();
 
     return () => {
+      debouncedAddWish.cancel();
       supabase.removeChannel(channel);
     };
-  }, []);
+  }, [debouncedAddWish]);
 
   // Handle form submission
   const handleSubmit = async (e) => {
@@ -251,49 +261,49 @@ function BankCard({ bank }) {
   };
 
   return (
-  <div className="bg-gradient-to-br from-[#764640] to-[#B16C63] rounded-lg p-6 shadow-lg flex justify-between items-center">
-    {/* Left Side: Text Information */}
-    <div className="flex flex-col text-left">
-      <h3 className="font-josefin font-bold text-xs text-white mb-4 uppercase tracking-wide">
-        {bank.bankName}
-      </h3>
+    <div className="bg-gradient-to-br from-[#764640] to-[#B16C63] rounded-lg p-6 shadow-lg flex justify-between items-center">
+      {/* Left Side: Text Information */}
+      <div className="flex flex-col text-left">
+        <h3 className="font-josefin font-bold text-xs text-white mb-4 uppercase tracking-wide">
+          {bank.bankName}
+        </h3>
 
-      {/* Account Number Section */}
-      <div className="mb-3">
-        <p className="font-dmSans text-[10px] text-white/80">
-          Nomor rekening
-        </p>
-        <p className="font-dmSans text-xs text-white tracking-widest">
-          {bank.accountNumber}
-        </p>
+        {/* Account Number Section */}
+        <div className="mb-3">
+          <p className="font-dmSans text-[10px] text-white/80">
+            Nomor rekening
+          </p>
+          <p className="font-dmSans text-xs text-white tracking-widest">
+            {bank.accountNumber}
+          </p>
+        </div>
+
+        {/* Account Name Section */}
+        <div>
+          <p className="font-dmSans text-[10px] text-white/80">
+            Nama akun
+          </p>
+          <p className="font-dmSans text-xs text-white font-medium">
+            {bank.accountName}
+          </p>
+        </div>
       </div>
 
-      {/* Account Name Section */}
-      <div>
-        <p className="font-dmSans text-[10px] text-white/80">
-          Nama akun
-        </p>
-        <p className="font-dmSans text-xs text-white font-medium">
-          {bank.accountName}
-        </p>
-      </div>
+      {/* Right Side: Icon Button */}
+      <button
+        onClick={handleCopy}
+        className="flex-shrink-0 ml-2 hover:scale-105 transition-transform duration-200"
+        aria-label="Copy Account Number"
+      >
+        <img
+          src="/assets/money-transfer.svg"
+          alt="Copy Icon"
+          // Increased size (w-16) to match the large icon in your design reference
+          className="w-17 h-17 object-contain opacity-90"
+        />
+      </button>
     </div>
-
-    {/* Right Side: Icon Button */}
-    <button
-      onClick={handleCopy}
-      className="flex-shrink-0 ml-2 hover:scale-105 transition-transform duration-200"
-      aria-label="Copy Account Number"
-    >
-      <img
-        src="/assets/money-transfer.svg"
-        alt="Copy Icon"
-        // Increased size (w-16) to match the large icon in your design reference
-        className="w-17 h-17 object-contain opacity-90"
-      />
-    </button>
-  </div>
-);
+  );
 }
 
 function WeddingGiftSection() {
@@ -301,7 +311,7 @@ function WeddingGiftSection() {
     <section className="bg-primary py-16 px-6">
       {/* Header */}
       <div className="text-center mb-6">
-        
+
         <h2 className="font-josefin font-bold text-4xl text-white mb-6">
           Wedding Gift
         </h2>
