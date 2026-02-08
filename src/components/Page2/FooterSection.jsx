@@ -33,11 +33,14 @@ export default function FooterSection() {
       />
 
       {/* Main Footer Content */}
-      <div className="pt-16 px-6 relative z-0">
+      <div className="pt-16 px-6 relative z-0 drop-shadow-xl">
         {/* Photo Frame Container */}
         <div
           className="bg-[#5B322D] p-5 mx-auto mb-8 rounded-xl"
-          style={{ maxWidth: 'fit-content' }}
+          style={{
+            maxWidth: 'fit-content',
+            boxShadow: '7px 10px 25px 2px rgba(0,0,0,0.4)'
+          }}
         >
           <div className="flex flex-col gap-[9px] mb-10">
             {photos.map((src, i) => (
@@ -64,7 +67,7 @@ export default function FooterSection() {
         </div>
 
         {/* Thank You Message */}
-        <p className="font-dmSans text-xs text-white text-center max-w-xl mx-10 mb-8 leading-relaxed">
+        <p className="font-dmSans text-xs text-white text-center max-w-xl mx-auto px-10 mb-8 leading-relaxed">
           Dari lubuk hati yang terdalam, kami mengucapkan terima kasih karena
           telah menjadi bagian dari hari istimewa kami.
         </p>
@@ -78,11 +81,12 @@ export default function FooterSection() {
         </h2>
 
         {/* Car Illustration */}
-        <div className="flex justify-center mix-blend-exclusion">
+        <div className="flex justify-center -mt-10">
           <img
             src="/assets/car.png"
             alt="Car with Ribbon"
-            className="w-90 h-70 object-contain"
+            style={{ filter: 'invert(1) sepia(0.3) saturate(0.5)' }}
+            className="w-[280px] h-auto mix-blend-exclusion opacity-70"
           />
         </div>
 

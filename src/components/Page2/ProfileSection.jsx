@@ -99,7 +99,7 @@ export default function ProfileSection() {
       <ProfileCard person={weddingData.couple.groom} title="The Groom" />
 
 {/* CENTER CONTENT: Increased max-width for better impact */}
-  <div className="relative w-full max-w-[450px] flex justify-center items-center">
+  <div className="relative w-full max-w-[450px] flex justify-center items-center mx-auto">
     
     <div className="w-full h-auto">
        <img 
