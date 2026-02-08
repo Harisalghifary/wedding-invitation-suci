@@ -1,5 +1,6 @@
 import { SectionWrapper } from '../shared/SectionWrapper';
 import { weddingData } from '../../data/content';
+import LazyImage from '../shared/LazyImage';
 
 const ProfileCard = ({ person, title }) => {
   // Split parent info into 2 rows

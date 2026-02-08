@@ -1,3 +1,5 @@
+import LazyImage from '../shared/LazyImage';
+
 export default function FooterSection() {
   const photos = [
     '/assets/footer_1.png',
@@ -46,12 +48,11 @@ export default function FooterSection() {
                 className="overflow-hidden rounded-xl shadow-lg"
                 style={{ width: '273px', height: '167px' }}
               >
-                <img
+                <LazyImage
                   src={src}
                   alt={`Wedding Photo ${i + 1}`}
                   className="w-full h-full object-cover"
                   style={{ imageRendering: 'auto' }}
-                  loading="lazy"
                 />
               </div>
             ))}

@@ -1,5 +1,6 @@
 import { Button } from '../shared/Button';
 import { weddingData } from '../../data/content';
+import LazyImage from '../shared/LazyImage';
 
 const dresscodeColors = [
   { color: '#FFFFFF', border: true, label: 'broken\nwhite' },
@@ -24,7 +25,7 @@ export default function EventSection() {
 
           {/* Venue illustration */}
           <div className="mb-6 ">
-            <img
+            <LazyImage
               src="/assets/gedung.png"
               alt="Venue Illustration"
               className="w-full max-w-lg mx-auto h-auto mix-blend-multiply opacity-90"
@@ -97,7 +98,7 @@ export default function EventSection() {
 
         {/* Ballroom Illustration */}
         <div className="my-12 mix-blend-multiply opacity-70">
-          <img
+          <LazyImage
             src="/assets/inside_venue_white.gif"
             alt="Ballroom Decoration"
             className="w-full rounded-lg"
@@ -106,9 +107,17 @@ export default function EventSection() {
 
         {/* Dresscode Section */}
         <div className=" px-8 py-10">
-          <h3 className="font-josefin font-semibold text-4xl text-primary text-center mb-8">
-            Dresscode
-          </h3>
+          {/* Header with bucket illustration */}
+          <div className="flex items-center justify-center gap-3 mb-8">
+            <h3 className="font-josefin font-semibold text-4xl text-primary text-center">
+              Dresscode
+            </h3>
+            <img
+              src="/assets/bucket.png"
+              alt="Bucket decoration"
+              className="w-12 h-12 object-contain"
+            />
+          </div>
 
           {/* Color circles - 5 in one row */}
           <div className="flex flex-row justify-center items-start gap-2 mb-6">
@@ -131,7 +140,17 @@ export default function EventSection() {
           </p>
 
           {/* Dress & Suit Icons */}
-          <div className="flex justify-center items-center gap-4 mt-6">
+          <div className="flex justify-center items-end gap-6 mt-6">
+            <LazyImage
+              src="/assets/attire.png"
+              alt="Attire"
+              className="w-24 h-auto object-contain"
+            />
+            <img
+              src="/assets/shoes_dark.gif"
+              alt="Shoes"
+              className="w-16 h-16 object-contain"
+            />
           </div>
         </div>
       </div>

@@ -1,4 +1,5 @@
 import { memo, useMemo } from 'react';
+import LazyImage from '../shared/LazyImage';
 
 const GallerySection = memo(function GallerySection() {
   // Memoize photos array to prevent recreation on each render
@@ -15,11 +16,9 @@ const GallerySection = memo(function GallerySection() {
               key={num}
               className="w-[109px] h-[171px] overflow-hidden"
             >
-              <img
+              <LazyImage
                 src={`/assets/galeri ${num}.png`}
                 alt={`Gallery Photo ${num}`}
-                loading="lazy"
-                decoding="async"
                 className="w-full h-full object-cover"
               />
             </div>

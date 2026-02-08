@@ -22,17 +22,8 @@ export default function HeroSection() {
     <SectionWrapper id="hero" background="primary" className="relative ">
       {/* Base background - bg-opening.png */}
       <div
-        className="h-[736px] w-screen z-0 absolute inset-0 bg-cover bg-center"
+        className="h-[850px] w-screen z-0 absolute inset-0 bg-cover bg-center"
         style={{ backgroundImage: "url('/assets/bg-opening.png')" }}
-        aria-hidden="true"
-      />
-
-      {/* Gradient fade overlay for smooth transition to bg-arrum.png */}
-      <div
-        className="absolute inset-x-0 bottom-0 h-48 z-10"
-        style={{
-          background: 'linear-gradient(to bottom, transparent, rgba(183, 142, 133, 0.8))',
-        }}
         aria-hidden="true"
       />
 

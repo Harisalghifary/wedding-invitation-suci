@@ -1,4 +1,5 @@
 import { useState, useEffect, useMemo } from 'react';
+import LazyImage from '../shared/LazyImage';
 
 export default function StorySection() {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -53,21 +54,21 @@ export default function StorySection() {
       <div className="relative px-8 py-10 -mt-18 mb-12 z-10 max-w-2xl mx-auto">
 
         {/* 1. LEFT-TOP: Chapel */}
-        <img
+        <LazyImage
           src="/assets/chapel.png"
           alt="Chapel"
           className="absolute -top-10 -left-6 w-32 h-auto opacity-80 pointer-events-none"
         />
 
         {/* 2. RIGHT-TOP: Clinking Glasses */}
-        <img
+        <LazyImage
           src="/assets/glass.png"
           alt="Cheers"
           className="absolute top-6 right-12 w-16 h-auto opacity-80 pointer-events-none"
         />
 
         {/* 3. RIGHT-BOTTOM: Candles */}
-        <img
+        <LazyImage
           src="/assets/candle.png"
           alt="Candles"
           className="absolute -bottom-4 -right-4 w-24 h-auto opacity-80 pointer-events-none"

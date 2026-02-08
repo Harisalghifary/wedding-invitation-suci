@@ -4,11 +4,11 @@ export default function QuranSection() {
   return (
     <section
       id="quran"
-      className="relative px-6"
+      className="relative px-6 overflow-visible"
       style={{
         minHeight: '100vh',
         paddingTop: '80px',
-        paddingBottom: '120px',
+        paddingBottom: '180px',
       }}
     >
       <div className="max-w-6xl mx-auto">
@@ -30,12 +30,17 @@ export default function QuranSection() {
         </div>
       </div>
 
-      {/* Flower Frame - Absolute Bottom, Full Width on Mobile */}
-      <img
-        src="/assets/flower_frame.png"
-        alt="Flower Frame"
-        className="absolute bottom-0 left-0 right-0 w-full z-10"
-      />
+      {/* Flower Frame - stretched at bottom, overflows into next section */}
+      <div
+        className="absolute left-0 right-0 z-10"
+        style={{ bottom: '-60px' }}
+      >
+        <img
+          src="/assets/flower_frame.png"
+          alt="Flower Frame"
+          className="w-full h-auto max-h-[280px] object-cover object-top"
+        />
+      </div>
     </section>
   );
 }
