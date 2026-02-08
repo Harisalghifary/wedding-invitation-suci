@@ -8,28 +8,25 @@ export default function FooterSection() {
   return (
     <footer className="bg-primary relative overflow-hidden">
 
-      {/* Love Animations - Left Side */}
+      {/* Love 1 - Top Left */}
       <img
-        src="/assets/love_1_dark.gif"
+        src="/assets/love_1.gif"
         alt=""
-        className="absolute top-24 left-2 w-12 h-12 opacity-60 z-10 pointer-events-none"
+        className="absolute top-8 left-4 w-14 h-14 z-10 pointer-events-none"
       />
+
+      {/* Love 2 Dark - Left Center */}
       <img
         src="/assets/love_2_dark.gif"
         alt=""
-        className="absolute top-72 left-4 w-10 h-10 opacity-50 z-10 pointer-events-none"
+        className="absolute top-1/2 -translate-y-1/2 left-4 w-16 h-16 z-10 pointer-events-none"
       />
 
-      {/* Love Animations - Right Side */}
+      {/* Love 2 Dark - Right Center */}
       <img
-        src="/assets/love_1_dark.gif"
+        src="/assets/love_2_dark.gif"
         alt=""
-        className="absolute top-40 right-2 w-12 h-12 opacity-60 z-10 pointer-events-none"
-      />
-      <img
-        src="/assets/love_3.gif"
-        alt=""
-        className="absolute top-96 right-4 w-10 h-10 opacity-50 z-10 pointer-events-none"
+        className="absolute top-1/2 -translate-y-1/2 right-4 w-16 h-16 z-10 pointer-events-none"
       />
 
       {/* Main Footer Content */}

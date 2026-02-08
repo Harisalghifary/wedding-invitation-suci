@@ -2,6 +2,13 @@ import { useState, useEffect, useMemo } from 'react';
 
 export default function StorySection() {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [topPhotoIndex, setTopPhotoIndex] = useState(0);
+
+  // Top photo dissolve images
+  const topPhotos = useMemo(() => [
+    '/assets/our_story_1_optimize.gif',
+    '/assets/our_story_2_optimize.gif',
+  ], []);
 
   // Memoize carousel images to prevent recreation
   const carouselImages = useMemo(() =>
@@ -9,24 +16,37 @@ export default function StorySection() {
     []
   );
 
-  // Auto-slide with cleanup
+  // Auto-slide for bottom carousel
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % carouselImages.length);
-    }, 4000); // Change every 4 seconds
+    }, 4000);
 
     return () => clearInterval(interval);
   }, [carouselImages.length]);
 
+  // Auto-dissolve for top photo
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setTopPhotoIndex((prev) => (prev + 1) % topPhotos.length);
+    }, 5000); // Switch every 5 seconds
+
+    return () => clearInterval(interval);
+  }, [topPhotos.length]);
+
   return (
     <section id="story" className="bg-cream bg-ceremony-pattern bg-cover bg-center py-0">
-      {/* Photo 1 - Dining table */}
-      <div className="w-full">
-        <img
-          src="/assets/our_story_photo.png"
-          alt="Our Story - Dining Together"
-          className="w-full h-auto object-cover"
-        />
+      {/* Photo 1 - Dissolve transition between two photos */}
+      <div className="w-full relative">
+        {topPhotos.map((src, index) => (
+          <img
+            key={src}
+            src={src}
+            alt={`Our Story ${index + 1}`}
+            className={`w-full h-auto object-cover transition-opacity duration-1000 ease-in-out ${index === 0 ? 'relative' : 'absolute inset-0'
+              } ${index === topPhotoIndex ? 'opacity-100' : 'opacity-0'}`}
+          />
+        ))}
       </div>
 
       {/* Story Card with Absolutely Positioned Illustrations */}

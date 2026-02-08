@@ -65,7 +65,7 @@ export default function CountdownSection() {
     <SectionWrapper id="countdown" background="transparent" className="relative pt-16 px-6 mb-50">
 
       {/* Bird decoration with ribbon - FLIPPED horizontally */}
-      <div className="text-center mb-8">
+      <div className="text-center mb-0">
         <img
           src="/assets/Bird.gif"
           alt="Birds with ribbon"
@@ -106,11 +106,11 @@ export default function CountdownSection() {
           className="mx-auto bg-[#FFFAF2] rounded-2xl relative opacity-84"
           style={{ width: '308px', height: '144px', padding: '20px' }}
         >
-          {/* Ribbon - Top-Right */}
+          {/* Ribbon - Top-Right - Larger */}
           <img
             src="/assets/ribbon.gif"
             alt="Ribbon"
-            className="absolute -top-4 -right-4 w-[98px] h-[102px] z-10"
+            className="absolute -top-6 -right-6 w-[140px] h-[146px] z-10"
             onError={(e) => e.target.style.display = 'none'}
           />
 
@@ -140,6 +140,22 @@ export default function CountdownSection() {
           />
           Save the Date
         </button>
+      </div>
+
+      {/* Love GIFs - Absolute Bottom Right */}
+      <div className="absolute bottom-4 right-4 flex items-end gap-2 z-20">
+        <img
+          src="/assets/love_1.gif"
+          alt="Love decoration"
+          className="w-12 h-12"
+          onError={(e) => e.target.style.display = 'none'}
+        />
+        <img
+          src="/assets/love_2_dark.gif"
+          alt="Love decoration"
+          className="w-16 h-16"
+          onError={(e) => e.target.style.display = 'none'}
+        />
       </div>
 
     </SectionWrapper>

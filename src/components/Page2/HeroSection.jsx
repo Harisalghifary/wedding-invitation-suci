@@ -27,6 +27,15 @@ export default function HeroSection() {
         aria-hidden="true"
       />
 
+      {/* Gradient fade overlay for smooth transition to bg-arrum.png */}
+      <div
+        className="absolute inset-x-0 bottom-0 h-48 z-10"
+        style={{
+          background: 'linear-gradient(to bottom, transparent, rgba(183, 142, 133, 0.8))',
+        }}
+        aria-hidden="true"
+      />
+
       <div className="relative z-30 flex flex-col items-center text-center text-cream">
         <h2 className="font-loveLight text-6xl sm:text-6xl md:text-7xl mb-8">
           The wedding of
@@ -35,6 +44,33 @@ export default function HeroSection() {
         {/* Carousel with decorative shapes */}
         <div className="relative mb-12 max-w-[402px] w-full" style={{ aspectRatio: '402/638' }}>
 
+          {/* Love GIF - Top Left (flipped) */}
+          <img
+            src="/assets/love_1.gif"
+            alt="Love decoration"
+            className="absolute -left-8 -top-4 w-16 h-16 z-30 scale-x-[-1]"
+          />
+
+          {/* Love GIF - Top Right */}
+          <img
+            src="/assets/love_1.gif"
+            alt="Love decoration"
+            className="absolute -right-8 -top-4 w-16 h-16 z-30"
+          />
+
+          {/* Spark GIF - Bottom Left */}
+          <img
+            src="/assets/spark.gif"
+            alt="Spark decoration"
+            className="absolute -left-6 -bottom-6 w-14 h-14 z-30"
+          />
+
+          {/* Spark GIF - Bottom Right */}
+          <img
+            src="/assets/spark.gif"
+            alt="Spark decoration"
+            className="absolute -right-6 -bottom-6 w-14 h-14 z-30"
+          />
 
           {/* Carousel */}
           <div className="relative w-full h-full z-20 overflow-hidden rounded-lg shadow-2xl">
