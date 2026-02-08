@@ -133,14 +133,14 @@ function WishesSection() {
   };
 
   return (
-    <section className="bg-primary py-16 px-6">
+    <section className="bg-primary px-6">
       {/* Header */}
       <div className="text-center mb-8 relative">
         {/* Love 4 - Left of header */}
         <img
           src="/assets/love_4.png"
           alt="Love"
-          className="absolute -top-10 left-4 w-16 h-16"
+          className="absolute top-0 left-4 w-[100px] h-[100px] object-cover z-10 scale-150"
         />
         <div className="flex items-center justify-center gap-3 mb-2">
           <h2 className="font-josefin font-bold text-4xl text-white">
@@ -150,7 +150,7 @@ function WishesSection() {
       </div>
 
       {/* Form */}
-      <div className="max-w-2xl mx-auto">
+      <div className="max-w-2xl mx-auto pt-8">
         <form onSubmit={handleSubmit} className="space-y-4">
           {/* Name field - always visible, read-only if from URL */}
           <input
@@ -196,7 +196,7 @@ function WishesSection() {
             <img
               src="/assets/love_6.png"
               alt="Love"
-              className="absolute -left-10 top-1/2 -translate-y-1/2 w-14 h-14"
+              className="absolute right-12 top-2 w-[56px] h-[53px] object-cover z-10 scale-150"
             />
             <button
               type="submit"
@@ -208,59 +208,49 @@ function WishesSection() {
           </div>
         </form>
 
-        {/* Wishes display - scrollable, ~3-4 bubbles visible */}
+        {/* Wishes display - scrollable on brown bg */}
         <div
-          className="wishes-scroll bg-cream rounded-2xl px-6 py-6 mt-8 overflow-y-auto relative"
-          style={{ maxHeight: '340px', scrollBehavior: 'smooth' }}
+          className="wishes-scroll mt-8 overflow-y-auto space-y-4"
+          style={{ maxHeight: '400px', scrollBehavior: 'smooth' }}
         >
-          {/* Amplop 3 - Bottom-left */}
-          <img
-            src="/assets/amplop_3.png"
-            alt="Envelope"
-            className="absolute -bottom-8 -left-8 w-24 h-24 z-10"
-          />
           {fetchingWishes && (
-            <p className="text-center font-dmSans text-sm text-primary opacity-50">
+            <p className="text-center font-dmSans text-sm text-white/50">
               Memuat ucapan...
             </p>
           )}
 
-          {!fetchingWishes && wishes.length > 0 && (
-            <div className="space-y-3">
-              {wishes.map((wish) => (
-                <div
-                  key={wish.id}
-                  className="bg-white rounded-xl px-4 py-3 shadow-sm animate-fadeIn"
-                >
-                  <div className="flex justify-between items-start mb-1">
-                    <p className="font-dmSans font-bold text-sm text-primary">
-                      {wish.name}
-                    </p>
-                    <span className="font-dmSans text-xs text-gray-400 whitespace-nowrap ml-2">
-                      {formatDate(wish.created_at)}
-                    </span>
-                  </div>
-                  <p className="font-dmSans text-sm text-primary leading-relaxed">
-                    {wish.message}
-                  </p>
-                </div>
-              ))}
+          {!fetchingWishes && wishes.length > 0 && wishes.map((wish) => (
+            <div
+              key={wish.id}
+              className="bg-cream/90 rounded-2xl px-5 py-4 shadow-md animate-fadeIn"
+            >
+              <div className="flex justify-between items-start mb-1">
+                <p className="font-dmSans font-bold text-sm text-primary">
+                  {wish.name}
+                </p>
+                <span className="font-dmSans text-xs text-primary/50 whitespace-nowrap ml-2">
+                  {formatDate(wish.created_at)}
+                </span>
+              </div>
+              <p className="font-dmSans text-sm text-primary leading-relaxed">
+                {wish.message}
+              </p>
             </div>
-          )}
+          ))}
 
           {!fetchingWishes && wishes.length === 0 && (
-            <p className="text-center font-dmSans text-sm text-primary opacity-50 py-8">
+            <p className="text-center font-dmSans text-sm text-white/50 py-8">
               Belum ada ucapan. Jadilah yang pertama!
             </p>
           )}
         </div>
 
-        {/* Scroll hint */}
-        {!fetchingWishes && wishes.length > 4 && (
-          <p className="text-center text-white/60 text-xs mt-2 font-dmSans">
-            Scroll untuk melihat lebih banyak
-          </p>
-        )}
+        {/* Amplop 3 - bottom-left */}
+        <img
+          src="/assets/amplop_3.png"
+          alt="Envelope"
+          className="w-[183px] h-[183px] rotate-[-15deg] object-cover pointer-events-none -mt-8 -ml-10"
+        />
       </div>
     </section>
   );
@@ -329,7 +319,7 @@ function BankCard({ bank }) {
 
 function WeddingGiftSection() {
   return (
-    <section className="bg-primary py-16 px-6">
+    <section className="bg-primary pb-16 px-6">
       {/* Header */}
       <div className="text-center mb-6">
 
