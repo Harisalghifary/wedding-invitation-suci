@@ -67,7 +67,7 @@ const ProfileCard = ({ person, title }) => {
       </div>
 
       {/* Parent description - 2 ROWS */}
-      <div className="text-cream font-dmSans text-sm mt-6 px-4 leading-relaxed">
+      <div className="text-cream font-dmSans text-[13px] mt-6 px-2 text-center">
         <p>{line1}</p>
         <p>{line2}</p>
       </div>
