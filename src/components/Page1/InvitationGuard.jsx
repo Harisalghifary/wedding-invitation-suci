@@ -5,7 +5,7 @@ export default function InvitationGuard({ onOpen }) {
 
   return (
     <div
-      className="fixed inset-0 bg-cover bg-no-repeat bg-center"
+      className="fixed inset-0 bg-cover bg-no-repeat bg-[30%_60%]"
       style={{ backgroundImage: "url('/assets/bg-cover.png')" }}
     >
 
