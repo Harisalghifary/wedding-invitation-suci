@@ -116,12 +116,9 @@ export default function CountdownSection() {
                     src="/assets/alarm.gif"
                     alt="Alarm Clock"
                     className="absolute -left-10 rotate-[-15deg] top-[100px] w-[130px] h-[136px] z-20"
-                    onError={(e) => e.target.style.display = 'none'}
-                    loading="lazy"
                     decoding="async"
                     initial="visible"
                     whileInView="visible"
-                    unoptimized={true}
                     viewport={viewportConfig}
                     variants={floatFromLeft}
                     transition={{ delay: 0.5 }}
