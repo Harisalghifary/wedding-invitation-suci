@@ -6,15 +6,18 @@ import { AnimateOnScroll } from '../shared/motion/MotionWrapper';
 import { floatFromLeft, floatFromRight, viewportConfig } from '../shared/motion/variants';
 
 const formatDateForGoogle = (dateString) => {
-    return new Date(dateString).toISOString().replace(/[-:]/g, '').split('.')[0] + 'Z';
+    // For all-day events, use YYYYMMDD format (no time)
+    return dateString.replace(/-/g, '');
 };
 
 const formatDateForICS = (dateString) => {
-    return new Date(dateString).toISOString().replace(/[-:]/g, '').split('.')[0];
+    // For all-day events, use YYYYMMDD format (no time)
+    return dateString.replace(/-/g, '');
 };
 
 const openGoogleCalendar = (event) => {
-    const googleUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(event.title)}&details=${encodeURIComponent(event.description)}&location=${encodeURIComponent(event.location)}&dates=${formatDateForGoogle(event.startDate)}/${formatDateForGoogle(event.endDate)}`;
+    // For all-day events, use date-only format
+    const googleUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(event.title)}&details=${encodeURIComponent(event.description)}&location=${encodeURIComponent(event.location)}&dates=${formatDateForGoogle(event.date)}/${formatDateForGoogle(event.dateEnd)}`;
     window.open(googleUrl, '_blank');
 };
 
@@ -25,9 +28,9 @@ const downloadICSFile = (event) => {
         'PRODID:-//Wedding Invitation//EN',
         'BEGIN:VEVENT',
         `UID:${Date.now()}@wedding-suci-seky.com`,
-        `DTSTAMP:${formatDateForICS(new Date().toISOString())}`,
-        `DTSTART:${formatDateForICS(event.startDate)}`,
-        `DTEND:${formatDateForICS(event.endDate)}`,
+        `DTSTAMP:${new Date().toISOString().replace(/[-:]/g, '').split('.')[0]}Z`,
+        `DTSTART;VALUE=DATE:${formatDateForICS(event.date)}`,
+        `DTEND;VALUE=DATE:${formatDateForICS(event.dateEnd)}`,
         `SUMMARY:${event.title}`,
         `DESCRIPTION:${event.description}`,
         `LOCATION:${event.location}`,
@@ -52,8 +55,8 @@ export default function CountdownSection() {
             title: 'Wedding of Suci & Seky',
             description: 'You are invited to the wedding celebration of Suci Kayla Febita Ratu Anarbya and Seky Prasdhika Pebransha',
             location: weddingData.event.venue.name + ', ' + weddingData.event.venue.address,
-            startDate: '2026-02-14T15:30:00',
-            endDate: '2026-02-14T21:30:00',
+            date: '2026-02-14',      // All-day event start
+            dateEnd: '2026-02-15',   // All-day event end (next day for full day)
         };
 
         const isAppleDevice = /iPhone|iPad|iPod|Macintosh/.test(navigator.userAgent);

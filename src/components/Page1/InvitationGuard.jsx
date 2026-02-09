@@ -38,7 +38,7 @@ export default function InvitationGuard({ onOpen }) {
 
         {/* 5. to - Bottom (above button) */}
         <p className="absolute bottom-44 left-1/2 -translate-x-1/2 font-dmSans text-xl whitespace-nowrap">
-          {guestName ? 'Kepada:' : 'To :'}
+          {guestName ? 'To :' : 'To :'}
         </p>
         <p className="absolute bottom-36 left-1/2 -translate-x-1/2 font-dmSans text-xl font-bold whitespace-nowrap">
           {guestName || 'Tamu Undangan'}
