@@ -61,7 +61,7 @@ export default function EventSection() {
                 <StaggerOnScroll className="text-center">
                     {/* Wedding Date */}
                     <MotionChild variant="fadeUp">
-                        <h3 className="font-dmSans font-black text-[40px] sm:text-6xl text-primary tracking-tightest drop-shadow-lg mb-6">
+                        <h3 className="font-dmSans font-black text-[40px] text-primary tracking-tightest drop-shadow-lg mb-6">
                             14 . 02 . 2026
                         </h3>
                     </MotionChild>

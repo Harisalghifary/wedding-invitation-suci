@@ -51,7 +51,7 @@ export default function QuranSection() {
         <img
           src="/assets/flower_frame.png"
           alt="Flower Frame"
-          className="hidden md:block w-full max-w-4xl mx-auto h-[400px] object-contain"
+          className="hidden md:block w-full max-w-4xl mx-auto h-[400px] scale-150 object-cover"
         />
       </AnimateOnScroll>
     </section>
