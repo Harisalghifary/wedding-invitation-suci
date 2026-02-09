@@ -53,7 +53,7 @@ const ProfileCard = ({ person, title, animationVariant }) => {
                     <LazyImage
                         src={person.photo}
                         alt={person.nickname}
-                        className="w-full h-auto object-contain drop-shadow-xl"
+                        className="w-full h-auto object-contain"
                     />
                 </div>
             </div>
@@ -102,7 +102,7 @@ export default function ProfileSection() {
             <ProfileCard person={weddingData.couple.groom} title="The Groom" animationVariant="slideFromRight" />
 
             {/* Couple illustration section */}
-            <AnimateOnScroll variant="fadeUp" delay={0.2} className="relative w-full max-w-[450px] flex justify-center items-center mx-auto mt-12 drop-shadow-xl">
+            <AnimateOnScroll variant="fadeUp" delay={0.2} className="relative w-full max-w-[450px] flex justify-center items-center mx-auto mt-12 drop-shadow-2xl">
 
                 <motion.img
                     src="/assets/flower.gif"
