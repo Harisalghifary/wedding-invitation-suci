@@ -8,15 +8,15 @@ const GallerySection = memo(function GallerySection() {
 
   return (
     <section id="gallery" className="bg-gradient-to-b from-[#E8E1D8] to-primary pt-24 px-6 relative">
-      {/* Fixed width container - 353px, centered */}
-      <div className="mx-auto" style={{ width: '353px' }}>
-        {/* 3x4 Grid: 109x171px cells, 13px gaps - Staggered cascade effect */}
-        <StaggerOnScroll grid className="grid grid-cols-3 gap-[13px]">
+      {/* Responsive container - max 353px, shrinks on small screens */}
+      <div className="mx-auto w-full max-w-[353px]">
+        {/* 3-column responsive grid with proportional gaps */}
+        <StaggerOnScroll grid className="grid grid-cols-3 gap-[3%]">
           {photos.map((num) => (
             <MotionChild
               key={num}
               variant="fadeScale"
-              className="w-[109px] h-[171px] overflow-hidden drop-shadow-md"
+              className="aspect-[109/171] overflow-hidden drop-shadow-md"
             >
               <LazyImage
                 src={`/assets/gallery-${num}.png`}

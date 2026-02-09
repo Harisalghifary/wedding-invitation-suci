@@ -27,7 +27,7 @@ function App() {
                     {/* Left Panel - Fixed Background Image (takes remaining space) */}
                     <div className="flex-1 relative overflow-hidden bg-primary">
                         <img
-                            src="/assets/desktop-mode.png"
+                            src="/assets/desktop-mode.gif"
                             alt="Suci & Seky"
                             className="w-full h-full object-cover"
                         />
