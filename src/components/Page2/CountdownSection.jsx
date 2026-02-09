@@ -113,7 +113,7 @@ export default function CountdownSection() {
 
                 {/* Alarm clock - Bottom-Left of card */}
                 <motion.img
-                    src="/assets/alarm.gif"
+                    src="/assets/Alarm.gif"
                     alt="Alarm Clock"
                     className="absolute -left-10 rotate-[-15deg] top-[100px] w-[130px] h-[136px] z-20"
                     decoding="async"
