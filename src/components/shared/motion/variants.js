@@ -91,14 +91,16 @@ export const staggerGrid = {
   },
 };
 
-// Page transition variants
+// Page transition variants - Curtain Up effect
 export const pageExit = {
-  hidden: { opacity: 1, y: 0, scale: 1 },
+  hidden: { opacity: 1, y: 0 },
   exit: { 
-    opacity: 0, 
-    y: -60, 
-    scale: 0.97,
-    transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] }
+    opacity: 0.3, 
+    y: '-100%', 
+    transition: { 
+      duration: 1.5, 
+      ease: [0.45, 0, 0.55, 1] // Smooth ease-in-out for curtain effect
+    }
   },
 };
 
