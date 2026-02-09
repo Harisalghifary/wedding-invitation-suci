@@ -112,8 +112,7 @@ export default function CountdownSection() {
                 <motion.img
                     src="/assets/alarm.gif"
                     alt="Alarm Clock"
-                    className="absolute left-[calc(50%-154px-56px)] rotate-[-15deg] top-[100px] w-[145px] h-[152px] z-20"
-                    onError={(e) => e.target.style.display = 'none'}
+                    className="absolute -left-10 rotate-[-15deg] top-[100px] w-[145px] h-[152px] z-20"
                     loading="lazy"
                     decoding="async"
                     initial="visible"
