@@ -166,18 +166,18 @@ export default function EventSection() {
 
                 {/* Dresscode Section */}
                 <div className="relative py-10 text-center mb-16">
-                    {/* Header with bucket illustration */}
-                    <AnimateOnScroll variant="fadeUp" className="relative inline-block mb-8">
-                        <h3 className="font-josefin font-semibold text-4xl text-primary mx-auto w-fit">
+                    {/* Header with bucket illustration - Dresscode stays centered */}
+                    <AnimateOnScroll variant="fadeUp" className="mb-8">
+                        <h3 className="relative inline-block font-josefin font-semibold text-4xl text-primary">
                             Dresscode
+                            {/* Bucket positioned absolute to the right of text */}
+                            <img
+                                src="/assets/bucket.png"
+                                alt="Bucket decoration"
+                                className="absolute -top-10 -right-20 w-[135px] h-[135px] object-contain rotate-[15deg]"
+                            />
                         </h3>
-
                     </AnimateOnScroll>
-                    <img
-                        src="/assets/bucket.png"
-                        alt="Bucket decoration"
-                        className="absolute -top-4 right-6 w-[140px] h-[144px] object-cover scale-125 rotate-[15deg] pointer-events-none"
-                    />
 
                     {/* Group 5: Color circles - pop in sequentially */}
                     <StaggerOnScroll grid className="flex flex-row justify-center items-start gap-2 mb-6">
