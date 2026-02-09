@@ -24,7 +24,7 @@ AnimatedDigit.displayName = 'AnimatedDigit';
 // Memoized countdown item with animated digit
 const CountdownItem = memo(({ value, label }) => (
   <div className="text-center">
-    <div className="font-ptSerif font-bold text-4xl text-primary overflow-hidden">
+    <div className="font-ptSerif font-bold text-4xl text-primary overflow-hidden pt-6 pb-2">
       <AnimatedDigit value={value} />
     </div>
     <div className="font-dmSans text-xs text-primary mt-3">{label}</div>
