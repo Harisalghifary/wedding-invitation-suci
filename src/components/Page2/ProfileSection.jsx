@@ -59,7 +59,7 @@ const ProfileCard = ({ person, title, animationVariant }) => {
             </div>
 
             {/* Name - Oregano font */}
-            <h3 className="font-oregano text-2xl text-cream">
+            <h3 className="font-oregano text-2xl text-cream whitespace-nowrap">
                 {person.fullName}
             </h3>
 
@@ -77,7 +77,7 @@ const ProfileCard = ({ person, title, animationVariant }) => {
             </div>
 
             {/* Parent description */}
-            <div className="text-cream font-dmSans text-[13px] mt-3 px-2 text-center">
+            <div className="text-cream font-dmSans text-[13px] mt-3 px-2 text-center whitespace-nowrap">
                 <p>{line1}</p>
                 <p>{line2}</p>
             </div>
