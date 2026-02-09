@@ -174,7 +174,7 @@ export default function EventSection() {
                         <img
                             src="/assets/bucket.png"
                             alt="Bucket decoration"
-                            className="absolute -top-2 -right-20 w-[140px] h-12 object-cover scale-125 rotate-[15deg] pointer-events-none"
+                            className="absolute -top-14 -right-20 w-[140px] h-[144px] object-cover scale-125 rotate-[15deg] pointer-events-none"
                         />
                     </AnimateOnScroll>
 
@@ -193,14 +193,6 @@ export default function EventSection() {
                         ))}
                     </StaggerOnScroll>
 
-                    {/* Shoes - left of description text */}
-                    <img
-                        src="/assets/shoes_dark.gif"
-                        alt="Shoes"
-                        className="absolute -left-20 bottom-10 w-[144px] h-[144px] object-cover rotate-[-10deg] scale-125 pointer-events-none"
-                        loading="lazy"
-                        decoding="async"
-                    />
 
                     {/* Description */}
                     <AnimateOnScroll variant="fadeUp" delay={0.3}>
