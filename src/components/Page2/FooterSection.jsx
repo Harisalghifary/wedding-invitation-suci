@@ -5,9 +5,9 @@ import { floatFromLeft, floatFromRight, viewportConfig } from '../shared/motion/
 
 export default function FooterSection() {
     const photos = [
-        '/assets/footer_1.png',
-        '/assets/footer_2.png',
-        '/assets/footer_3.png',
+        '/assets/strip-1.png',
+        '/assets/strip-2.png',
+        '/assets/strip-3.png',
     ];
 
     return (
@@ -60,7 +60,7 @@ export default function FooterSection() {
                 {/* Photo Frame Container */}
                 <AnimateOnScroll
                     variant="fadeUp"
-                    className="bg-[#5B322D] p-5 mx-auto mb-8 rounded-xl"
+                    className="bg-[#5B322D] p-5 mx-auto mb-8"
                     style={{
                         maxWidth: 'fit-content',
                         boxShadow: '7px 10px 25px 2px rgba(0,0,0,0.4)'
@@ -71,13 +71,13 @@ export default function FooterSection() {
                             <MotionChild
                                 key={i}
                                 variant="fadeScale"
-                                className="overflow-hidden rounded-xl shadow-lg"
+                                className="overflow-hidden shadow-lg"
                                 style={{ width: '273px', height: '167px' }}
                             >
                                 <LazyImage
                                     src={src}
                                     alt={`Wedding Photo ${i + 1}`}
-                                    className="w-full h-full object-cover"
+                                    className="w-full h-full object-cover object-[50%_40%]"
                                     style={{ imageRendering: 'auto' }}
                                 />
                             </MotionChild>

@@ -19,7 +19,7 @@ const GallerySection = memo(function GallerySection() {
               className="w-[109px] h-[171px] overflow-hidden drop-shadow-md"
             >
               <LazyImage
-                src={`/assets/galeri ${num}.png`}
+                src={`/assets/gallery-${num}.png`}
                 alt={`Gallery Photo ${num}`}
                 className="w-full h-full object-cover"
               />

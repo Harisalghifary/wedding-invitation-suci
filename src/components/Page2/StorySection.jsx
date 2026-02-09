@@ -16,7 +16,7 @@ export default function StorySection() {
 
   // Memoize carousel images to prevent recreation
   const carouselImages = useMemo(() =>
-    Array.from({ length: 5 }, (_, i) => `/assets/story_carrousel${i + 1}.png`),
+    Array.from({ length: 5 }, (_, i) => `/assets/sc-${i + 1}.png`),
     []
   );
 
