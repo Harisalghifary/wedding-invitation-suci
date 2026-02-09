@@ -10,8 +10,8 @@ export default function StorySection() {
 
   // Top photo dissolve images
   const topPhotos = useMemo(() => [
-    '/assets/our_story_1_optimize.gif',
-    '/assets/our_story_2_optimize.gif',
+    '/assets/os-top-1.gif',
+    '/assets/os-top-2.gif',
   ], []);
 
   // Memoize carousel images to prevent recreation

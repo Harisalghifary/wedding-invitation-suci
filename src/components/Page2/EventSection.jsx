@@ -127,12 +127,40 @@ export default function EventSection() {
                     </MotionChild>
                 </StaggerOnScroll>
 
-                {/* Group 4: Ballroom Illustration */}
-                <AnimateOnScroll variant="fadeScale" className="my-12 mix-blend-multiply opacity-70">
+                {/* Group 4: Ballroom Illustration - Layered Stack */}
+                <AnimateOnScroll variant="fadeScale" className="my-12 relative">
+                    {/* Layer 1: Base venue outline (bottom) */}
                     <LazyImage
-                        src="/assets/inside_venue_white.gif"
-                        alt="Ballroom Decoration"
-                        className="w-full rounded-lg"
+                        src="/assets/inside-venue-polos.png"
+                        alt="Ballroom Base"
+                        className="w-full mix-blend-darken opacity-60 sepia-[0.15]"
+                    />
+
+                    {/* Layer 2: Animated decorations (flowers, drapes, tables) */}
+                    <img
+                        src="/assets/decor_venue.gif"
+                        alt="Ballroom Decorations"
+                        className="absolute inset-0 w-full h-full object-cover mix-blend-darken opacity-80"
+                        loading="lazy"
+                        decoding="async"
+                    />
+
+                    {/* Layer 3: Couple (pengantin) - centered in circle area */}
+                    <img
+                        src="/assets/pengantin.png"
+                        alt="Bride and Groom"
+                        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[18%] h-auto z-10"
+                        loading="lazy"
+                        decoding="async"
+                    />
+
+                    {/* Layer 4: Circle frame (top) - rotated -4deg */}
+                    <img
+                        src="/assets/circle.gif"
+                        alt="Circle Frame"
+                        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[28%] h-auto z-20 -rotate-[4deg]"
+                        loading="lazy"
+                        decoding="async"
                     />
                 </AnimateOnScroll>
 
