@@ -4,10 +4,11 @@
  */
 
 // Shared viewport configuration for all scroll animations
+// NOTE: Using margin: '0px' for Safari compatibility (negative margins cause issues)
 export const viewportConfig = {
   once: true,
-  margin: '-50px',
-  amount: 0.2,
+  margin: '0px',
+  amount: 0.15,
 };
 
 // Standard transition presets
