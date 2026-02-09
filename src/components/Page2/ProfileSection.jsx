@@ -107,7 +107,7 @@ export default function ProfileSection() {
                 <motion.img
                     src="/assets/flower.gif"
                     alt="Decoration"
-                    className="absolute top-2 right-0 w-[107px] h-[107px] object-contain scale-150 opacity-80 z-20"
+                    className="absolute top-2 right-0 w-[107px] h-[107px] object-contain scale-[2] opacity-80 z-20"
                     loading="lazy"
                     decoding="async"
                     initial="hidden"
@@ -131,7 +131,7 @@ export default function ProfileSection() {
                 <motion.img
                     src="/assets/love_1_pink.gif"
                     alt="Love decoration"
-                    className="absolute top-12 left-12 w-[100px] h-[82px] object-cover z-20 scale-125"
+                    className="absolute top-28 left-20 w-[100px] h-[82px] object-cover z-20 scale-[1.25]"
                     onError={(e) => e.target.style.display = 'none'}
                     loading="lazy"
                     decoding="async"
@@ -144,7 +144,7 @@ export default function ProfileSection() {
                 <motion.img
                     src="/assets/love_2_pink.gif"
                     alt="Love decoration"
-                    className="absolute top-12 left-10 w-[80px] h-[80px] object-cover z-20"
+                    className="absolute top-20 left-20 w-[60px] h-[60px] object-cover scale-[1.25] z-20"
                     onError={(e) => e.target.style.display = 'none'}
                     loading="lazy"
                     decoding="async"
@@ -171,9 +171,9 @@ export default function ProfileSection() {
 
                 {/* Bottom-right: Shoes */}
                 <motion.img
-                    src="/assets/shoes.gif"
+                    src="/assets/shoes-light.gif"
                     alt="Shoes"
-                    className="absolute bottom-10 -right-0 w-[193px] h-[193px] object-cover opacity-90 scale-150"
+                    className="absolute -bottom-8 -right-4 w-[150px] h-[150px] object-cover opacity-90"
                     loading="lazy"
                     decoding="async"
                     initial="hidden"
