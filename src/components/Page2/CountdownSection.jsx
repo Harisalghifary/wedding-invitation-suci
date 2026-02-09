@@ -121,6 +121,7 @@ export default function CountdownSection() {
                     decoding="async"
                     initial="visible"
                     whileInView="visible"
+                    unoptimized={true}
                     viewport={viewportConfig}
                     variants={floatFromLeft}
                     transition={{ delay: 0.5 }}
