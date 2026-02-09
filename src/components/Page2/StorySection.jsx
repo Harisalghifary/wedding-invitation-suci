@@ -93,7 +93,7 @@ export default function StorySection() {
         {/* 3. RIGHT-BOTTOM: Candles */}
         <motion.div
           className="absolute -bottom-10 -right-8 w-[127px] h-[160px] pointer-events-none"
-          initial="hidden"
+          initial="visible"
           whileInView="visible"
           viewport={viewportConfig}
           variants={floatFromRight}

@@ -116,7 +116,7 @@ export default function CountdownSection() {
                     onError={(e) => e.target.style.display = 'none'}
                     loading="lazy"
                     decoding="async"
-                    initial="hidden"
+                    initial="visible"
                     whileInView="visible"
                     viewport={viewportConfig}
                     variants={floatFromLeft}
@@ -126,7 +126,7 @@ export default function CountdownSection() {
                 {/* Countdown Card - 308x144 */}
                 <AnimateOnScroll variant="fadeUp" delay={0.15}>
                     <div
-                        className="mx-auto bg-[#FFFAF2] rounded-2xl relative opacity-84"
+                        className="mx-auto bg-[#FFFAF2] rounded-3xl relative opacity-84"
                         style={{ width: '308px', height: '144px', padding: '20px' }}
                     >
                         <CountdownTimer targetDate={weddingData.event.date} />
