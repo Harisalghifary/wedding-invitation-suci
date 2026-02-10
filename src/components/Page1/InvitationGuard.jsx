@@ -1,7 +1,9 @@
 export default function InvitationGuard({ onOpen }) {
   // Get guest name from URL params
   const params = new URLSearchParams(window.location.search);
-  const guestName = params.get('to') || params.get('name') || '';
+  const rawName = params.get('to') || params.get('name') || '';
+  // decodeURIComponent handles double-encoded values (%2520 → %20 → space)
+  const guestName = decodeURIComponent(rawName);
 
   return (
     <>

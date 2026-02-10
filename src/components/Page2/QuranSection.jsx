@@ -18,7 +18,7 @@ export default function QuranSection() {
         </AnimateOnScroll>
 
         {/* Translation */}
-        <div className="max-w-2xl mx-auto mb-16">
+        <div className="max-[385px] mx-auto mb-16">
           <AnimateOnScroll variant="fadeUp" delay={0.2}>
             <p className="text-xs text-darkBrown mb-4 text-center">
               {weddingData.quranVerse.translation}
